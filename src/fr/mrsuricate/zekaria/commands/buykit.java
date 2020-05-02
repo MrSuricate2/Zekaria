@@ -10,6 +10,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -18,7 +19,7 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 
 import java.util.Arrays;
 
-public class buykit implements CommandExecutor {
+public class buykit implements CommandExecutor, Listener {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String msg, String[] args) {
         if (sender instanceof Player) {
@@ -78,82 +79,67 @@ public class buykit implements CommandExecutor {
     public void ClickEvent(InventoryClickEvent e) {
         if (setupEconomy()) {
             Inventory inv = e.getInventory();
+            ItemStack item = e.getCurrentItem();
             Player p = (Player) e.getWhoClicked();
             ItemStack current = e.getCurrentItem();
             double balance = economy.getBalance(p);
-            if (current == null)
+            if (current == null){
                 return;
-            if (inv.getName().equalsIgnoreCase("")) {
+            }
+            if (inv.getName().equalsIgnoreCase("§6Achat de kit")) {
                 e.setCancelled(true);
+                if (item.getItemMeta().getDisplayName().equals(" "))
+                    return;
                 switch (current.getType()) {
-                    case IRON_SWORD:
-                        if (balance >= 6500.0D) {
-                            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "spawner give " + p.getName() + " Skeleton 1");
-                            economy.withdrawPlayer(p, 6500.0D);
+                    case TNT:
+                        if (balance >= 200000.0D) {
+                            Bukkit.dispatchCommand((CommandSender)Bukkit.getConsoleSender(), "manuaddp " + p.getName() + " essentials.kits.Pillage");
+                            economy.withdrawPlayer((OfflinePlayer)p, 200000.0D);
                             p.closeInventory();
-                            p.sendMessage("venez de recevoir votre spawner");
+                            p.sendMessage("§8[§4Zekaria§8] §6Vous avez désormais accès au kit Pillage");
                             break;
                         }
-                        p.sendMessage("n'avez pas assez d'argent !");
+                        p.sendMessage("§8[§4Zekaria§8] §6Vous n'avez pas assez d'argent !");
                         p.closeInventory();
                         break;
-                    case GOLD_SWORD:
-                        if (balance >= 6500.0D) {
-                            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "spawner give " + p.getName() + " Zombie 1");
-                            economy.withdrawPlayer(p, 6500.0D);
+                    case POTION:
+                        if (balance >= 200000.0D) {
+                            Bukkit.dispatchCommand((CommandSender)Bukkit.getConsoleSender(), "manuaddp " + p.getName() + " essentials.kits.Potion");
+                            economy.withdrawPlayer((OfflinePlayer)p, 200000.0D);
                             p.closeInventory();
-                            p.sendMessage("venez de recevoir votre spawner");
+                            p.sendMessage("§8[§4Zekaria§8] §6Vous avez désormais accès au kit Potion");
                             break;
                         }
-                        p.sendMessage("n'avez pas assez d'argent !");
+                        p.sendMessage("§8[§4Zekaria§8] §6Vous n'avez pas assez d'argent !");
                         p.closeInventory();
                         break;
-                    case DIAMOND_SWORD:
-                        if (balance >= 80000.0D) {
-                            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "spawner give " + p.getName() + " VillagerGolem 1");
-                            economy.withdrawPlayer(p, 80000.0D);
+                    case OBSIDIAN:
+                        if (balance >= 200000.0D) {
+                            Bukkit.dispatchCommand((CommandSender)Bukkit.getConsoleSender(), "manuaddp " + p.getName() + " essentials.kits.Construction");
+                            economy.withdrawPlayer((OfflinePlayer)p, 200000.0D);
                             p.closeInventory();
-                            p.sendMessage("venez de recevoir votre spawner");
+                            p.sendMessage("§8[§4Zekaria§8] §6Vous avez désormais accès au kit Construction");
                             break;
                         }
-                        p.sendMessage("n'avez pas assez d'argent !");
+                        p.sendMessage("§8[§4Zekaria§8] §6Vous n'avez pas assez d'argent !");
                         p.closeInventory();
                         break;
-                    case COOKED_BEEF:
-                        if (balance >= 4000.0D) {
-                            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "ss give " + p.getName() + " Cow 1");
-                            economy.withdrawPlayer(p, 4000.0D);
+                    case ENCHANTED_BOOK:
+                        if (balance >= 200000.0D) {
+                            Bukkit.dispatchCommand((CommandSender)Bukkit.getConsoleSender(), "manuaddp " + p.getName() + " essentials.kits.Enchanteur");
+                            economy.withdrawPlayer((OfflinePlayer)p, 200000.0D);
                             p.closeInventory();
-                            p.sendMessage("venez de recevoir votre spawner");
+                            p.sendMessage("§8[§4Zekaria§8] §6Vous avez désormais accès au kit Enchanteur");
                             break;
                         }
-                        p.sendMessage("n'avez pas assez d'argent !");
-                        p.closeInventory();
-                        break;
-                    case GRILLED_PORK:
-                        if (balance >= 4000.0D) {
-                            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "ss give " + p.getName() + " Pig 1");
-                            economy.withdrawPlayer(p, 4000.0D);
-                            p.closeInventory();
-                            p.sendMessage("venez de recevoir votre spawner");
-                            break;
-                        }
-                        p.sendMessage("n'avez pas assez d'argent !");
-                        p.closeInventory();
-                        break;
-                    case COOKED_CHICKEN:
-                        if (balance >= 4000.0D) {
-                            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "ss give " + p.getName() + " Chicken 1");
-                            economy.withdrawPlayer(p, 4000.0D);
-                            p.closeInventory();
-                            p.sendMessage("venez de recevoir votre spawner");
-                            break;
-                        }
-                        p.sendMessage("n'avez pas assez d'argent !");
+                        p.sendMessage("§8[§4Zekaria§8] §6Vous n'avez pas assez d'argent !");
                         p.closeInventory();
                         break;
                 }
             }
+
+
+
         }
 
 
