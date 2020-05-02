@@ -92,6 +92,7 @@ public class spawner implements CommandExecutor, Listener {
     public void ClickEvent(InventoryClickEvent e) {
         if (setupEconomy()) {
             Inventory inv = e.getInventory();
+            ItemStack item = e.getCurrentItem();
             Player p = (Player) e.getWhoClicked();
             ItemStack current = e.getCurrentItem();
             double balance = economy.getBalance(p);
@@ -99,6 +100,8 @@ public class spawner implements CommandExecutor, Listener {
                 return;
             if (inv.getName().equalsIgnoreCase("§6Spawners")) {
                 e.setCancelled(true);
+                if (item.getItemMeta().getDisplayName().equals(" "))
+                    return;
                 switch (current.getType()) {
                     case IRON_SWORD:
                         if (balance >= 6500.0D) {
