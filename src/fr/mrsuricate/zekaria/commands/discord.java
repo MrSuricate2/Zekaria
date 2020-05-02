@@ -12,7 +12,7 @@ public class discord implements CommandExecutor {
             Player player = (Player)sender;
             if (cmd.getName().equalsIgnoreCase("discord")) {
                 player.sendMessage("");
-                player.sendMessage("§4§lTest");
+                player.sendMessage("§4§lhttps://discord.gg/knXYnBG");
                 player.sendMessage("");
                 return true;
             }

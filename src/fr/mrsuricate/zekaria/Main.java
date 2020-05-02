@@ -19,6 +19,7 @@ public class Main extends JavaPlugin implements Listener {
         getCommand("spawners").setExecutor(new spawner());
         getServer().getPluginManager().registerEvents(new spawner(), this);
         getCommand("grades").setExecutor(new grades());
+        getServer().getPluginManager().registerEvents(new grades(), this);
         getCommand("buykits").setExecutor(new buykit());
 
     }
