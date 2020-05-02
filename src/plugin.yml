@@ -1,0 +1,17 @@
+name: Zekaria
+version: 1.0.0
+authors: [Neiyko,MrSuricate]
+main: fr.mrsuricate.zekaria.Main
+depends: [Vault]
+commands:
+  alert:
+    description: Broadcast custom
+    permission: bc.use
+  discord:
+    description: Lien discord
+  spawners:
+    description: Achat spawner
+  grades:
+    description: Achat grade
+  buykits:
+    description: Achat de kit

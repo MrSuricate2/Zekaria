@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="Zekaria">
+    <output-path>$PROJECT_DIR$/../../Serveur test/Remote/plugins</output-path>
+    <root id="archive" name="Zekaria.jar">
+      <element id="module-output" name="Zekaria" />
+    </root>
+  </artifact>
+</component>
