@@ -3,6 +3,7 @@ version: 1.0.0
 authors: [Neiyko,MrSuricate]
 main: fr.mrsuricate.zekaria.Main
 depends: [Vault]
+softdepend: [SkinRestorer]
 commands:
   alert:
     description: Broadcast custom
@@ -22,3 +23,6 @@ commands:
       - mod
   report:
     description: Commande de report
+  coinflip:
+    description: Ouvre le menu coinflip
+    aliases: cf
