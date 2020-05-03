@@ -1,6 +1,7 @@
 package fr.mrsuricate.zekaria.commands;
 
 import fr.mrsuricate.zekaria.Main;
+import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -108,16 +109,18 @@ public class spawner implements CommandExecutor, Listener {
     public void ClickEvent(InventoryClickEvent e) {
         if (setupEconomy()) {
             Inventory inv = e.getInventory();
-            ItemStack item = e.getCurrentItem();
             Player p = (Player) e.getWhoClicked();
             ItemStack current = e.getCurrentItem();
             double balance = economy.getBalance(p);
-            if (current == null)
+            if (current == null || !current.hasItemMeta())
                 return;
             if (inv.getName().equalsIgnoreCase("§6Spawners")) {
                 e.setCancelled(true);
-                if (item.getItemMeta().getDisplayName().equals(" "))
+                if(current.getItemMeta().getDisplayName().equals(" ")){
+                    p.closeInventory();
+                    p.openInventory(inv);
                     return;
+                }
                 switch (current.getType()) {
                     //Squelleton
                     case IRON_SWORD:

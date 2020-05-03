@@ -98,8 +98,11 @@ public class buykit implements CommandExecutor, Listener {
             }
             if (inv.getName().equalsIgnoreCase("§6Achat de kit")) {
                 e.setCancelled(true);
-                if (item.getItemMeta().getDisplayName().equals(" "))
+                if (item.getItemMeta().getDisplayName().equals(" ")){
+                    p.closeInventory();
+                    p.openInventory(inv);
                     return;
+                }
                 switch (current.getType()) {
                     case TNT:
                         if (balance >= 200000.0D) {
