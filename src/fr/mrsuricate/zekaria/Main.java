@@ -7,11 +7,15 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.ArrayList;
+import java.util.UUID;
+
 public class Main extends JavaPlugin implements Listener {
 
     public static Main getInstance() {
         return JavaPlugin.getPlugin(Main.class);
     }
+    public ArrayList<UUID> moderateurs = new ArrayList<>();
 
     @Override
     public void onEnable() {
@@ -27,7 +31,9 @@ public class Main extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new buykit(), this);
         getServer().getPluginManager().registerEvents(new DeathMoney(), this);
         getServer().getPluginManager().registerEvents(new EffectBlood(), this);
-
+        getCommand("moderation").setExecutor(new moderation());
+        getCommand("report").setExecutor(new moderation());
+        getServer().getPluginManager().registerEvents(new moderation(), this);
 
     }
 

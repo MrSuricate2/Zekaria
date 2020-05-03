@@ -26,30 +26,40 @@ public class buykit implements CommandExecutor, Listener {
             Player player = (Player) sender;
             if (cmd.getName().equalsIgnoreCase("buykits")) {
                 Inventory inv = Bukkit.createInventory(null, 9, "§6Achat de kit");
+
+                //Kit Pillage
                 ItemStack pillage = new ItemStack(Material.TNT);
                 ItemMeta pillageM = pillage.getItemMeta();
                 pillageM.setDisplayName("§6Kit Pillage");
                 pillageM.setLore(Arrays.asList(new String[]{"§4Prix: 200 000 $"}));
                 pillage.setItemMeta(pillageM);
                 inv.setItem(0, pillage);
+
+                //Kit Potion
                 ItemStack potion = new ItemStack(Material.POTION, 1);
                 ItemMeta potionM = potion.getItemMeta();
                 potionM.setDisplayName("§6Kit Potion");
                 potionM.setLore(Arrays.asList(new String[]{"§4Prix: 200 000 $"}));
                 potion.setItemMeta(potionM);
                 inv.setItem(1, potion);
+
+                //Kit Construction
                 ItemStack constru = new ItemStack(Material.OBSIDIAN, 1);
                 ItemMeta construM = constru.getItemMeta();
                 construM.setDisplayName("§6Kit Construction");
                 construM.setLore(Arrays.asList(new String[]{"§4Prix: 200 000 $"}));
                 constru.setItemMeta(construM);
                 inv.setItem(2, constru);
+
+                //Kit Enchanteur
                 ItemStack enchant = new ItemStack(Material.ENCHANTED_BOOK, 1);
                 ItemMeta enchantM = enchant.getItemMeta();
                 enchantM.setDisplayName("§6Kit Enchanteur");
                 enchantM.setLore(Arrays.asList(new String[]{"§4Prix: 200 000 $"}));
                 enchant.setItemMeta(enchantM);
                 inv.setItem(3, enchant);
+
+                //Vitre
                 ItemStack vitre = new ItemStack(Material.STAINED_GLASS_PANE, 1);
                 ItemMeta vitreM = vitre.getItemMeta();
                 vitreM.setDisplayName(" ");

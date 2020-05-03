@@ -15,3 +15,10 @@ commands:
     description: Achat grade
   buykits:
     description: Achat de kit
+  moderation:
+    description: Interface de moderation
+    permission: mod.interface.use
+    aliases:
+      - mod
+  report:
+    description: Commande de report
