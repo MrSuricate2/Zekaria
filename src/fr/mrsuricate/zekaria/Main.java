@@ -4,6 +4,7 @@ import fr.mrsuricate.zekaria.commands.*;
 import fr.mrsuricate.zekaria.effectblood.EffectBlood;
 import fr.mrsuricate.zekaria.events.DeathMoney;
 import fr.mrsuricate.zekaria.events.ModCancels;
+import fr.mrsuricate.zekaria.events.ModsItemsInteract;
 import fr.mrsuricate.zekaria.managers.PlayerManager;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
@@ -39,6 +40,7 @@ public class Main extends JavaPlugin implements Listener {
         getCommand("report").setExecutor(new moderation());
         getServer().getPluginManager().registerEvents(new moderation(), this);
         getServer().getPluginManager().registerEvents(new ModCancels(), this);
+        getServer().getPluginManager().registerEvents(new ModsItemsInteract(), this);
 
     }
 
