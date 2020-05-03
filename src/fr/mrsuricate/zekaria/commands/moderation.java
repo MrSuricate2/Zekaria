@@ -52,7 +52,6 @@ public class moderation implements CommandExecutor, Listener {
             }
 
             String reportedname = args[0];
-            String authorname = p.getName();
 
             if(Bukkit.getPlayer(reportedname) == null){
                 p.sendMessage("§4§lCe joueur n'est pas connécté !");
