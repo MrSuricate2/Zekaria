@@ -92,11 +92,8 @@ public class grades implements CommandExecutor, Listener {
             if (inv.getName().equalsIgnoreCase("§6Grades")) {
                 e.setCancelled(true);
                 if (item.getItemMeta().getDisplayName().equals(" ")){
-                    p.closeInventory();
-                    p.openInventory(inv);
                     return;
                 }
-
                 switch (current.getType()) {
                     //Gladiateur
                     case IRON_HELMET:
