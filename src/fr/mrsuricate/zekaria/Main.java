@@ -5,7 +5,10 @@ import fr.mrsuricate.zekaria.effectblood.EffectBlood;
 import fr.mrsuricate.zekaria.events.DeathMoney;
 import fr.mrsuricate.zekaria.events.ModCancels;
 import fr.mrsuricate.zekaria.events.ModsItemsInteract;
+import fr.mrsuricate.zekaria.events.PlayerLeave;
+import fr.mrsuricate.zekaria.managers.FreezeRunnable;
 import fr.mrsuricate.zekaria.managers.PlayerManager;
+import org.bukkit.Location;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -21,6 +24,7 @@ public class Main extends JavaPlugin implements Listener {
     }
     public ArrayList<UUID> moderateurs = new ArrayList<>();
     public HashMap<UUID, PlayerManager> players = new HashMap<>();
+    public HashMap<UUID, Location> freezedPlayers = new HashMap<>();
 
     @Override
     public void onEnable() {
@@ -41,6 +45,8 @@ public class Main extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new moderation(), this);
         getServer().getPluginManager().registerEvents(new ModCancels(), this);
         getServer().getPluginManager().registerEvents(new ModsItemsInteract(), this);
+        getServer().getPluginManager().registerEvents(new PlayerLeave(), this);
+        new FreezeRunnable().runTaskTimer(this, 0, 20);
 
     }
 

@@ -1,5 +1,6 @@
 package fr.mrsuricate.zekaria.events;
 
+import fr.mrsuricate.zekaria.Main;
 import fr.mrsuricate.zekaria.managers.PlayerManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -56,7 +57,15 @@ public class ModsItemsInteract implements Listener {
             //Freeze
 
             case PACKED_ICE:
-                //TODO
+                if(Main.getInstance().freezedPlayers.containsKey(target.getUniqueId())){
+                    Main.getInstance().freezedPlayers.remove(target.getUniqueId());
+                    target.sendMessage("§6Vous avez été unfreeze par §b" + player.getName());
+                    player.sendMessage("§6Vous avez unfreeze §b" + target.getName());
+                } else {
+                    Main.getInstance().freezedPlayers.put(target.getUniqueId(), target.getLocation());
+                    target.sendMessage("§6Vous avez été freeze par §b" + player.getName());
+                    player.sendMessage("§6Vous avez freeze §b" + player.getName());
+                }
                 break;
 
             //Kill player
