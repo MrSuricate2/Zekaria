@@ -8,6 +8,7 @@ import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -25,70 +26,65 @@ public class moderation implements CommandExecutor, Listener {
             return false;
         }
 
-        Player p = (Player) sender;
+        Player player = (Player) sender;
 
         if(cmd.getName().equalsIgnoreCase("moderation")){
-            if(!p.hasPermission("mod.interface.use")){
-                p.sendMessage("§4Vous n'avez pas la permission !");
+            if(!player.hasPermission("moderation.mod")){
+                player.sendMessage("§cVous n'avez pas la permission !");
                 return false;
             }
 
-            if (PlayerManager.isInModMod(p)){
-                PlayerManager pm = PlayerManager.getFromPlayer(p);
+            if(PlayerManager.isInModerationMod(player)){
+                PlayerManager pm = PlayerManager.getFromPlayer(player);
 
-                Main.getInstance().moderateurs.remove(p.getUniqueId());
-                p.getInventory().clear();
-                p.sendMessage("§6Vous n'êtes plus dans le mode modération");
-
+                Main.getInstance().moderateurs.remove(player.getUniqueId());
+                player.getInventory().clear();
+                player.sendMessage("§cVous n'êtes maintenant plus en mode modération");
                 pm.giveInventory();
                 pm.destroy();
-                p.setAllowFlight(false);
-                p.setFlying(false);
-
+                player.setAllowFlight(false);
+                player.setFlying(false);
                 return false;
             }
 
-            PlayerManager pm = new PlayerManager(p);
+            PlayerManager pm = new PlayerManager(player);
             pm.init();
 
-            Main.getInstance().moderateurs.add(p.getUniqueId());
-            p.sendMessage("§6Vous êtes à present dans le mode modération");
+            Main.getInstance().moderateurs.add(player.getUniqueId());
+            player.sendMessage("§aVous êtes à présent en mode modération");
             pm.saveInventory();
-            p.setAllowFlight(true);
-            p.setFlying(true);
+            player.setAllowFlight(true);
+            player.setFlying(true);
 
-            ItemBuilder invSee = new ItemBuilder(Material.PAPER).setName("§eVoir l'inventaire").setLore("§6Clique doir sur un joueur", "§6pour voir son inventaire");
-            ItemBuilder reports = new ItemBuilder(Material.BOOK).setName("§eVoir les reports").setLore("§6Clique droit sur un joueur", "§6pour voir ses report");
-            ItemBuilder freeze = new ItemBuilder(Material.PACKED_ICE).setName("§eFreeze le joueur").setLore("§6Clique droit sur un joueur", "§6pour le freeze");
-            ItemBuilder kbTest = new ItemBuilder(Material.STICK).setName("§eTest KB").setLore("§6Tape un joueur", "§6pour tester son recul");
-            ItemBuilder kill = new ItemBuilder(Material.BLAZE_ROD).setName("§eKill").setLore("§6Clique droit sur un joueur", "§6pour le tuer");
-            ItemBuilder randomTP = new ItemBuilder(Material.ARROW).setName("§eTéléportation aléatoire").setLore("§6Clique droit pour se téléporter", "§6aléatoirement sur un joueur");
-            ItemBuilder vanish = new ItemBuilder(Material.GLASS).setName("§eVanish").setLore("§6Clique droit pour activer", "§6le vanish");
+            ItemBuilder invSee = new ItemBuilder(Material.PAPER).setName("§eVoir l'inventaire").setLore("§6Clique droit sur un joueur", "§6pour voir son inventaire.");
+            ItemBuilder reports = new ItemBuilder(Material.BOOK).setName("§eVoir les signalements").setLore("§6Clique droit sur un joueur", "§6pour voir ses signalements.");
+            ItemBuilder freeze = new ItemBuilder(Material.PACKED_ICE).setName("§eFreeze").setLore("§6Clique droit sur un joueur", "§6pour le freeze.");
+            ItemBuilder kbTester = new ItemBuilder(Material.STICK).setName("§eTest de recul").setLore("§6Clique gauche sur un joueur", "§6pour tester son recul.").addUnsafeEnchantment(Enchantment.KNOCKBACK, 5);
+            ItemBuilder killer = new ItemBuilder(Material.BLAZE_ROD).setName("§eTueur de joueur").setLore("§6Clique droit sur un joueur", "§6pour le tuer.");
+            ItemBuilder tpRandom = new ItemBuilder(Material.ARROW).setName("§eTéléportation aléatoire").setLore("§6Clique droit pour se téléporter", "§6aléatoirement sur un joueur.");
+            ItemBuilder vanish = new ItemBuilder(Material.BLAZE_POWDER).setName("§eVanish").setLore("§6Clique droit pour activer/désactiver", "§6le vanish.");
 
-            p.getInventory().setItem(0, invSee.toItemStack());
-            p.getInventory().setItem(1, reports.toItemStack());
-            p.getInventory().setItem(2, freeze.toItemStack());
-            p.getInventory().setItem(3, kbTest.toItemStack());
-            p.getInventory().setItem(4, kill.toItemStack());
-            p.getInventory().setItem(5, randomTP.toItemStack());
-            p.getInventory().setItem(6, vanish.toItemStack());
-
+            player.getInventory().setItem(0, invSee.toItemStack());
+            player.getInventory().setItem(1, reports.toItemStack());
+            player.getInventory().setItem(2, freeze.toItemStack());
+            player.getInventory().setItem(3, kbTester.toItemStack());
+            player.getInventory().setItem(4, killer.toItemStack());
+            player.getInventory().setItem(5, tpRandom.toItemStack());
+            player.getInventory().setItem(6, vanish.toItemStack());
         }
 
         if(cmd.getName().equalsIgnoreCase("report")){
             if(args.length != 1){
-                p.sendMessage("§4§lMerci de préciser le pseudo d'un joueur");
+                player.sendMessage("§4§lMerci de préciser le pseudo d'un joueur");
                 return false;
             }
 
             String reportedname = args[0];
 
             if(Bukkit.getPlayer(reportedname) == null){
-                p.sendMessage("§4§lCe joueur n'est pas connécté !");
+                player.sendMessage("§4§lCe joueur n'est pas connécté !");
                 return false;
             }
-
-            Player reported = Bukkit.getPlayer(reportedname);
 
             Inventory inv = Bukkit.createInventory(null, 9, "§4Report: §2" + reportedname);
 
@@ -157,7 +153,7 @@ public class moderation implements CommandExecutor, Listener {
             reach.setItemMeta(reachM);
             inv.setItem(8, reach);
 
-            p.openInventory(inv);
+            player.openInventory(inv);
 
             return true;
         }

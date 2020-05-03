@@ -1,6 +1,7 @@
 package fr.mrsuricate.zekaria.managers;
 
 import fr.mrsuricate.zekaria.Main;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -8,9 +9,11 @@ public class PlayerManager {
 
     private Player player;
     private ItemStack[] items = new ItemStack[40];
+    private boolean vanished;
 
     public PlayerManager(Player player){
         this.player = player;
+        vanished = false;
     }
 
     public void init(){
@@ -25,12 +28,25 @@ public class PlayerManager {
         return Main.getInstance().players.get(player.getUniqueId());
     }
 
-    public static boolean isInModMod(Player player){
+    public static boolean isInModerationMod(Player player){
         return Main.getInstance().moderateurs.contains(player.getUniqueId());
     }
 
     public ItemStack[] getItems() {
         return items;
+    }
+
+    public boolean isVanished() {
+        return vanished;
+    }
+
+    public void setVanished(boolean vanished){
+        this.vanished = vanished;
+        if(vanished){
+            Bukkit.getOnlinePlayers().forEach(players -> players.hidePlayer(player));
+        } else {
+            Bukkit.getOnlinePlayers().forEach(players -> players.showPlayer(player));
+        }
     }
 
     public void saveInventory(){
@@ -46,18 +62,16 @@ public class PlayerManager {
         items[38] = player.getInventory().getLeggings();
         items[39] = player.getInventory().getBoots();
 
-
         player.getInventory().clear();
         player.getInventory().setHelmet(null);
         player.getInventory().setChestplate(null);
         player.getInventory().setLeggings(null);
         player.getInventory().setBoots(null);
-
     }
 
     public void giveInventory(){
-
         player.getInventory().clear();
+
         for(int slot = 0; slot < 36; slot++){
             ItemStack item = items[slot];
             if(item != null){
@@ -69,6 +83,5 @@ public class PlayerManager {
         player.getInventory().setChestplate(items[37]);
         player.getInventory().setLeggings(items[38]);
         player.getInventory().setBoots(items[39]);
-
     }
 }
