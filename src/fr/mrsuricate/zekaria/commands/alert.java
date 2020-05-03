@@ -23,7 +23,7 @@ public class alert implements CommandExecutor {
                     String[] arrayOfString;
                     for (i = (arrayOfString = args).length, b = 0; b < i; ) {
                         String part = arrayOfString[b];
-                        bc.append(String.valueOf(part) + " ");
+                        bc.append(part + " ");
                         b++;
                     }
                     Bukkit.broadcastMessage("");
