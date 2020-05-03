@@ -1,6 +1,8 @@
 package fr.mrsuricate.zekaria.commands;
 
 import fr.mrsuricate.zekaria.Main;
+import fr.mrsuricate.zekaria.managers.PlayerManager;
+import fr.mrsuricate.zekaria.utils.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -31,17 +33,43 @@ public class moderation implements CommandExecutor, Listener {
                 return false;
             }
 
-            if (Main.getInstance().moderateurs.contains(p.getUniqueId())){
+            if (PlayerManager.isInModMod(p)){
+                PlayerManager pm = PlayerManager.getFromPlayer(p);
+
                 Main.getInstance().moderateurs.remove(p.getUniqueId());
                 p.getInventory().clear();
                 p.sendMessage("§6Vous n'êtes plus dans le mode modération");
 
+                pm.giveInventory();
+                pm.destroy();
+                p.setAllowFlight(false);
+                p.setFlying(false);
+
                 return false;
             }
 
+            PlayerManager pm = new PlayerManager(p);
+            pm.init();
+
             Main.getInstance().moderateurs.add(p.getUniqueId());
             p.sendMessage("§6Vous êtes à present dans le mode modération");
+            pm.saveInventory();
+            p.setAllowFlight(true);
+            p.setFlying(true);
 
+            ItemBuilder invSee = new ItemBuilder(Material.PAPER).setName("§eVoir l'inventaire").setLore("§6Clique doir sur un joueur", "§6pour voir son inventaire");
+            ItemBuilder reports = new ItemBuilder(Material.BOOK).setName("§eVoir les reports").setLore("§6Clique droit sur un joueur", "§6pour voir ses report");
+            ItemBuilder freeze = new ItemBuilder(Material.PACKED_ICE).setName("§eFreeze le joueur").setLore("§6Clique droit sur un joueur", "§6pour le freeze");
+            ItemBuilder kbTest = new ItemBuilder(Material.STICK).setName("§eTest KB").setLore("§6Tape un joueur", "§6pour tester son recul");
+            ItemBuilder kill = new ItemBuilder(Material.BLAZE_ROD).setName("§eKill").setLore("§6Clique droit sur un joueur", "§6pour le tuer");
+            ItemBuilder randomTP = new ItemBuilder(Material.ARROW).setName("§eTéléportation aléatoire").setLore("§6Clique droit pour se téléporter", "§6aléatoirement sur un joueur");
+
+            p.getInventory().setItem(0, invSee.toItemStack());
+            p.getInventory().setItem(1, reports.toItemStack());
+            p.getInventory().setItem(2, freeze.toItemStack());
+            p.getInventory().setItem(3, kbTest.toItemStack());
+            p.getInventory().setItem(4, kill.toItemStack());
+            p.getInventory().setItem(5, randomTP.toItemStack());
 
         }
 

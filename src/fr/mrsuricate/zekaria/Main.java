@@ -3,11 +3,14 @@ package fr.mrsuricate.zekaria;
 import fr.mrsuricate.zekaria.commands.*;
 import fr.mrsuricate.zekaria.effectblood.EffectBlood;
 import fr.mrsuricate.zekaria.events.DeathMoney;
+import fr.mrsuricate.zekaria.events.ModCancels;
+import fr.mrsuricate.zekaria.managers.PlayerManager;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.UUID;
 
 public class Main extends JavaPlugin implements Listener {
@@ -16,6 +19,7 @@ public class Main extends JavaPlugin implements Listener {
         return JavaPlugin.getPlugin(Main.class);
     }
     public ArrayList<UUID> moderateurs = new ArrayList<>();
+    public HashMap<UUID, PlayerManager> players = new HashMap<>();
 
     @Override
     public void onEnable() {
@@ -34,6 +38,7 @@ public class Main extends JavaPlugin implements Listener {
         getCommand("moderation").setExecutor(new moderation());
         getCommand("report").setExecutor(new moderation());
         getServer().getPluginManager().registerEvents(new moderation(), this);
+        getServer().getPluginManager().registerEvents(new ModCancels(), this);
 
     }
 
