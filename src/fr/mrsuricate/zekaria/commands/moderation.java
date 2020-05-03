@@ -63,6 +63,7 @@ public class moderation implements CommandExecutor, Listener {
             ItemBuilder kbTest = new ItemBuilder(Material.STICK).setName("§eTest KB").setLore("§6Tape un joueur", "§6pour tester son recul");
             ItemBuilder kill = new ItemBuilder(Material.BLAZE_ROD).setName("§eKill").setLore("§6Clique droit sur un joueur", "§6pour le tuer");
             ItemBuilder randomTP = new ItemBuilder(Material.ARROW).setName("§eTéléportation aléatoire").setLore("§6Clique droit pour se téléporter", "§6aléatoirement sur un joueur");
+            ItemBuilder vanish = new ItemBuilder(Material.GLASS).setName("§eVanish").setLore("§6Clique droit pour activer", "§6le vanish");
 
             p.getInventory().setItem(0, invSee.toItemStack());
             p.getInventory().setItem(1, reports.toItemStack());
@@ -70,6 +71,7 @@ public class moderation implements CommandExecutor, Listener {
             p.getInventory().setItem(3, kbTest.toItemStack());
             p.getInventory().setItem(4, kill.toItemStack());
             p.getInventory().setItem(5, randomTP.toItemStack());
+            p.getInventory().setItem(6, vanish.toItemStack());
 
         }
 
