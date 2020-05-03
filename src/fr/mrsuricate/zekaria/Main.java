@@ -35,7 +35,7 @@ public class Main extends JavaPlugin implements Listener {
         getCommand("buykits").setExecutor(new buykit());
         getServer().getPluginManager().registerEvents(new buykit(), this);
         getServer().getPluginManager().registerEvents(new DeathMoney(), this);
-        getServer().getPluginManager().registerEvents(new EffectBlood(), this);
+        //TODO getServer().getPluginManager().registerEvents(new EffectBlood(), this);
         getCommand("moderation").setExecutor(new moderation());
         getCommand("report").setExecutor(new moderation());
         getServer().getPluginManager().registerEvents(new moderation(), this);
