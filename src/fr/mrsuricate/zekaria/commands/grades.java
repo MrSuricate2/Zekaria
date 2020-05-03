@@ -26,24 +26,32 @@ public class grades implements CommandExecutor, Listener {
             Player player = (Player) sender;
             if (cmd.getName().equalsIgnoreCase("grades")) {
                 Inventory inv = Bukkit.createInventory(null, 9, "§6Grades");
+
+                //Gladiateur
                 ItemStack gladiateur = new ItemStack(Material.IRON_HELMET, 1);
                 ItemMeta gladiateurM = gladiateur.getItemMeta();
                 gladiateurM.setDisplayName("§6Grade Gladiateur");
                 gladiateurM.setLore(Arrays.asList(new String[]{"§4Prix: 75 000 $"}));
                 gladiateur.setItemMeta(gladiateurM);
                 inv.setItem(3, gladiateur);
+
+                //Duc
                 ItemStack duc = new ItemStack(Material.GOLD_HELMET, 1);
                 ItemMeta ducM = duc.getItemMeta();
                 ducM.setDisplayName("§6Grade Duc");
                 ducM.setLore(Arrays.asList(new String[]{"§4Prix: 350 000 $"}));
                 duc.setItemMeta(ducM);
                 inv.setItem(4, duc);
+
+                //Seigneur
                 ItemStack seigneur = new ItemStack(Material.DIAMOND_HELMET, 1);
                 ItemMeta seigneurM = seigneur.getItemMeta();
                 seigneurM.setDisplayName("§6Grade Seigneur");
                 seigneurM.setLore(Arrays.asList(new String[]{"§4Prix: 2 000 000 $"}));
                 seigneur.setItemMeta(seigneurM);
                 inv.setItem(5, seigneur);
+
+                //Vitre
                 ItemStack vitre = new ItemStack(Material.STAINED_GLASS_PANE, 1);
                 ItemMeta vitreM = vitre.getItemMeta();
                 vitreM.setDisplayName(" ");
@@ -86,6 +94,7 @@ public class grades implements CommandExecutor, Listener {
                 if (item.getItemMeta().getDisplayName().equals(" "))
                     return;
                 switch (current.getType()) {
+                    //Gladiateur
                     case IRON_HELMET:
                         if (balance >= 75000.0D) {
                             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "manuadd " + p.getName() + " Gladiateur");
@@ -97,6 +106,7 @@ public class grades implements CommandExecutor, Listener {
                         p.sendMessage("§8[§4Zekaria§8] §6Vous n'avez pas assez d'argent !");
                         p.closeInventory();
                         break;
+                    //Duc
                     case GOLD_HELMET:
                         if (balance >= 350000.0D) {
                             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "manuadd " + p.getName() + " Duc");
@@ -108,6 +118,7 @@ public class grades implements CommandExecutor, Listener {
                         p.sendMessage("§8[§4Zekaria§8] §6Vous n'avez pas assez d'argent !");
                         p.closeInventory();
                         break;
+                    //Seigneur
                     case DIAMOND_HELMET:
                         if (balance >= 2000000.0D) {
                             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "manuadd " + p.getName() + " Seigneur");

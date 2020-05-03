@@ -28,42 +28,56 @@ public class spawner implements CommandExecutor, Listener {
             Player player = (Player)sender;
             if (cmd.getName().equalsIgnoreCase("spawners")) {
                 Inventory inv = Bukkit.createInventory(null, 9, "§6Spawners");
+
+                //Squelleton
                 ItemStack squelette = new ItemStack(Material.IRON_SWORD, 1);
                 ItemMeta squeletteM = squelette.getItemMeta();
                 squeletteM.setDisplayName("§6Spawner Squelette");
                 squeletteM.setLore(Arrays.asList(new String[] { "§4Prix: 6 500 $" }));
                 squelette.setItemMeta(squeletteM);
                 inv.setItem(0, squelette);
+
+                //Zombie
                 ItemStack zombie = new ItemStack(Material.GOLD_SWORD, 1);
                 ItemMeta zombieM = zombie.getItemMeta();
                 zombieM.setDisplayName("§6Spawner à Zombie");
                 zombieM.setLore(Arrays.asList(new String[] { "§4Pirx: 6 500 $" }));
                 zombie.setItemMeta(zombieM);
                 inv.setItem(1, zombie);
+
+                //Golem
                 ItemStack golem = new ItemStack(Material.DIAMOND_SWORD, 1);
                 ItemMeta golemM = golem.getItemMeta();
                 golemM.setDisplayName("§6Spawner à Golem");
                 golemM.setLore(Arrays.asList(new String[] { "§4Prix: 80 000 $" }));
                 golem.setItemMeta(golemM);
                 inv.setItem(2, golem);
+
+                //Vache
                 ItemStack vache = new ItemStack(Material.COOKED_BEEF, 1);
                 ItemMeta vacheM = vache.getItemMeta();
                 vacheM.setDisplayName("§6Spawner à Vache");
                 vacheM.setLore(Arrays.asList(new String[] { "§4Prix: 4 000 $" }));
                 vache.setItemMeta(vacheM);
                 inv.setItem(8, vache);
+
+                //Cochon
                 ItemStack cochon = new ItemStack(Material.GRILLED_PORK, 1);
                 ItemMeta cochonM = cochon.getItemMeta();
                 cochonM.setDisplayName("§6Spawner à Cochon");
                 cochonM.setLore(Arrays.asList(new String[] { "§4Prix: 4 000 $" }));
                 cochon.setItemMeta(cochonM);
                 inv.setItem(7, cochon);
+
+                //Poulet
                 ItemStack poulet = new ItemStack(Material.COOKED_CHICKEN, 1);
                 ItemMeta pouletM = poulet.getItemMeta();
                 pouletM.setDisplayName("§6Spawner à Poulet");
                 pouletM.setLore(Arrays.asList(new String[] { "§4Prix: 4 000 $" }));
                 poulet.setItemMeta(pouletM);
                 inv.setItem(6, poulet);
+
+                //Vitre
                 ItemStack bars = new ItemStack(Material.STAINED_GLASS_PANE, 1);
                 ItemMeta barsM = bars.getItemMeta();
                 barsM.setDisplayName(" ");
@@ -71,7 +85,9 @@ public class spawner implements CommandExecutor, Listener {
                 inv.setItem(5, bars);
                 inv.setItem(4, bars);
                 inv.setItem(3, bars);
+
                 player.openInventory(inv);
+
                 return true;
             }
         }
@@ -103,6 +119,7 @@ public class spawner implements CommandExecutor, Listener {
                 if (item.getItemMeta().getDisplayName().equals(" "))
                     return;
                 switch (current.getType()) {
+                    //Squelleton
                     case IRON_SWORD:
                         if (balance >= 6500.0D) {
                             ItemStack spawners = new ItemStack(Material.MOB_SPAWNER , 1);
@@ -119,6 +136,7 @@ public class spawner implements CommandExecutor, Listener {
                         p.sendMessage("§8[§4Zekaria§8] §6Vous n'avez pas assez d'argent !");
                         p.closeInventory();
                         break;
+                    //Zombie
                     case GOLD_SWORD:
                         if (balance >= 6500.0D) {
                             ItemStack spawners = new ItemStack(Material.MOB_SPAWNER , 1);
@@ -135,6 +153,7 @@ public class spawner implements CommandExecutor, Listener {
                         p.sendMessage("§8[§4Zekaria§8] §6Vous n'avez pas assez d'argent !");
                         p.closeInventory();
                         break;
+                    //Golem
                     case DIAMOND_SWORD:
                         if (balance >= 80000.0D) {
                             ItemStack spawners = new ItemStack(Material.MOB_SPAWNER , 1);
@@ -151,6 +170,7 @@ public class spawner implements CommandExecutor, Listener {
                         p.sendMessage("§8[§4Zekaria§8] §6Vous n'avez pas assez d'argent !");
                         p.closeInventory();
                         break;
+                    //Vache
                     case COOKED_BEEF:
                         if (balance >= 4000.0D) {
                             ItemStack spawners = new ItemStack(Material.MOB_SPAWNER , 1);
@@ -167,6 +187,7 @@ public class spawner implements CommandExecutor, Listener {
                         p.sendMessage("§8[§4Zekaria§8] §6Vous n'avez pas assez d'argent !");
                         p.closeInventory();
                         break;
+                    //Cochon
                     case GRILLED_PORK:
                         if (balance >= 4000.0D) {
                             ItemStack spawners = new ItemStack(Material.MOB_SPAWNER , 1);
@@ -183,6 +204,7 @@ public class spawner implements CommandExecutor, Listener {
                         p.sendMessage("§8[§4Zekaria§8] §6Vous n'avez pas assez d'argent !");
                         p.closeInventory();
                         break;
+                    //Poulet
                     case COOKED_CHICKEN:
                         if (balance >= 4000.0D) {
                             ItemStack spawners = new ItemStack(Material.MOB_SPAWNER , 1);
