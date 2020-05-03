@@ -33,7 +33,7 @@ public class PlayerManager {
         ItemBuilder kbTester = new ItemBuilder(Material.STICK).setName("§eTest de recul").setLore("§6Clique gauche sur un joueur", "§6pour tester son recul.").addUnsafeEnchantment(Enchantment.KNOCKBACK, 5);
         ItemBuilder killer = new ItemBuilder(Material.BLAZE_ROD).setName("§eTueur de joueur").setLore("§6Clique droit sur un joueur", "§6pour le tuer.");
         ItemBuilder tpRandom = new ItemBuilder(Material.ARROW).setName("§eTéléportation aléatoire").setLore("§6Clique droit pour se téléporter", "§6aléatoirement sur un joueur.");
-        ItemBuilder vanish = new ItemBuilder(Material.BLAZE_POWDER).setName("§eVanish").setLore("§6Clique droit pour activer/désactiver", "§6le vanish.");
+        ItemBuilder vanish = new ItemBuilder(Material.GLASS).setName("§eVanish").setLore("§6Clique droit pour activer/désactiver", "§6le vanish.");
 
         player.getInventory().setItem(0, invSee.toItemStack());
         player.getInventory().setItem(1, reports.toItemStack());

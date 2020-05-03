@@ -102,7 +102,7 @@ public class ModsItemsInteract implements Listener {
 
             //Vanish
 
-            case BLAZE_POWDER:
+            case GLASS:
                 PlayerManager mod = PlayerManager.getFromPlayer(player);
                 mod.setVanished(!mod.isVanished());
                 player.sendMessage(mod.isVanished() ? "§avous êtes à présent invisible !" : "§bVous êtes à présent visible !");
