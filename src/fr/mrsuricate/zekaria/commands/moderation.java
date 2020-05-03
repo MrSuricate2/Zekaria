@@ -34,7 +34,7 @@ public class moderation implements CommandExecutor, Listener {
             if (Main.getInstance().moderateurs.contains(p.getUniqueId())){
                 Main.getInstance().moderateurs.remove(p.getUniqueId());
                 p.getInventory().clear();
-                p.sendMessage("§4Vous n'êtes plus dans le mode modération");
+                p.sendMessage("§6Vous n'êtes plus dans le mode modération");
 
                 return false;
             }
@@ -52,6 +52,7 @@ public class moderation implements CommandExecutor, Listener {
             }
 
             String reportedname = args[0];
+            String authorname = p.getName();
 
             if(Bukkit.getPlayer(reportedname) == null){
                 p.sendMessage("§4§lCe joueur n'est pas connécté !");
@@ -60,7 +61,7 @@ public class moderation implements CommandExecutor, Listener {
 
             Player reported = Bukkit.getPlayer(reportedname);
 
-            Inventory inv = Bukkit.createInventory(null, 18, "§4Report: §2" + reportedname);
+            Inventory inv = Bukkit.createInventory(null, 9, "§4Report: §2" + reportedname);
 
             //Type de hack
 
@@ -77,6 +78,55 @@ public class moderation implements CommandExecutor, Listener {
             spambowM.setDisplayName("§cSpamBow");
             spambow.setItemMeta(spambowM);
             inv.setItem(1, spambow);
+
+            //AntiKnockBack
+            ItemStack antiknockback = new ItemStack(Material.STICK);
+            ItemMeta antiknockbackM = antiknockback.getItemMeta();
+            antiknockbackM.setDisplayName("§cAnti-KB");
+            antiknockback.setItemMeta(antiknockbackM);
+            inv.setItem(2, antiknockback);
+
+            //Blink
+            ItemStack blink = new ItemStack(Material.ENDER_PEARL);
+            ItemMeta blinkM = blink.getItemMeta();
+            blinkM.setDisplayName("§cBlink");
+            blink.setItemMeta(blinkM);
+            inv.setItem(3, blink);
+
+            //Spider
+            ItemStack spider = new ItemStack(Material.SPIDER_EYE);
+            ItemMeta spiderM = spider.getItemMeta();
+            spiderM.setDisplayName("§cClimb / Spider");
+            spider.setItemMeta(spiderM);
+            inv.setItem(4, spider);
+
+            //Criticals
+            ItemStack criticals = new ItemStack(Material.BARRIER);
+            ItemMeta criticalsM = criticals.getItemMeta();
+            criticalsM.setDisplayName("§cCriticals");
+            criticals.setItemMeta(criticalsM);
+            inv.setItem(5, criticals);
+
+            //Dolphin
+            ItemStack dolphin = new ItemStack(Material.PACKED_ICE);
+            ItemMeta dolphinM = dolphin.getItemMeta();
+            dolphinM.setDisplayName("§cDolphin");
+            dolphin.setItemMeta(dolphinM);
+            inv.setItem(6, dolphin);
+
+            //Nuker
+            ItemStack nuker = new ItemStack(Material.TNT);
+            ItemMeta nukerM = nuker.getItemMeta();
+            nukerM.setDisplayName("§cNuker");
+            nuker.setItemMeta(nukerM);
+            inv.setItem(7, nuker);
+
+            //Reach
+            ItemStack reach = new ItemStack(Material.ARROW);
+            ItemMeta reachM = reach.getItemMeta();
+            reachM.setDisplayName("§cReach");
+            reach.setItemMeta(reachM);
+            inv.setItem(8, reach);
 
             p.openInventory(inv);
 
@@ -98,7 +148,7 @@ public class moderation implements CommandExecutor, Listener {
                 if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§cForceField")){
                     e.setCancelled(true);
                     p.closeInventory();
-                    sendToMods(e.getCurrentItem().getItemMeta().getDisplayName(), e.getInventory().getName().substring(12));
+                    sendToMods(e.getCurrentItem().getItemMeta().getDisplayName(), p.getName(), e.getInventory().getName().substring(12));
                     p.sendMessage("§2Le joueur a bien été signalé !");
                 }
                 break;
@@ -106,18 +156,74 @@ public class moderation implements CommandExecutor, Listener {
                 if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§cSpamBow")){
                     e.setCancelled(true);
                     p.closeInventory();
-                    sendToMods(e.getCurrentItem().getItemMeta().getDisplayName(), e.getInventory().getName().substring(12));
+                    sendToMods(e.getCurrentItem().getItemMeta().getDisplayName(), p.getName(), e.getInventory().getName().substring(12));
                     p.sendMessage("§2Le joueur a bien été signalé !");
+                }
+                break;
+            case STICK:
+                if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§cAnti-KB")){
+                    e.setCancelled(true);
+                    p.closeInventory();
+                    sendToMods(e.getCurrentItem().getItemMeta().getDisplayName(), p.getName(), e.getInventory().getName().substring(12));
+                    p.sendMessage("§2Le joueur a bien été signalé");
+                }
+                break;
+            case ENDER_PEARL:
+                if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§cBlink")){
+                    e.setCancelled(true);
+                    p.closeInventory();
+                    sendToMods(e.getCurrentItem().getItemMeta().getDisplayName(), p.getName(), e.getInventory().getName().substring(12));
+                    p.sendMessage("§2Le joueur a bien été signalé");
+                }
+                break;
+            case SPIDER_EYE:
+                if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§cClimb / Spider")){
+                    e.setCancelled(true);
+                    p.closeInventory();
+                    sendToMods(e.getCurrentItem().getItemMeta().getDisplayName(), p.getName(), e.getInventory().getName().substring(12));
+                    p.sendMessage("§2Le joueur a bien été signalé");
+                }
+                break;
+            case BARRIER:
+                if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§cCriticals")){
+                    e.setCancelled(true);
+                    p.closeInventory();
+                    sendToMods(e.getCurrentItem().getItemMeta().getDisplayName(), p.getName(), e.getInventory().getName().substring(12));
+                    p.sendMessage("§2Le joueur a bien été signalé");
+                }
+                break;
+            case PACKED_ICE:
+                if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§cDolphin")){
+                    e.setCancelled(true);
+                    p.closeInventory();
+                    sendToMods(e.getCurrentItem().getItemMeta().getDisplayName(), p.getName(), e.getInventory().getName().substring(12));
+                    p.sendMessage("§2Le joueur a bien été signalé");
+                }
+                break;
+            case TNT:
+                if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§cNuker")){
+                    e.setCancelled(true);
+                    p.closeInventory();
+                    sendToMods(e.getCurrentItem().getItemMeta().getDisplayName(), p.getName(), e.getInventory().getName().substring(12));
+                    p.sendMessage("§2Le joueur a bien été signalé");
+                }
+                break;
+            case ARROW:
+                if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§cReach")){
+                    e.setCancelled(true);
+                    p.closeInventory();
+                    sendToMods(e.getCurrentItem().getItemMeta().getDisplayName(), p.getName(), e.getInventory().getName().substring(12));
+                    p.sendMessage("§2Le joueur a bien été signalé");
                 }
                 break;
         }
 
     }
 
-    private void sendToMods(String reason, String reportedname) {
+    private void sendToMods(String reason, String reportedname, String authorname) {
         for(Player players : Bukkit.getOnlinePlayers()){
             if(players.hasPermission("mod.receive.use")){
-                players.sendMessage("§bLe joueur §a" + reportedname + " §ba été signalé pour : " + reason);
+                players.sendMessage("§8§l[§4§lReport§8§l]§r §bLe joueur §r§a" + reportedname + " §ba été signalé par §a" + authorname + " §bpour : §c" + reason);
             }
         }
     }
