@@ -14,13 +14,7 @@ public class PlayerLeave implements Listener {
         Player p = e.getPlayer();
 
         if(PlayerManager.isInModerationMod(p)){
-            PlayerManager pm = PlayerManager.getFromPlayer(p);
-            Main.getInstance().moderateurs.remove(p.getUniqueId());
-            p.getInventory().clear();
-            pm.giveInventory();
-            pm.destroy();
-            p.setAllowFlight(false);
-            p.setFlying(false);
+            PlayerManager.getFromPlayer(p).destroy();
         }
     }
 }
