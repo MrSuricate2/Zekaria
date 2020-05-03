@@ -112,15 +112,13 @@ public class spawner implements CommandExecutor, Listener {
             Player p = (Player) e.getWhoClicked();
             ItemStack current = e.getCurrentItem();
             double balance = economy.getBalance(p);
-            if (current == null || !current.hasItemMeta())
+            if (current == null){
                 return;
+            }
+
             if (inv.getName().equalsIgnoreCase("§6Spawners")) {
                 e.setCancelled(true);
-                if(current.getItemMeta().getDisplayName().equals(" ")){
-                    p.closeInventory();
-                    p.openInventory(inv);
-                    return;
-                }
+
                 switch (current.getType()) {
                     //Squelleton
                     case IRON_SWORD:
