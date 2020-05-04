@@ -85,7 +85,6 @@ public class Giveall implements CommandExecutor {
                     p.getInventory().addItem(new ItemStack[] { is });
 
                     Bukkit.getConsoleSender().sendMessage(item);
-                    //TODO
                     p.sendMessage("");
                     p.sendMessage("§8[§4Give All§8] §6Vous avez reçu " + amount + " " + item);
                     p.sendMessage("");
