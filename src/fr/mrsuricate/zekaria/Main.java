@@ -1,5 +1,6 @@
 package fr.mrsuricate.zekaria;
 
+import fr.mrsuricate.zekaria.ChatSide.ClearChat;
 import fr.mrsuricate.zekaria.CoinFlip.commands.CoinFlipCommand;
 import fr.mrsuricate.zekaria.CoinFlip.events.ClickEvent;
 import fr.mrsuricate.zekaria.CoinFlip.events.PlayerQuitEvent;
@@ -50,6 +51,7 @@ public class Main extends JavaPlugin implements Listener {
     public HashMap<UUID, PlayerManager> players = new HashMap<>();
     public HashMap<UUID, Location> freezedPlayers = new HashMap<>();
     public boolean isFreeze(Player player) {return freezedPlayers.containsKey(player.getUniqueId());}
+    public static boolean chatlock = false;
 
     @Override
     public void onEnable() {
@@ -72,6 +74,7 @@ public class Main extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new ModsItemsInteract(), this);
         getServer().getPluginManager().registerEvents(new PlayerLeave(), this);
         getCommand("giveall").setExecutor(new Giveall());
+        getCommand("clearchat").setExecutor(new ClearChat());
 
         //trade
         getCommand("trade").setExecutor(new trade());
