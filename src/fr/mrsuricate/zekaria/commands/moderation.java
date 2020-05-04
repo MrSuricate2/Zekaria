@@ -213,7 +213,7 @@ public class moderation implements CommandExecutor, Listener {
     private void sendToMods(String reason, String reportedname, String authorname) {
         for(Player players : Bukkit.getOnlinePlayers()){
             if(players.hasPermission("mod.receive.use")){
-                players.sendMessage("§8§l[§4§lReport§8§l]§r §bLe joueur §r§a" + reportedname + " §ba été signalé par §a" + authorname + " §bpour : §c" + reason);
+                players.sendMessage("§8§l[§4§lReport§8§l]§r §bLe joueur §r§a" + authorname + " §ba été signalé par §a" + reportedname + " §bpour : §c" + reason);
             }
         }
     }
