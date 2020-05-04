@@ -6,6 +6,7 @@ import fr.mrsuricate.zekaria.CoinFlip.events.PlayerQuitEvent;
 import fr.mrsuricate.zekaria.CoinFlip.utilz.*;
 import fr.mrsuricate.zekaria.commands.*;
 import fr.mrsuricate.zekaria.events.DeathMoney;
+import fr.mrsuricate.zekaria.giveall.Giveall;
 import fr.mrsuricate.zekaria.moderation.ModCancels;
 import fr.mrsuricate.zekaria.moderation.ModsItemsInteract;
 import fr.mrsuricate.zekaria.moderation.PlayerLeave;
@@ -63,6 +64,7 @@ public class Main extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new ModCancels(), this);
         getServer().getPluginManager().registerEvents(new ModsItemsInteract(), this);
         getServer().getPluginManager().registerEvents(new PlayerLeave(), this);
+        getCommand("giveall").setExecutor(new Giveall());
 
         //cf
         this.broadcast = new BroadcastManager();

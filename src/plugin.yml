@@ -26,3 +26,8 @@ commands:
   coinflip:
     description: Ouvre le menu coinflip
     aliases: cf
+  giveall:
+    description: Commande faite pour le giveall
+    permission: giveall.use
+    aliases:
+      - ga
