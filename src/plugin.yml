@@ -43,3 +43,6 @@ commands:
     permission: lockchat.use
     aliases:
       - cl
+  staffchat:
+    permission: staffchat.use
+    aliases: sc
