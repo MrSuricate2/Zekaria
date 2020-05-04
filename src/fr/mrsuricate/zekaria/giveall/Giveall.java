@@ -83,8 +83,6 @@ public class Giveall implements CommandExecutor {
                 for (j = (arrayOfPlayer = getServer().getOnlinePlayers().toArray(new Player[0])).length, b2 = 0; b2 < j; ) {
                     Player p = arrayOfPlayer[b2];
                     p.getInventory().addItem(new ItemStack[] { is });
-
-                    Bukkit.getConsoleSender().sendMessage(item);
                     p.sendMessage("");
                     p.sendMessage("§8[§4Give All§8] §6Vous avez reçu " + amount + " " + item);
                     p.sendMessage("");
