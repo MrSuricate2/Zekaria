@@ -1,7 +1,6 @@
-package fr.mrsuricate.zekaria.events;
+package fr.mrsuricate.zekaria.moderation;
 
-import fr.mrsuricate.zekaria.Main;
-import fr.mrsuricate.zekaria.managers.PlayerManager;
+import fr.mrsuricate.zekaria.moderation.PlayerManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

@@ -1,4 +1,4 @@
-package fr.mrsuricate.zekaria.managers;
+package fr.mrsuricate.zekaria.moderation;
 
 import fr.mrsuricate.zekaria.Main;
 import fr.mrsuricate.zekaria.utils.ItemBuilder;

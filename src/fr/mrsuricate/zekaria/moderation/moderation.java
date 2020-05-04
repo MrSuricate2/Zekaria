@@ -1,6 +1,6 @@
-package fr.mrsuricate.zekaria.commands;
+package fr.mrsuricate.zekaria.moderation;
 
-import fr.mrsuricate.zekaria.managers.PlayerManager;
+import fr.mrsuricate.zekaria.moderation.PlayerManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
