@@ -1,7 +1,6 @@
 package fr.mrsuricate.zekaria;
 
 import fr.mrsuricate.zekaria.ChatSide.ChatLock;
-import fr.mrsuricate.zekaria.ChatSide.ChatManager;
 import fr.mrsuricate.zekaria.ChatSide.ClearChat;
 import fr.mrsuricate.zekaria.CoinFlip.commands.CoinFlipCommand;
 import fr.mrsuricate.zekaria.CoinFlip.events.ClickEvent;
@@ -78,7 +77,7 @@ public class Main extends JavaPlugin implements Listener {
         getCommand("giveall").setExecutor(new Giveall());
         getCommand("clearchat").setExecutor(new ClearChat());
         getCommand("chatlock").setExecutor(new ChatLock());
-        getServer().getPluginManager().registerEvents(new ChatManager(), this);
+        getServer().getPluginManager().registerEvents(new ChatLock(), this);
 
         //trade
         getCommand("trade").setExecutor(new trade());
