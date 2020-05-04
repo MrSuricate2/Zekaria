@@ -26,6 +26,8 @@ commands:
   coinflip:
     description: Ouvre le menu coinflip
     aliases: cf
+  trade:
+    description: trade avec des joueurs
   giveall:
     description: Commande faite pour le giveall
     permission: giveall.use

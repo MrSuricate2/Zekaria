@@ -77,3 +77,16 @@ Messages:
   NotInBet: "&e&l[!] &eYou are not in the coinflip menu!"
   ToggleON: "&e&l[!] &eCoinFlip broadcasts are &a&lON"
   ToggleOFF: "&e&l[!] &eCoinFlip broadcasts are &c&lOFF"
+
+
+############################################################
+# +------------------------------------------------------+ #
+# |                        Trade                         | #
+# +------------------------------------------------------+ #
+############################################################
+Allow-Distance:
+  enable: true
+  radius: 10
+
+Allow-inter-world:
+  enable: true

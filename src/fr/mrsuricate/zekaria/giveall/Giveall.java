@@ -77,16 +77,17 @@ public class Giveall implements CommandExecutor {
                 byte b2;
                 int j;
                 Player[] arrayOfPlayer;
+                String item = md.toString();
+                item = item.substring(0,(item.length() - 3));
+                item = item.replace("(","");
                 for (j = (arrayOfPlayer = getServer().getOnlinePlayers().toArray(new Player[0])).length, b2 = 0; b2 < j; ) {
                     Player p = arrayOfPlayer[b2];
                     p.getInventory().addItem(new ItemStack[] { is });
+
+                    Bukkit.getConsoleSender().sendMessage(item);
                     //TODO
                     p.sendMessage("");
-                    p.sendMessage("§8[§4Give All§8] §6Vous avez reçu " + amount + " " + md.toString()
-                            .replace("(", "").replace("0", "").replace(")", "").replace("1", "").replace("2", "")
-                            .replace("3", "").replace("4", "").replace("5", "").replace("6", "").replace("7", "")
-                            .replace("8", "").replace("9", "").replace("10", "").replace("11", "").replace("12", "")
-                            .replace("13", "").replace("14", "").replace("15", ""));
+                    p.sendMessage("§8[§4Give All§8] §6Vous avez reçu " + amount + " " + item);
                     p.sendMessage("");
                     b2++;
                 }

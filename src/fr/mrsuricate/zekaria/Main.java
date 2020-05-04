@@ -4,6 +4,9 @@ import fr.mrsuricate.zekaria.CoinFlip.commands.CoinFlipCommand;
 import fr.mrsuricate.zekaria.CoinFlip.events.ClickEvent;
 import fr.mrsuricate.zekaria.CoinFlip.events.PlayerQuitEvent;
 import fr.mrsuricate.zekaria.CoinFlip.utilz.*;
+import fr.mrsuricate.zekaria.Trade.ItemStackUtils;
+import fr.mrsuricate.zekaria.Trade.TradeHandler;
+import fr.mrsuricate.zekaria.Trade.commands.trade;
 import fr.mrsuricate.zekaria.commands.*;
 import fr.mrsuricate.zekaria.events.DeathMoney;
 import fr.mrsuricate.zekaria.giveall.Giveall;
@@ -39,6 +42,10 @@ public class Main extends JavaPlugin implements Listener {
     private AnimationManager animation;
     //cf
 
+    //trade
+    private TradeHandler tradeHandler;
+    //trade
+
     public ArrayList<UUID> moderateurs = new ArrayList<>();
     public HashMap<UUID, PlayerManager> players = new HashMap<>();
     public HashMap<UUID, Location> freezedPlayers = new HashMap<>();
@@ -66,6 +73,13 @@ public class Main extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new PlayerLeave(), this);
         getCommand("giveall").setExecutor(new Giveall());
 
+        //trade
+        getCommand("trade").setExecutor(new trade());
+        getServer().getPluginManager().registerEvents(this.tradeHandler = new TradeHandler(), this);
+        ItemStackUtils.loadUtils();
+        //trade
+
+
         //cf
         this.broadcast = new BroadcastManager();
         this.stats = new StatsManager();
@@ -81,6 +95,7 @@ public class Main extends JavaPlugin implements Listener {
 
     }
 
+    //cf
     public BroadcastManager getBroadcast() {
         return this.broadcast;
     }
@@ -118,7 +133,11 @@ public class Main extends JavaPlugin implements Listener {
         econ = rsp.getProvider();
         return (econ != null);
     }
+    //cf
 
+    //trade
+
+    //trade
 
 
 
@@ -126,5 +145,9 @@ public class Main extends JavaPlugin implements Listener {
     @Override
     public void onDisable() {
         super.onDisable();
+    }
+
+    public TradeHandler getTradeHandler() {
+        return this.tradeHandler;
     }
 }
