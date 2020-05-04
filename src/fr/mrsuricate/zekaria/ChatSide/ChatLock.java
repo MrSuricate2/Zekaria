@@ -16,10 +16,10 @@ public class ChatLock implements CommandExecutor, Listener {
         if(cmd.getName().equalsIgnoreCase("chatlock")){
             if(sender.hasPermission("lockchat.use")){
                 if(!Main.chatlock){
-                    Bukkit.broadcastMessage("§8[§4Chat Lock§8] §6 " + sender.getName() + " §6à verrouiller le chat !");
+                    Bukkit.broadcastMessage("§8[§4Chat Lock§8] §6 " + sender.getName() + " §6a verrouiller le chat !");
                     Main.chatlock = true;
                 } else if (Main.chatlock){
-                    Bukkit.broadcastMessage("§8[§4Chat Lock§8] §6 " + sender.getName() + " §6à déverrouiller le chat !");
+                    Bukkit.broadcastMessage("§8[§4Chat Lock§8] §6 " + sender.getName() + " §6a déverrouiller le chat !");
                     Main.chatlock = false;
                 }
             } else {
@@ -33,7 +33,7 @@ public class ChatLock implements CommandExecutor, Listener {
     public void onChat(AsyncPlayerChatEvent e){
         if(Main.chatlock && !e.getPlayer().hasPermission("cl.bypass")){
             e.setCancelled(true);
-            Bukkit.broadcastMessage("§8[§4Lock Chat§8] §6Le chat à été désactiver");
+            Bukkit.broadcastMessage("§8[§4Lock Chat§8] §6Le chat a été désactiver");
         }
     }
 
