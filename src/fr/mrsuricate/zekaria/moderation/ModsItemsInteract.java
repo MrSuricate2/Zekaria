@@ -63,7 +63,10 @@ public class ModsItemsInteract implements Listener {
                     player.sendMessage("§6Vous avez unfreeze §b" + target.getName());
                 } else {
                     Main.getInstance().freezedPlayers.put(target.getUniqueId(), target.getLocation());
+                    target.sendMessage("");
                     target.sendMessage("§6Vous avez été freeze par §b" + player.getName());
+                    target.sendMessage("§6Merci de venir sur discord : §bhttps://discord.gg/knXYnBG");
+                    target.sendMessage("");
                     player.sendMessage("§6Vous avez freeze §b" + target.getName());
                 }
                 break;
