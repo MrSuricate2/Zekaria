@@ -141,6 +141,7 @@ public class moderation implements CommandExecutor, Listener {
                     sendToMods(e.getCurrentItem().getItemMeta().getDisplayName(), p.getName(), e.getInventory().getName().substring(12));
                     p.sendMessage("§2Le joueur a bien été signalé !");
                 }
+                e.setCancelled(true);
                 break;
             case BOW:
                 if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§cSpamBow")){
@@ -157,6 +158,7 @@ public class moderation implements CommandExecutor, Listener {
                     sendToMods(e.getCurrentItem().getItemMeta().getDisplayName(), p.getName(), e.getInventory().getName().substring(12));
                     p.sendMessage("§2Le joueur a bien été signalé");
                 }
+                e.setCancelled(true);
                 break;
             case ENDER_PEARL:
                 if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§cBlink")){
@@ -165,6 +167,7 @@ public class moderation implements CommandExecutor, Listener {
                     sendToMods(e.getCurrentItem().getItemMeta().getDisplayName(), p.getName(), e.getInventory().getName().substring(12));
                     p.sendMessage("§2Le joueur a bien été signalé");
                 }
+                e.setCancelled(true);
                 break;
             case SPIDER_EYE:
                 if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§cClimb / Spider")){
@@ -173,6 +176,7 @@ public class moderation implements CommandExecutor, Listener {
                     sendToMods(e.getCurrentItem().getItemMeta().getDisplayName(), p.getName(), e.getInventory().getName().substring(12));
                     p.sendMessage("§2Le joueur a bien été signalé");
                 }
+                e.setCancelled(true);
                 break;
             case BARRIER:
                 if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§cCriticals")){
@@ -181,6 +185,7 @@ public class moderation implements CommandExecutor, Listener {
                     sendToMods(e.getCurrentItem().getItemMeta().getDisplayName(), p.getName(), e.getInventory().getName().substring(12));
                     p.sendMessage("§2Le joueur a bien été signalé");
                 }
+                e.setCancelled(true);
                 break;
             case PACKED_ICE:
                 if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§cDolphin")){
@@ -189,6 +194,7 @@ public class moderation implements CommandExecutor, Listener {
                     sendToMods(e.getCurrentItem().getItemMeta().getDisplayName(), p.getName(), e.getInventory().getName().substring(12));
                     p.sendMessage("§2Le joueur a bien été signalé");
                 }
+                e.setCancelled(true);
                 break;
             case TNT:
                 if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§cNuker")){
@@ -197,6 +203,7 @@ public class moderation implements CommandExecutor, Listener {
                     sendToMods(e.getCurrentItem().getItemMeta().getDisplayName(), p.getName(), e.getInventory().getName().substring(12));
                     p.sendMessage("§2Le joueur a bien été signalé");
                 }
+                e.setCancelled(true);
                 break;
             case ARROW:
                 if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§cReach")){
@@ -205,6 +212,7 @@ public class moderation implements CommandExecutor, Listener {
                     sendToMods(e.getCurrentItem().getItemMeta().getDisplayName(), p.getName(), e.getInventory().getName().substring(12));
                     p.sendMessage("§2Le joueur a bien été signalé");
                 }
+                e.setCancelled(true);
                 break;
         }
 
