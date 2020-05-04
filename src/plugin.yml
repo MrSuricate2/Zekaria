@@ -38,3 +38,8 @@ commands:
     permission: clearchat.use
     aliases:
       - cc
+  chatlock:
+    description: Commande lock chat
+    permission: lockchat.use
+    aliases:
+      - cl
