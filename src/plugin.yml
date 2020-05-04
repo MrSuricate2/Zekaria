@@ -18,7 +18,7 @@ commands:
     description: Achat de kit
   moderation:
     description: Interface de moderation
-    permission: mod.interface.use
+    permission: moderation.mod
     aliases:
       - mod
   report:

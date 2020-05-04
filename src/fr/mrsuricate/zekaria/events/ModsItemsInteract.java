@@ -64,7 +64,7 @@ public class ModsItemsInteract implements Listener {
                 } else {
                     Main.getInstance().freezedPlayers.put(target.getUniqueId(), target.getLocation());
                     target.sendMessage("§6Vous avez été freeze par §b" + player.getName());
-                    player.sendMessage("§6Vous avez freeze §b" + player.getName());
+                    player.sendMessage("§6Vous avez freeze §b" + target.getName());
                 }
                 break;
 
