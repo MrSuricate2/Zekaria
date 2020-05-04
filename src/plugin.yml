@@ -33,3 +33,8 @@ commands:
     permission: giveall.use
     aliases:
       - ga
+  clearchat:
+    description: Commande clear chat
+    permission: clearchat.use
+    aliases:
+      - cc
