@@ -1,5 +1,6 @@
 package fr.mrsuricate.zekaria.moderation;
 
+import fr.mrsuricate.zekaria.Main;
 import fr.mrsuricate.zekaria.moderation.PlayerManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -45,6 +46,7 @@ public class moderation implements CommandExecutor, Listener {
             }
 
             String reportedname = args[0];
+            Main.getInstance().reportgetname = args[0];
 
             if(Bukkit.getPlayer(reportedname) == null){
                 player.sendMessage("§4§lCe joueur n'est pas connécté !");
@@ -132,89 +134,93 @@ public class moderation implements CommandExecutor, Listener {
 
         Player p = (Player) e.getWhoClicked();
 
-        switch (e.getCurrentItem().getType()){
+        if(e.getClickedInventory().getTitle().equals("§4Report: §2" + Main.getInstance().reportgetname)){
+            switch (e.getCurrentItem().getType()){
 
-            case DIAMOND_SWORD:
-                if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§cForceField")){
+                case DIAMOND_SWORD:
+                    if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§cForceField")){
+                        e.setCancelled(true);
+                        p.closeInventory();
+                        sendToMods(e.getCurrentItem().getItemMeta().getDisplayName(), p.getName(), e.getInventory().getName().substring(12));
+                        p.sendMessage("§2Le joueur a bien été signalé !");
+                    }
                     e.setCancelled(true);
-                    p.closeInventory();
-                    sendToMods(e.getCurrentItem().getItemMeta().getDisplayName(), p.getName(), e.getInventory().getName().substring(12));
-                    p.sendMessage("§2Le joueur a bien été signalé !");
-                }
-                e.setCancelled(true);
-                break;
-            case BOW:
-                if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§cSpamBow")){
+                    break;
+                case BOW:
+                    if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§cSpamBow")){
+                        e.setCancelled(true);
+                        p.closeInventory();
+                        sendToMods(e.getCurrentItem().getItemMeta().getDisplayName(), p.getName(), e.getInventory().getName().substring(12));
+                        p.sendMessage("§2Le joueur a bien été signalé !");
+                    }
+                    break;
+                case STICK:
+                    if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§cAnti-KB")){
+                        e.setCancelled(true);
+                        p.closeInventory();
+                        sendToMods(e.getCurrentItem().getItemMeta().getDisplayName(), p.getName(), e.getInventory().getName().substring(12));
+                        p.sendMessage("§2Le joueur a bien été signalé");
+                    }
                     e.setCancelled(true);
-                    p.closeInventory();
-                    sendToMods(e.getCurrentItem().getItemMeta().getDisplayName(), p.getName(), e.getInventory().getName().substring(12));
-                    p.sendMessage("§2Le joueur a bien été signalé !");
-                }
-                break;
-            case STICK:
-                if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§cAnti-KB")){
+                    break;
+                case ENDER_PEARL:
+                    if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§cBlink")){
+                        e.setCancelled(true);
+                        p.closeInventory();
+                        sendToMods(e.getCurrentItem().getItemMeta().getDisplayName(), p.getName(), e.getInventory().getName().substring(12));
+                        p.sendMessage("§2Le joueur a bien été signalé");
+                    }
                     e.setCancelled(true);
-                    p.closeInventory();
-                    sendToMods(e.getCurrentItem().getItemMeta().getDisplayName(), p.getName(), e.getInventory().getName().substring(12));
-                    p.sendMessage("§2Le joueur a bien été signalé");
-                }
-                e.setCancelled(true);
-                break;
-            case ENDER_PEARL:
-                if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§cBlink")){
+                    break;
+                case SPIDER_EYE:
+                    if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§cClimb / Spider")){
+                        e.setCancelled(true);
+                        p.closeInventory();
+                        sendToMods(e.getCurrentItem().getItemMeta().getDisplayName(), p.getName(), e.getInventory().getName().substring(12));
+                        p.sendMessage("§2Le joueur a bien été signalé");
+                    }
                     e.setCancelled(true);
-                    p.closeInventory();
-                    sendToMods(e.getCurrentItem().getItemMeta().getDisplayName(), p.getName(), e.getInventory().getName().substring(12));
-                    p.sendMessage("§2Le joueur a bien été signalé");
-                }
-                e.setCancelled(true);
-                break;
-            case SPIDER_EYE:
-                if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§cClimb / Spider")){
+                    break;
+                case BARRIER:
+                    if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§cCriticals")){
+                        e.setCancelled(true);
+                        p.closeInventory();
+                        sendToMods(e.getCurrentItem().getItemMeta().getDisplayName(), p.getName(), e.getInventory().getName().substring(12));
+                        p.sendMessage("§2Le joueur a bien été signalé");
+                    }
                     e.setCancelled(true);
-                    p.closeInventory();
-                    sendToMods(e.getCurrentItem().getItemMeta().getDisplayName(), p.getName(), e.getInventory().getName().substring(12));
-                    p.sendMessage("§2Le joueur a bien été signalé");
-                }
-                e.setCancelled(true);
-                break;
-            case BARRIER:
-                if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§cCriticals")){
+                    break;
+                case PACKED_ICE:
+                    if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§cDolphin")){
+                        e.setCancelled(true);
+                        p.closeInventory();
+                        sendToMods(e.getCurrentItem().getItemMeta().getDisplayName(), p.getName(), e.getInventory().getName().substring(12));
+                        p.sendMessage("§2Le joueur a bien été signalé");
+                    }
                     e.setCancelled(true);
-                    p.closeInventory();
-                    sendToMods(e.getCurrentItem().getItemMeta().getDisplayName(), p.getName(), e.getInventory().getName().substring(12));
-                    p.sendMessage("§2Le joueur a bien été signalé");
-                }
-                e.setCancelled(true);
-                break;
-            case PACKED_ICE:
-                if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§cDolphin")){
+                    break;
+                case TNT:
+                    if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§cNuker")){
+                        e.setCancelled(true);
+                        p.closeInventory();
+                        sendToMods(e.getCurrentItem().getItemMeta().getDisplayName(), p.getName(), e.getInventory().getName().substring(12));
+                        p.sendMessage("§2Le joueur a bien été signalé");
+                    }
                     e.setCancelled(true);
-                    p.closeInventory();
-                    sendToMods(e.getCurrentItem().getItemMeta().getDisplayName(), p.getName(), e.getInventory().getName().substring(12));
-                    p.sendMessage("§2Le joueur a bien été signalé");
-                }
-                e.setCancelled(true);
-                break;
-            case TNT:
-                if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§cNuker")){
+                    break;
+                case ARROW:
+                    if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§cReach")){
+                        e.setCancelled(true);
+                        p.closeInventory();
+                        sendToMods(e.getCurrentItem().getItemMeta().getDisplayName(), p.getName(), e.getInventory().getName().substring(12));
+                        p.sendMessage("§2Le joueur a bien été signalé");
+                    }
                     e.setCancelled(true);
-                    p.closeInventory();
-                    sendToMods(e.getCurrentItem().getItemMeta().getDisplayName(), p.getName(), e.getInventory().getName().substring(12));
-                    p.sendMessage("§2Le joueur a bien été signalé");
-                }
-                e.setCancelled(true);
-                break;
-            case ARROW:
-                if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§cReach")){
-                    e.setCancelled(true);
-                    p.closeInventory();
-                    sendToMods(e.getCurrentItem().getItemMeta().getDisplayName(), p.getName(), e.getInventory().getName().substring(12));
-                    p.sendMessage("§2Le joueur a bien été signalé");
-                }
-                e.setCancelled(true);
-                break;
+                    break;
+            }
         }
+
+
 
     }
 

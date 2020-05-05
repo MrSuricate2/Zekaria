@@ -54,6 +54,11 @@ public class Main extends JavaPlugin implements Listener {
     public static HashMap<String, Integer> map = new HashMap<>();
     //StaffChat
 
+    //report
+    public static String reportgetname;
+    //report
+
+
     public ArrayList<UUID> moderateurs = new ArrayList<>();
     public HashMap<UUID, PlayerManager> players = new HashMap<>();
     public HashMap<UUID, Location> freezedPlayers = new HashMap<>();
@@ -108,6 +113,8 @@ public class Main extends JavaPlugin implements Listener {
         getCommand("staffchat").setExecutor(new StaffChat());
         Bukkit.getPluginManager().registerEvents(new StaffChat(), this);
         //StaffChat
+
+
 
 
     }
