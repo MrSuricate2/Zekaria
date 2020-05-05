@@ -10,14 +10,10 @@ import fr.mrsuricate.zekaria.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 
@@ -94,7 +90,10 @@ public class TradeInventory
             this.receiverInventory.setItem(statusSlot.intValue(), ItemStackUtils.getItem(Material.INK_SACK, 1, 0, "§b > Échangé <", new String[0]));
         }
 
-
+        Player player = getSender();
+        Player p = Main.getInstance().trade.get(player);
+        Main.getInstance().trade.remove(player);
+        Main.getInstance().trade.remove(p);
         getSender().closeInventory();
         getReceiver().closeInventory();
 
@@ -321,6 +320,11 @@ public class TradeInventory
         getSender().sendMessage("§cL'échange a été annulé!");
         getReceiver().sendMessage("§cL'échange a été annulé!");
 
+
+        Player p = Main.getInstance().trade.get(player);
+        Main.getInstance().trade.remove(player);
+        Main.getInstance().trade.remove(p);
+
         this.closed = true;
 
         giveItemsBack();
@@ -421,6 +425,15 @@ public class TradeInventory
 
                 getSenderInventory().setItem(48, ItemStackUtils.getItem(Material.INK_SACK, 1, 1, "§cRefusé!", new String[0]));
                 getReceiverInventory().setItem(50, ItemStackUtils.getItem(Material.INK_SACK, 1, 1, "§cRefusé!", new String[0]));
+
+                if (getSenderInventory().getItem(48).equals(ItemStackUtils.getItem(Material.INK_SACK, 1, 1, "§cRefusé!", new String[0]))){
+                    getSender().closeInventory();
+                    getReceiver().closeInventory();
+                }
+                if (getSenderInventory().getItem(50).equals(ItemStackUtils.getItem(Material.INK_SACK, 1, 1, "§cRefusé!", new String[0]))){
+                    getSender().closeInventory();
+                    getReceiver().closeInventory();
+                }
             }
         }
 
@@ -446,6 +459,16 @@ public class TradeInventory
 
                 getSenderInventory().setItem(50, ItemStackUtils.getItem(Material.INK_SACK, 1, 1, "§cRefusé!", new String[0]));
                 getReceiverInventory().setItem(48, ItemStackUtils.getItem(Material.INK_SACK, 1, 1, "§cRefusé!", new String[0]));
+
+                if (getSenderInventory().getItem(48).equals(ItemStackUtils.getItem(Material.INK_SACK, 1, 1, "§cRefusé!", new String[0]))){
+                    getSender().closeInventory();
+                    getReceiver().closeInventory();
+                }
+                if (getSenderInventory().getItem(50).equals(ItemStackUtils.getItem(Material.INK_SACK, 1, 1, "§cRefusé!", new String[0]))){
+                    getSender().closeInventory();
+                    getReceiver().closeInventory();
+                }
+
             }
         }
     }

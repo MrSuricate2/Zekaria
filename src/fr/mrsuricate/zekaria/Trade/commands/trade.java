@@ -70,7 +70,8 @@ public class trade implements CommandExecutor{
 
                                         Main.getInstance().getTradeHandler().removeRequests(player);
                                         Main.getInstance().getTradeHandler().removeRequests(onlinePlayer);
-
+                                        Main.getInstance().trade.put(player, onlinePlayer);
+                                        Main.getInstance().trade.put(onlinePlayer, player);
                                         Main.getInstance().getTradeHandler().open(player, onlinePlayer);
                                     }
 

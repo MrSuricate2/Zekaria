@@ -47,6 +47,7 @@ public class Main extends JavaPlugin implements Listener {
 
     //trade
     private TradeHandler tradeHandler;
+    public static HashMap<Player, Player> trade = new HashMap<>();
     //trade
 
     //StaffChat

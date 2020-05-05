@@ -9,6 +9,7 @@ import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.inventory.*;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.plugin.Plugin;
@@ -189,20 +190,17 @@ public class TradeHandler implements Listener {
 
 //todo fermer le trade si combats
 
-/*    @EventHandler
+    @EventHandler
     public void onGetDamage(EntityDamageByEntityEvent e){
         if(e.getEntity() instanceof Player){
-
             Player player = (Player) e.getEntity();
-            player.closeInventory();
-            Bukkit.getConsoleSender().sendMessage(String.valueOf(player));
+            if(Main.getInstance().trade.containsKey(player)){
+                player.closeInventory();
+            }
         }
-        //TradeInventory tradeInventory = new TradeInventory(player, player);
-        //tradeInventory.closeInventories(player);
-
     }
 
-*/
+
     @EventHandler
     public void closeInventory(InventoryCloseEvent e) {
         Player player = (Player)e.getPlayer();
