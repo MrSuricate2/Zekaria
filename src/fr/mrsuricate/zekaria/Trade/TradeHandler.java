@@ -188,8 +188,6 @@ public class TradeHandler implements Listener {
         this.tradeInventories.add(tradeInventory);
     }
 
-//todo fermer le trade si combats
-
     @EventHandler
     public void onGetDamage(EntityDamageByEntityEvent e){
         if(e.getEntity() instanceof Player){

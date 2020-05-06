@@ -11,6 +11,7 @@ import fr.mrsuricate.zekaria.Trade.ItemStackUtils;
 import fr.mrsuricate.zekaria.Trade.TradeHandler;
 import fr.mrsuricate.zekaria.Trade.commands.trade;
 import fr.mrsuricate.zekaria.commands.*;
+import fr.mrsuricate.zekaria.enchere.enchere;
 import fr.mrsuricate.zekaria.events.DeathMoney;
 import fr.mrsuricate.zekaria.giveall.Giveall;
 import fr.mrsuricate.zekaria.moderation.ModCancels;
@@ -24,6 +25,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -57,6 +59,14 @@ public class Main extends JavaPlugin implements Listener {
     //report
     public static String reportgetname;
     //report
+
+    //enchere
+    public static  int quantité;
+    public static  double prixDeDepart;
+    public static HashMap<Player, ItemStack> data = new HashMap<>();
+    public static byte enchereEnCours;
+
+    //enchere
 
 
     public ArrayList<UUID> moderateurs = new ArrayList<>();
@@ -114,6 +124,10 @@ public class Main extends JavaPlugin implements Listener {
         Bukkit.getPluginManager().registerEvents(new StaffChat(), this);
         //StaffChat
 
+        //enchere
+        getCommand("enchere").setExecutor(new enchere());
+        //enchere
+
 
 
 
@@ -159,19 +173,17 @@ public class Main extends JavaPlugin implements Listener {
     }
     //cf
 
-    //trade
 
     //trade
-
-
+    public TradeHandler getTradeHandler() {
+        return this.tradeHandler;
+    }
+    //trade
 
 
     @Override
     public void onDisable() {
-        super.onDisable();
+
     }
 
-    public TradeHandler getTradeHandler() {
-        return this.tradeHandler;
-    }
 }

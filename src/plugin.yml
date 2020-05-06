@@ -46,3 +46,7 @@ commands:
   staffchat:
     permission: staffchat.use
     aliases: sc
+  enchere:
+    description: Mettre des items au enchère
+    permission: enchere.use
+    aliases: auc

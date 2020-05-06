@@ -1,7 +1,5 @@
 package fr.mrsuricate.zekaria.giveall;
 
-import fr.mrsuricate.zekaria.Main;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

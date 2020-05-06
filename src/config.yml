@@ -8,8 +8,6 @@ messages:
   error-block: 'Le bloc n''est pas bon. Merci de le changer.'
 
 
-
-
 ############################################################
 # +------------------------------------------------------+ #
 # |                       CoinFlip                       | #
@@ -26,55 +24,55 @@ GUI:
     data: 15
     display_name: '&0'
   Size: 9
-  Title: "&lCOIN FLIP"
+  Title: "&lPile ou Face"
   SkullItem:
     name: "&f&l%name%"
     lore:
       - ""
-      - "&b&lWager"
+      - "&b&lMontant"
       - " &7$%money%"
       - ""
-      - "&b&lSide Chosen"
+      - "&b&lCoté choisis"
       - " &7%side%"
       - ""
-      - "&7Click here to &a&lENTER &7the bet!"
+      - "&7Clique içi pour &a&lENTRER &7dans le pari !"
   BookInfo:
     type: BOOK
-    name: "&b&lCoin Flip Help"
+    name: "&b&lAide CoinFlip"
     lore:
       - ""
       - "&f/coinflip"
-      - "&7View all active coinflip matches"
+      - "&7Gui"
       - ""
-      - "&f/coinflip <amount> <heads/tails>"
-      - "&7Start a coinflip match"
+      - "&f/coinflip <amount> <pile/face>"
+      - "&7Démarrer un match"
       - ""
       - "&f/coinflip cancel"
-      - "&7Remove your coinflip match"
+      - "&7Annulé le match"
       - ""
       - "&f/coinflip toggle"
-      - "&7Toggles coinflip broadcasts"
+      - "&7Activer le broadcast"
   RefreshItem:
     type: CHEST
     name: "&b&lRefresh"
     lore:
-      - "&7Click here to refresh this page"
+      - "&7Clique içi pour rafraichir la liste"
 
 AnimationGUI:
-  Title: "&lWINNER IS.."
+  Title: "&lLe gagnant est ..."
 
 # messages
 Messages:
-  WinBroadcast: "&7&l** &a%winner% &7has defeated &c%loser% &7in a &7&n$%amount%&r &7/coinflip &7&l**"
-  Entered: "&b&l[!] &bYou created a bet of &3$%amount% (&b/coinflip&3)"
-  Canceled: "&e&l[!] &eYou removed yourself from the coinflip matches!"
-  CanceledHelp: "&e&l[!] &eTo remove a coin flip type &6/cf cancel"
-  ReceivedMoney: " &a&l+ %amount%"
-  LostMoney: " &c&l- %amount%"
-  NotEnoughMoney: "&c&l[!] &cYou dont have enough money to enter!"
-  NotEnoughEnterMoney: "&c&l[!] &cAmount must be greater then &4$1,000!"
-  AlreadyInBet: "&c&l[!] &cYou already are in the coins bet menu!"
-  NotInBet: "&e&l[!] &eYou are not in the coinflip menu!"
+  WinBroadcast: "&a%winner% &7a vaincu &c%loser% &7avec un montant de &7&n$%amount%&r"
+  Entered: "&b&l[!] &bVous avez crée un pari avec un montant de &3$%amount% (&b/coinflip&3)"
+  Canceled: "&e&l[!] &eVous vous êtes retiré du match!"
+  CanceledHelp: "&e&l[!] &ePour annulé un match tape &6/cf cancel"
+  ReceivedMoney: " &a&l+ %amount% +"
+  LostMoney: " &c&l- %amount% -"
+  NotEnoughMoney: "&c&l[!] &cTu n'a pas assez de monnaie pour entrer dans le pari!"
+  NotEnoughEnterMoney: "&c&l[!] &cLe montant du pari doit être supérieur ou égale à &4$1,000!"
+  AlreadyInBet: "&c&l[!] &cVous êtes dèjà dans un pari!"
+  NotInBet: "&e&l[!] &eVous n'êtes pas membre d'un pari!"
   ToggleON: "&e&l[!] &eCoinFlip broadcasts are &a&lON"
   ToggleOFF: "&e&l[!] &eCoinFlip broadcasts are &c&lOFF"
 
