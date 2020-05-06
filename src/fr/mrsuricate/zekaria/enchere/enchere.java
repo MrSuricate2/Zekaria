@@ -1,21 +1,17 @@
 package fr.mrsuricate.zekaria.enchere;
 
 import fr.mrsuricate.zekaria.Main;
-import org.bukkit.Bukkit;
+import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.material.MaterialData;
-
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import org.bukkit.plugin.RegisteredServiceProvider;
 
 public class enchere implements CommandExecutor {
 
@@ -24,6 +20,7 @@ public class enchere implements CommandExecutor {
         if(sender instanceof Player){
             if(cmd.getName().equalsIgnoreCase("enchere")){
                 if(sender.hasPermission("enchere.use")){
+                    setupEconomy();
                     if(args.length == 0){
                         sender.sendMessage("/enchere create <quantité> <prix>");
                     }
@@ -60,9 +57,46 @@ public class enchere implements CommandExecutor {
                                     }
                                 }
                             }
-                        } else {
-                            sender.sendMessage("/enchere create <quantité> <prix>");
                         }
+                        if(Main.getInstance().enchereEnCours == 1){
+                            if(args[0].equalsIgnoreCase("mise")){
+                                if(args.length == 2){
+                                    try{
+                                        Main.getInstance().bidup = Integer.parseInt(args[1]);
+                                    } catch (Exception e){
+                                        sender.sendMessage("§cMauvais prix");
+                                        Main.getInstance().bidup = 0;
+                                    }
+                                    if(economy.getBalance((OfflinePlayer) sender) >= Main.getInstance().bidup){
+                                        if(Main.getInstance().bidup >= Main.getInstance().prixDeDepart){
+                                            if(Main.getInstance().bid.isEmpty()){
+                                                Main.getInstance().bid.put((Player) sender,Main.getInstance().bidup);
+                                                Main.getInstance().lastbid = (Player) sender;
+                                                economy.withdrawPlayer((OfflinePlayer) sender, Main.getInstance().bidup);
+                                                sender.sendMessage("§aVotre Mise à bien était enregistré");
+                                            } else {
+                                                if (Main.getInstance().bidup > Main.getInstance().bid.get(Main.getInstance().lastbid)){
+                                                    economy.depositPlayer((OfflinePlayer) Main.getInstance().lastbid, Main.getInstance().bid.get(Main.getInstance().lastbid));
+                                                    Main.getInstance().bid.remove(Main.getInstance().lastbid);
+                                                    Main.getInstance().bid.put((Player) sender, Main.getInstance().bidup);
+                                                    economy.withdrawPlayer((OfflinePlayer) sender, Main.getInstance().bidup);
+                                                    sender.sendMessage("§aVotre Mise à bien était enregistré");
+                                                } else {
+                                                    sender.sendMessage("§aVous n'avez pas surencherie assez. Veuillez mettre plus de "+ Main.getInstance().bid.get(Main.getInstance().lastbid));
+                                                }
+                                            }
+
+                                        } else {
+                                            sender.sendMessage("§aVous n'avez pas surencherie assez. Veuillez mettre plus ou égal a "+ Main.getInstance().prixDeDepart);
+                                        }
+                                    } else {
+                                        sender.sendMessage("§aVous n'avez pas assez d'argent");
+                                    }
+
+                                }
+                            }
+                        }
+
                     }
                 }
 
@@ -85,12 +119,20 @@ public class enchere implements CommandExecutor {
             ItemStack vide = new ItemStack(Material.AIR);
             player.setItemInHand(vide);
             Main.getInstance().enchereEnCours = 1;
+            new Lancementenchere(player, is).runTaskTimer(Main.getInstance(),0L, 20L);
         } else {
             player.getItemInHand().setAmount(player.getItemInHand().getAmount() - Main.getInstance().quantité);
             Main.getInstance().enchereEnCours = 1;
+            new Lancementenchere(player, is).runTaskTimer(Main.getInstance(),0L, 20L);
         }
     }
 
-
+    public static Economy economy = null;
+    private boolean setupEconomy() {
+        RegisteredServiceProvider<Economy> economyProvider = Main.getInstance().getServer().getServicesManager().getRegistration(Economy.class);
+        if (economyProvider != null)
+            economy = economyProvider.getProvider();
+        return (economy != null);
+    }
 
 }

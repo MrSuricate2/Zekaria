@@ -61,11 +61,13 @@ public class Main extends JavaPlugin implements Listener {
     //report
 
     //enchere
-    public static  int quantité;
-    public static  double prixDeDepart;
+    public static int quantité;
+    public static double prixDeDepart;
     public static HashMap<Player, ItemStack> data = new HashMap<>();
     public static byte enchereEnCours;
-
+    public static HashMap<Player, Double> bid = new HashMap<>();
+    public static double bidup;
+    public static Player lastbid;
     //enchere
 
 
