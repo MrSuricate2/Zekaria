@@ -68,6 +68,7 @@ public class Main extends JavaPlugin implements Listener {
     public static HashMap<Player, Double> bid = new HashMap<>();
     public static double bidup;
     public static Player lastbid;
+    public static Player namecreate;
     //enchere
 
 

@@ -46,6 +46,7 @@ public class enchere implements CommandExecutor {
                                             if(!Main.getInstance().data.containsKey(name)){
                                                 if(Main.getInstance().enchereEnCours == 0){
                                                     sender.sendMessage("§aVotre enchere à bien était crée !");
+                                                    Main.getInstance().namecreate = (Player) sender;
                                                     enchereManager((Player) sender);
                                                 } else {
                                                     sender.sendMessage("§aVeuillez attendre que l'enchere soit fini !");
@@ -69,23 +70,27 @@ public class enchere implements CommandExecutor {
                                     }
                                     if(economy.getBalance((OfflinePlayer) sender) >= Main.getInstance().bidup){
                                         if(Main.getInstance().bidup >= Main.getInstance().prixDeDepart){
-                                            if(Main.getInstance().bid.isEmpty()){
-                                                Main.getInstance().bid.put((Player) sender,Main.getInstance().bidup);
-                                                Main.getInstance().lastbid = (Player) sender;
-                                                economy.withdrawPlayer((OfflinePlayer) sender, Main.getInstance().bidup);
-                                                sender.sendMessage("§aVotre Mise à bien était enregistré");
+                                            if(Main.getInstance().namecreate.equals((Player) sender)){
+                                                sender.sendMessage("§cVous ne pouvez pas surenchérir à votre propre enchere !");
                                             } else {
-                                                if (Main.getInstance().bidup > Main.getInstance().bid.get(Main.getInstance().lastbid)){
-                                                    economy.depositPlayer((OfflinePlayer) Main.getInstance().lastbid, Main.getInstance().bid.get(Main.getInstance().lastbid));
-                                                    Main.getInstance().bid.remove(Main.getInstance().lastbid);
-                                                    Main.getInstance().bid.put((Player) sender, Main.getInstance().bidup);
+                                                if(Main.getInstance().bid.isEmpty()){
+                                                    Main.getInstance().bid.put((Player) sender,Main.getInstance().bidup);
+                                                    Main.getInstance().lastbid = (Player) sender;
                                                     economy.withdrawPlayer((OfflinePlayer) sender, Main.getInstance().bidup);
                                                     sender.sendMessage("§aVotre Mise à bien était enregistré");
                                                 } else {
-                                                    sender.sendMessage("§aVous n'avez pas surencherie assez. Veuillez mettre plus de "+ Main.getInstance().bid.get(Main.getInstance().lastbid));
+                                                    if (Main.getInstance().bidup > Main.getInstance().bid.get(Main.getInstance().lastbid)){
+                                                        economy.depositPlayer(Main.getInstance().lastbid, Main.getInstance().bid.get(Main.getInstance().lastbid));
+                                                        Main.getInstance().bid.remove(Main.getInstance().lastbid);
+                                                        Main.getInstance().bid.put((Player) sender, Main.getInstance().bidup);
+                                                        Main.getInstance().lastbid = (Player) sender;
+                                                        economy.withdrawPlayer((OfflinePlayer) sender, Main.getInstance().bidup);
+                                                        sender.sendMessage("§aVotre Mise à bien était enregistré");
+                                                    } else {
+                                                        sender.sendMessage("§aVous n'avez pas surencherie assez. Veuillez mettre plus de "+ Main.getInstance().bid.get(Main.getInstance().lastbid));
+                                                    }
                                                 }
                                             }
-
                                         } else {
                                             sender.sendMessage("§aVous n'avez pas surencherie assez. Veuillez mettre plus ou égal a "+ Main.getInstance().prixDeDepart);
                                         }
@@ -108,12 +113,11 @@ public class enchere implements CommandExecutor {
 
     private void enchereManager(Player player){
         MaterialData item2 = new MaterialData(player.getItemInHand().getType(), (byte) 0);
+        short dura = player.getItemInHand().getDurability();
         ItemMeta meta = player.getItemInHand().getItemMeta();
         ItemStack is = item2.toItemStack(Main.getInstance().quantité);
         is.setItemMeta(meta);
-        //todo a retiré
-        player.getInventory().addItem(is);
-        //
+        is.setDurability(dura);
         Main.getInstance().data.put(player, is);
         if(Main.getInstance().quantité == player.getItemInHand().getAmount()){
             ItemStack vide = new ItemStack(Material.AIR);
