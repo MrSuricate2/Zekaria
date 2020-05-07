@@ -21,7 +21,6 @@ public class Lancementenchere extends BukkitRunnable {
         tempo--;
         int minute = tempo/60;
         int seconde = tempo - minute*60;
-        System.out.println(minute + seconde);
         if(tempo == 0){
             if(Main.getInstance().bid.isEmpty()){
                 Main.getInstance().namecreate.getInventory().addItem(item);
@@ -30,7 +29,6 @@ public class Lancementenchere extends BukkitRunnable {
                 return;
             } else {
                 Player winbid = Main.getInstance().lastbid;
-                System.out.println(winbid);
 
                 double retour = Main.getInstance().bid.get(Main.getInstance().lastbid);
                 enchere.economy.depositPlayer(player, retour);

@@ -24,6 +24,7 @@ import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.Inventory;
@@ -33,6 +34,7 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
@@ -76,6 +78,8 @@ public class Main extends JavaPlugin implements Listener {
     //enchere
 
     //TimeIsMoney
+    public static File TimeIsMoney;
+    public static FileConfiguration config2;
     //TimeIsMoney
 
 
@@ -87,7 +91,6 @@ public class Main extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
-        final File file = new File(this.getDataFolder(), "Zekaria/TimeIsMoney.yml");
         saveDefaultConfig();
         PluginManager pm = getServer().getPluginManager();
         getCommand("alert").setExecutor(new alert());
@@ -110,14 +113,11 @@ public class Main extends JavaPlugin implements Listener {
         getCommand("clearchat").setExecutor(new ClearChat());
         getCommand("chatlock").setExecutor(new ChatLock());
         getServer().getPluginManager().registerEvents(new ChatLock(), this);
-
         //trade
         getCommand("trade").setExecutor(new trade());
         getServer().getPluginManager().registerEvents(this.tradeHandler = new TradeHandler(), this);
         ItemStackUtils.loadUtils();
         //trade
-
-
         //cf
         this.broadcast = new BroadcastManager();
         this.stats = new StatsManager();
@@ -129,18 +129,23 @@ public class Main extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new PlayerQuitEvent(), this);
         setupEconomy();
         //cf
-
         //StaffChat
         getCommand("staffchat").setExecutor(new StaffChat());
         Bukkit.getPluginManager().registerEvents(new StaffChat(), this);
         //StaffChat
-
         //enchere
         getCommand("enchere").setExecutor(new enchere());
         //enchere
-
         //timemoney
-
+        this.TimeIsMoney = new File(getDataFolder() + File.separator + "TimeIsMoney.yml");
+        if(!TimeIsMoney.exists()){
+            try{
+                TimeIsMoney.createNewFile();
+            }catch(IOException e){
+                e.printStackTrace();
+            }
+        }
+        this.config2 = YamlConfiguration.loadConfiguration(TimeIsMoney);
         Bukkit.getPluginManager().registerEvents(new TimeisMoney(), this);
         //timemoney
 
@@ -195,6 +200,12 @@ public class Main extends JavaPlugin implements Listener {
         return this.tradeHandler;
     }
     //trade
+
+    //TimeIsMoney
+    public FileConfiguration getTimeIsMoneyConfig(){
+        return config2;
+    }
+    //TimeIsMoney
 
 
     @Override
