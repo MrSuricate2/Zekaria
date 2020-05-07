@@ -7,6 +7,7 @@ import fr.mrsuricate.zekaria.CoinFlip.events.ClickEvent;
 import fr.mrsuricate.zekaria.CoinFlip.events.PlayerQuitEvent;
 import fr.mrsuricate.zekaria.CoinFlip.utilz.*;
 import fr.mrsuricate.zekaria.StaffChat.StaffChat;
+import fr.mrsuricate.zekaria.TimeIsMoney.TimeisMoney;
 import fr.mrsuricate.zekaria.Trade.ItemStackUtils;
 import fr.mrsuricate.zekaria.Trade.TradeHandler;
 import fr.mrsuricate.zekaria.Trade.commands.trade;
@@ -22,6 +23,7 @@ import fr.mrsuricate.zekaria.moderation.moderation;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.Inventory;
@@ -29,6 +31,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
@@ -71,6 +75,9 @@ public class Main extends JavaPlugin implements Listener {
     public static Player namecreate;
     //enchere
 
+    //TimeIsMoney
+    //TimeIsMoney
+
 
     public ArrayList<UUID> moderateurs = new ArrayList<>();
     public HashMap<UUID, PlayerManager> players = new HashMap<>();
@@ -80,6 +87,7 @@ public class Main extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
+        final File file = new File(this.getDataFolder(), "Zekaria/TimeIsMoney.yml");
         saveDefaultConfig();
         PluginManager pm = getServer().getPluginManager();
         getCommand("alert").setExecutor(new alert());
@@ -130,6 +138,11 @@ public class Main extends JavaPlugin implements Listener {
         //enchere
         getCommand("enchere").setExecutor(new enchere());
         //enchere
+
+        //timemoney
+
+        Bukkit.getPluginManager().registerEvents(new TimeisMoney(), this);
+        //timemoney
 
 
 

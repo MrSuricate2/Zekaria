@@ -7,7 +7,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class Lancementenchere extends BukkitRunnable {
 
-    public int tempo = 30;
+    public int tempo = 60;
     public Player player;
     public ItemStack item;
 
@@ -25,6 +25,7 @@ public class Lancementenchere extends BukkitRunnable {
         if(tempo == 0){
             if(Main.getInstance().bid.isEmpty()){
                 Main.getInstance().namecreate.getInventory().addItem(item);
+                Main.getInstance().enchereEnCours = 0;
                 this.cancel();
                 return;
             } else {
