@@ -18,7 +18,6 @@ public class runnable extends BukkitRunnable {
     @Override
     public void run() {
         tempo--;
-        System.out.println(tempo);
         if(tempo == 0){
             int temps = (int) Main.getInstance().getTimeIsMoneyConfig().get(p);
             temps++;
