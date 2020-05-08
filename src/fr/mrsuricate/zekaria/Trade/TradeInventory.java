@@ -6,7 +6,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
+import com.google.protobuf.StringValue;
 import fr.mrsuricate.zekaria.Main;
+import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -14,6 +17,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.scheduler.BukkitRunnable;
 
 
@@ -46,18 +50,36 @@ public class TradeInventory
         int acceptedSlot = 45;
         int declinedSlot = 46;
 
-        int placeholderSlot = 47;
+        int solde = 47;
 
-        this.youSlots = Arrays.asList(new Integer[] { Integer.valueOf(0), Integer.valueOf(1), Integer.valueOf(2), Integer.valueOf(3), Integer.valueOf(9), Integer.valueOf(10), Integer.valueOf(11), Integer.valueOf(12), Integer.valueOf(18), Integer.valueOf(19), Integer.valueOf(20), Integer.valueOf(21), Integer.valueOf(27), Integer.valueOf(28), Integer.valueOf(29), Integer.valueOf(30), Integer.valueOf(36), Integer.valueOf(37), Integer.valueOf(38), Integer.valueOf(39) });
-        this.otherSlots = Arrays.asList(new Integer[] { Integer.valueOf(5), Integer.valueOf(6), Integer.valueOf(7), Integer.valueOf(8), Integer.valueOf(14), Integer.valueOf(15), Integer.valueOf(16), Integer.valueOf(17), Integer.valueOf(23), Integer.valueOf(24), Integer.valueOf(25), Integer.valueOf(26), Integer.valueOf(32), Integer.valueOf(33), Integer.valueOf(34), Integer.valueOf(35), Integer.valueOf(41), Integer.valueOf(42), Integer.valueOf(43), Integer.valueOf(44) });
+        this.youSlots = Arrays.asList(new Integer[] { Integer.valueOf(0), Integer.valueOf(1), Integer.valueOf(2), Integer.valueOf(3), Integer.valueOf(9), Integer.valueOf(10), Integer.valueOf(11), Integer.valueOf(12), Integer.valueOf(18), Integer.valueOf(19), Integer.valueOf(20), Integer.valueOf(21) });
+        this.otherSlots = Arrays.asList(new Integer[] { Integer.valueOf(5), Integer.valueOf(6), Integer.valueOf(7), Integer.valueOf(8), Integer.valueOf(14), Integer.valueOf(15), Integer.valueOf(16), Integer.valueOf(17), Integer.valueOf(23), Integer.valueOf(24), Integer.valueOf(25), Integer.valueOf(26) });
 
         for (Integer wallSlot : wallSlots) {
             this.senderInventory.setItem(wallSlot.intValue(), ItemStackUtils.getItem(Material.STAINED_GLASS_PANE, 1, 0, " ", new String[0]));
             this.receiverInventory.setItem(wallSlot.intValue(), ItemStackUtils.getItem(Material.STAINED_GLASS_PANE, 1, 0, " ", new String[0]));
         }
 
-        this.senderInventory.setItem(placeholderSlot, ItemStackUtils.getItem(Material.STAINED_GLASS_PANE, 1, 0, " ", new String[0]));
-        this.receiverInventory.setItem(placeholderSlot, ItemStackUtils.getItem(Material.STAINED_GLASS_PANE, 1, 0, " ", new String[0]));
+
+
+        this.senderInventory.setItem(27,ItemStackUtils.getItem(Material.PAPER, 1, 0, "§a§l+ 10 000 €", new String[0]));
+        this.senderInventory.setItem(28,ItemStackUtils.getItem(Material.PAPER, 1, 0, "§a§l+ 1 000 €", new String[0]));
+        this.senderInventory.setItem(29,ItemStackUtils.getItem(Material.PAPER, 1, 0, "§a§l+ 100 €", new String[0]));
+        this.senderInventory.setItem(30,ItemStackUtils.getItem(Material.PAPER, 1, 0, "§a§l+ 10 €", new String[0]));
+        this.senderInventory.setItem(36,ItemStackUtils.getItem(Material.PAPER, 1, 0, "§c§l- 10 000 €", new String[0]));
+        this.senderInventory.setItem(37,ItemStackUtils.getItem(Material.PAPER, 1, 0, "§c§l- 1 000 €", new String[0]));
+        this.senderInventory.setItem(38,ItemStackUtils.getItem(Material.PAPER, 1, 0, "§c§l- 100 €", new String[0]));
+        this.senderInventory.setItem(39,ItemStackUtils.getItem(Material.PAPER, 1, 0, "§c§l- 10 €", new String[0]));
+
+        this.receiverInventory.setItem(27,ItemStackUtils.getItem(Material.PAPER, 1, 0, "§a§l+ 10 000 €", new String[0]));
+        this.receiverInventory.setItem(28,ItemStackUtils.getItem(Material.PAPER, 1, 0, "§a§l+ 1 000 €", new String[0]));
+        this.receiverInventory.setItem(29,ItemStackUtils.getItem(Material.PAPER, 1, 0, "§a§l+ 100 €", new String[0]));
+        this.receiverInventory.setItem(30,ItemStackUtils.getItem(Material.PAPER, 1, 0, "§a§l+ 10 €", new String[0]));
+        this.receiverInventory.setItem(36,ItemStackUtils.getItem(Material.PAPER, 1, 0, "§c§l- 10 000 €", new String[0]));
+        this.receiverInventory.setItem(37,ItemStackUtils.getItem(Material.PAPER, 1, 0, "§c§l- 1 000 €", new String[0]));
+        this.receiverInventory.setItem(38,ItemStackUtils.getItem(Material.PAPER, 1, 0, "§c§l- 100 €", new String[0]));
+        this.receiverInventory.setItem(39,ItemStackUtils.getItem(Material.PAPER, 1, 0, "§c§l- 10 €", new String[0]));
+
 
         for (Integer statusSlot : statusSlots) {
             this.senderInventory.setItem(statusSlot.intValue(), ItemStackUtils.getItem(Material.INK_SACK, 1, 9, "§7Statut en attente...", new String[0]));
@@ -92,10 +114,15 @@ public class TradeInventory
 
         Player player = getSender();
         Player p = Main.getInstance().trade.get(player);
+        economy.withdrawPlayer(player, Main.getInstance().setmoney);
+        economy.depositPlayer(player, Main.getInstance().setmoney2);
+        economy.withdrawPlayer(p, Main.getInstance().setmoney2);
+        economy.depositPlayer(p, Main.getInstance().setmoney);
         Main.getInstance().trade.remove(player);
         Main.getInstance().trade.remove(p);
         getSender().closeInventory();
         getReceiver().closeInventory();
+
 
     }
 
@@ -151,8 +178,6 @@ public class TradeInventory
         return itemStackList;
     }
 
-
-
     public List<ItemStack> getOtherItems(Player player) {
         List<ItemStack> itemStackList = new ArrayList<ItemStack>();
 
@@ -178,8 +203,6 @@ public class TradeInventory
 
         return itemStackList;
     }
-
-
 
     public void giveItemsBack() {
         List<ItemStack> senderItems = getYouItems(getSender());
@@ -217,8 +240,6 @@ public class TradeInventory
         }
     }
 
-
-
     public boolean isClosed(Player player) {
         if (this.closedPlayers.contains(player.getUniqueId().toString())) {
             return true;
@@ -226,8 +247,6 @@ public class TradeInventory
 
         return false;
     }
-
-
 
     public void closeInventory(Player player) {
         if (!this.closedPlayers.contains(player.getUniqueId().toString())) {
@@ -285,10 +304,6 @@ public class TradeInventory
         }
     }
 
-
-
-
-
     public void closeInventories(final Player player) {
         if (this.closed) {
             return;
@@ -330,7 +345,6 @@ public class TradeInventory
         giveItemsBack();
     }
 
-
     public void addSingleClose() {
         this.singleClose++;
     }
@@ -365,8 +379,8 @@ public class TradeInventory
 
 
     public void updateSlots(Inventory clickedInventory, Inventory inventory) {
-        this.youSlots = Arrays.asList(new Integer[] { Integer.valueOf(0), Integer.valueOf(1), Integer.valueOf(2), Integer.valueOf(3), Integer.valueOf(9), Integer.valueOf(10), Integer.valueOf(11), Integer.valueOf(12), Integer.valueOf(18), Integer.valueOf(19), Integer.valueOf(20), Integer.valueOf(21), Integer.valueOf(27), Integer.valueOf(28), Integer.valueOf(29), Integer.valueOf(30), Integer.valueOf(36), Integer.valueOf(37), Integer.valueOf(38), Integer.valueOf(39) });
-        this.otherSlots = Arrays.asList(new Integer[] { Integer.valueOf(5), Integer.valueOf(6), Integer.valueOf(7), Integer.valueOf(8), Integer.valueOf(14), Integer.valueOf(15), Integer.valueOf(16), Integer.valueOf(17), Integer.valueOf(23), Integer.valueOf(24), Integer.valueOf(25), Integer.valueOf(26), Integer.valueOf(32), Integer.valueOf(33), Integer.valueOf(34), Integer.valueOf(35), Integer.valueOf(41), Integer.valueOf(42), Integer.valueOf(43), Integer.valueOf(44) });
+        this.youSlots = Arrays.asList(new Integer[] { Integer.valueOf(0), Integer.valueOf(1), Integer.valueOf(2), Integer.valueOf(3), Integer.valueOf(9), Integer.valueOf(10), Integer.valueOf(11), Integer.valueOf(12), Integer.valueOf(18), Integer.valueOf(19), Integer.valueOf(20), Integer.valueOf(21) });
+        this.otherSlots = Arrays.asList(new Integer[] { Integer.valueOf(5), Integer.valueOf(6), Integer.valueOf(7), Integer.valueOf(8), Integer.valueOf(14), Integer.valueOf(15), Integer.valueOf(16), Integer.valueOf(17), Integer.valueOf(23), Integer.valueOf(24), Integer.valueOf(25), Integer.valueOf(26) });
 
         Map<Integer, ItemStack> youItems = new HashMap<Integer, ItemStack>();
 
@@ -405,6 +419,7 @@ public class TradeInventory
         if (isFinished()) {
             return;
         }
+        setupEconomy();
 
         if (player.getUniqueId().toString().equals(getSender().getUniqueId().toString())) {
 
@@ -419,8 +434,6 @@ public class TradeInventory
                 }
             }
 
-
-
             if (slot == 46) {
 
                 getSenderInventory().setItem(48, ItemStackUtils.getItem(Material.INK_SACK, 1, 1, "§cRefusé!", new String[0]));
@@ -433,6 +446,72 @@ public class TradeInventory
                 if (getSenderInventory().getItem(50).equals(ItemStackUtils.getItem(Material.INK_SACK, 1, 1, "§cRefusé!", new String[0]))){
                     getSender().closeInventory();
                     getReceiver().closeInventory();
+                }
+            }
+
+            double balance = economy.getBalance(getSender());
+            if (slot == 27){
+                if (balance >= 10000D){
+                    Main.getInstance().setmoney = Main.getInstance().setmoney + 10000;
+                    getReceiverInventory().setItem(47, ItemStackUtils.getItem(Material.GOLD_INGOT, 1, 0, "§eArgent", "§7Vous donnez §a"+Main.getInstance().setmoney2+" §7$","§7Il donne §a"+Main.getInstance().setmoney+" §7$"));
+                    getSenderInventory().setItem(47, ItemStackUtils.getItem(Material.GOLD_INGOT, 1, 0, "§eArgent", "§7Vous donnez §a"+Main.getInstance().setmoney+" §7$","§7Il donne §a"+Main.getInstance().setmoney2+" §7$" ));
+                }
+            }
+            if (slot == 28){
+                if (balance >= 1000D){
+                    Main.getInstance().setmoney = Main.getInstance().setmoney + 1000;
+                    getReceiverInventory().setItem(47, ItemStackUtils.getItem(Material.GOLD_INGOT, 1, 0, "§eArgent", "§7Vous donnez §a"+Main.getInstance().setmoney2+" §7$","§7Il donne §a"+Main.getInstance().setmoney+" §7$"));
+                    getSenderInventory().setItem(47, ItemStackUtils.getItem(Material.GOLD_INGOT, 1, 0, "§eArgent", "§7Vous donnez §a"+Main.getInstance().setmoney+" §7$","§7Il donne §a"+Main.getInstance().setmoney2+" §7$" ));
+                }
+            }
+            if (slot == 29){
+                if (balance >= 100D){
+                    Main.getInstance().setmoney = Main.getInstance().setmoney + 100;
+                    getReceiverInventory().setItem(47, ItemStackUtils.getItem(Material.GOLD_INGOT, 1, 0, "§eArgent", "§7Vous donnez §a"+Main.getInstance().setmoney2+" §7$","§7Il donne §a"+Main.getInstance().setmoney+" §7$"));
+                    getSenderInventory().setItem(47, ItemStackUtils.getItem(Material.GOLD_INGOT, 1, 0, "§eArgent", "§7Vous donnez §a"+Main.getInstance().setmoney+" §7$","§7Il donne §a"+Main.getInstance().setmoney2+" §7$" ));
+                }
+            }
+            if (slot == 30){
+                if (balance >= 10D){
+                    Main.getInstance().setmoney = Main.getInstance().setmoney + 10;
+                    getReceiverInventory().setItem(47, ItemStackUtils.getItem(Material.GOLD_INGOT, 1, 0, "§eArgent", "§7Vous donnez §a"+Main.getInstance().setmoney2+" §7$","§7Il donne §a"+Main.getInstance().setmoney+" §7$"));
+                    getSenderInventory().setItem(47, ItemStackUtils.getItem(Material.GOLD_INGOT, 1, 0, "§eArgent", "§7Vous donnez §a"+Main.getInstance().setmoney+" §7$","§7Il donne §a"+Main.getInstance().setmoney2+" §7$" ));
+                }
+            }
+            if (slot == 36){
+                if (Main.getInstance().setmoney >= 10000D){
+                    Main.getInstance().setmoney = Main.getInstance().setmoney - 10000;
+                    getReceiverInventory().setItem(47, ItemStackUtils.getItem(Material.GOLD_INGOT, 1, 0, "§eArgent", "§7Vous donnez §a"+Main.getInstance().setmoney2+" §7$","§7Il donne §a"+Main.getInstance().setmoney+" §7$"));
+                    getSenderInventory().setItem(47, ItemStackUtils.getItem(Material.GOLD_INGOT, 1, 0, "§eArgent", "§7Vous donnez §a"+Main.getInstance().setmoney+" §7$","§7Il donne §a"+Main.getInstance().setmoney2+" §7$" ));
+                } else {
+                    Main.getInstance().setmoney = 0;
+                }
+            }
+            if (slot == 37){
+                if (Main.getInstance().setmoney >= 1000D){
+                    Main.getInstance().setmoney = Main.getInstance().setmoney - 1000;
+                    getReceiverInventory().setItem(47, ItemStackUtils.getItem(Material.GOLD_INGOT, 1, 0, "§eArgent", "§7Vous donnez §a"+Main.getInstance().setmoney2+" §7$","§7Il donne §a"+Main.getInstance().setmoney+" §7$"));
+                    getSenderInventory().setItem(47, ItemStackUtils.getItem(Material.GOLD_INGOT, 1, 0, "§eArgent", "§7Vous donnez §a"+Main.getInstance().setmoney+" §7$","§7Il donne §a"+Main.getInstance().setmoney2+" §7$" ));
+                } else {
+                    Main.getInstance().setmoney = 0;
+                }
+            }
+            if (slot == 38){
+                if (Main.getInstance().setmoney >= 100D){
+                    Main.getInstance().setmoney = Main.getInstance().setmoney - 100;
+                    getReceiverInventory().setItem(47, ItemStackUtils.getItem(Material.GOLD_INGOT, 1, 0, "§eArgent", "§7Vous donnez §a"+Main.getInstance().setmoney2+" §7$","§7Il donne §a"+Main.getInstance().setmoney+" §7$"));
+                    getSenderInventory().setItem(47, ItemStackUtils.getItem(Material.GOLD_INGOT, 1, 0, "§eArgent", "§7Vous donnez §a"+Main.getInstance().setmoney+" §7$","§7Il donne §a"+Main.getInstance().setmoney2+" §7$" ));
+                } else {
+                    Main.getInstance().setmoney = 0;
+                }
+            }
+            if (slot == 39){
+                if (Main.getInstance().setmoney >= 10D){
+                    Main.getInstance().setmoney = Main.getInstance().setmoney - 10;
+                    getReceiverInventory().setItem(47, ItemStackUtils.getItem(Material.GOLD_INGOT, 1, 0, "§eArgent", "§7Vous donnez §a"+Main.getInstance().setmoney2+" §7$","§7Il donne §a"+Main.getInstance().setmoney+" §7$"));
+                    getSenderInventory().setItem(47, ItemStackUtils.getItem(Material.GOLD_INGOT, 1, 0, "§eArgent", "§7Vous donnez §a"+Main.getInstance().setmoney+" §7$","§7Il donne §a"+Main.getInstance().setmoney2+" §7$" ));
+                } else {
+                    Main.getInstance().setmoney = 0;
                 }
             }
         }
@@ -453,8 +532,6 @@ public class TradeInventory
                 }
             }
 
-
-
             if (slot == 46) {
 
                 getSenderInventory().setItem(50, ItemStackUtils.getItem(Material.INK_SACK, 1, 1, "§cRefusé!", new String[0]));
@@ -470,6 +547,80 @@ public class TradeInventory
                 }
 
             }
+            double balance = economy.getBalance(player);
+            if (slot == 27){
+                if (balance >= 10000D){
+                    Main.getInstance().setmoney2 = Main.getInstance().setmoney2 + 10000;
+                    getReceiverInventory().setItem(47, ItemStackUtils.getItem(Material.GOLD_INGOT, 1, 0, "§eArgent", "§7Vous donnez §a"+Main.getInstance().setmoney2+" §7$","§7Il donne §a"+Main.getInstance().setmoney+" §7$"));
+                    getSenderInventory().setItem(47, ItemStackUtils.getItem(Material.GOLD_INGOT, 1, 0, "§eArgent", "§7Vous donnez §a"+Main.getInstance().setmoney+" §7$","§7Il donne §a"+Main.getInstance().setmoney2+" §7$" ));
+                }
+            }
+            if (slot == 28){
+                if (balance >= 1000D){
+                    Main.getInstance().setmoney2 = Main.getInstance().setmoney2 + 1000;
+                    getReceiverInventory().setItem(47, ItemStackUtils.getItem(Material.GOLD_INGOT, 1, 0, "§eArgent", "§7Vous donnez §a"+Main.getInstance().setmoney2+" §7$","§7Il donne §a"+Main.getInstance().setmoney+" §7$"));
+                    getSenderInventory().setItem(47, ItemStackUtils.getItem(Material.GOLD_INGOT, 1, 0, "§eArgent", "§7Vous donnez §a"+Main.getInstance().setmoney+" §7$","§7Il donne §a"+Main.getInstance().setmoney2+" §7$" ));
+                }
+            }
+            if (slot == 29){
+                if (balance >= 100D){
+                    Main.getInstance().setmoney2 = Main.getInstance().setmoney2 + 100;
+                    getReceiverInventory().setItem(47, ItemStackUtils.getItem(Material.GOLD_INGOT, 1, 0, "§eArgent", "§7Vous donnez §a"+Main.getInstance().setmoney2+" §7$","§7Il donne §a"+Main.getInstance().setmoney+" §7$"));
+                    getSenderInventory().setItem(47, ItemStackUtils.getItem(Material.GOLD_INGOT, 1, 0, "§eArgent", "§7Vous donnez §a"+Main.getInstance().setmoney+" §7$","§7Il donne §a"+Main.getInstance().setmoney2+" §7$" ));
+                }
+            }
+            if (slot == 30){
+                if (balance >= 10D){
+                    Main.getInstance().setmoney2 = Main.getInstance().setmoney2 + 10;
+                    getReceiverInventory().setItem(47, ItemStackUtils.getItem(Material.GOLD_INGOT, 1, 0, "§eArgent", "§7Vous donnez §a"+Main.getInstance().setmoney2+" §7$","§7Il donne §a"+Main.getInstance().setmoney+" §7$"));
+                    getSenderInventory().setItem(47, ItemStackUtils.getItem(Material.GOLD_INGOT, 1, 0, "§eArgent", "§7Vous donnez §a"+Main.getInstance().setmoney+" §7$","§7Il donne §a"+Main.getInstance().setmoney2+" §7$" ));
+                }
+            }
+            if (slot == 36){
+                if (Main.getInstance().setmoney2 >= 10000D){
+                    Main.getInstance().setmoney2 = Main.getInstance().setmoney2 - 10000;
+                    getReceiverInventory().setItem(47, ItemStackUtils.getItem(Material.GOLD_INGOT, 1, 0, "§eArgent", "§7Vous donnez §a"+Main.getInstance().setmoney2+" §7$","§7Il donne §a"+Main.getInstance().setmoney+" §7$"));
+                    getSenderInventory().setItem(47, ItemStackUtils.getItem(Material.GOLD_INGOT, 1, 0, "§eArgent", "§7Vous donnez §a"+Main.getInstance().setmoney+" §7$","§7Il donne §a"+Main.getInstance().setmoney2+" §7$" ));
+                } else {
+                    Main.getInstance().setmoney2 = 0;
+                }
+            }
+            if (slot == 37){
+                if (Main.getInstance().setmoney2 >= 1000D){
+                    Main.getInstance().setmoney2 = Main.getInstance().setmoney2 - 1000;
+                    getReceiverInventory().setItem(47, ItemStackUtils.getItem(Material.GOLD_INGOT, 1, 0, "§eArgent", "§7Vous donnez §a"+Main.getInstance().setmoney2+" §7$","§7Il donne §a"+Main.getInstance().setmoney+" §7$"));
+                    getSenderInventory().setItem(47, ItemStackUtils.getItem(Material.GOLD_INGOT, 1, 0, "§eArgent", "§7Vous donnez §a"+Main.getInstance().setmoney+" §7$","§7Il donne §a"+Main.getInstance().setmoney2+" §7$" ));
+                } else {
+                    Main.getInstance().setmoney2 = 0;
+                }
+            }
+            if (slot == 38){
+                if (Main.getInstance().setmoney2 >= 100D){
+                    Main.getInstance().setmoney2 = Main.getInstance().setmoney2 - 100;
+                    getReceiverInventory().setItem(47, ItemStackUtils.getItem(Material.GOLD_INGOT, 1, 0, "§eArgent", "§7Vous donnez §a"+Main.getInstance().setmoney2+" §7$","§7Il donne §a"+Main.getInstance().setmoney+" §7$"));
+                    getSenderInventory().setItem(47, ItemStackUtils.getItem(Material.GOLD_INGOT, 1, 0, "§eArgent", "§7Vous donnez §a"+Main.getInstance().setmoney+" §7$","§7Il donne §a"+Main.getInstance().setmoney2+" §7$" ));
+                } else {
+                    Main.getInstance().setmoney2 = 0;
+                }
+            }
+            if (slot == 39){
+                if (Main.getInstance().setmoney2 >= 10D){
+                    Main.getInstance().setmoney2 = Main.getInstance().setmoney2 - 10;
+                    getReceiverInventory().setItem(47, ItemStackUtils.getItem(Material.GOLD_INGOT, 1, 0, "§eArgent", "§7Vous donnez §a"+Main.getInstance().setmoney2+" §7$","§7Il donne §a"+Main.getInstance().setmoney+" §7$"));
+                    getSenderInventory().setItem(47, ItemStackUtils.getItem(Material.GOLD_INGOT, 1, 0, "§eArgent", "§7Vous donnez §a"+Main.getInstance().setmoney+" §7$","§7Il donne §a"+Main.getInstance().setmoney2+" §7$" ));
+                } else {
+                    Main.getInstance().setmoney2 = 0;
+                }
+            }
         }
+    }
+
+    public static Economy economy = null;
+
+    private boolean setupEconomy() {
+        RegisteredServiceProvider<Economy> economyProvider = Main.getInstance().getServer().getServicesManager().getRegistration(Economy.class);
+        if (economyProvider != null)
+            economy = economyProvider.getProvider();
+        return (economy != null);
     }
 }

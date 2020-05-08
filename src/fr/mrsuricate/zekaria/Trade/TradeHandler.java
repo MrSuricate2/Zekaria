@@ -417,15 +417,6 @@ public class TradeHandler implements Listener {
         }
     }
 
-
-
-
-
-
-
-
-
-
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void clickInventory(InventoryClickEvent e) {
         if (e.getWhoClicked() instanceof Player) {
@@ -571,7 +562,7 @@ public class TradeHandler implements Listener {
 
 
 
-                if (slotId == 45 || slotId == 46)
+                if (slotId == 45 || slotId == 46 || slotId == 27 || slotId == 28 || slotId == 29 || slotId == 30 || slotId == 36 || slotId == 37 || slotId == 38 || slotId == 39)
                 {
                     tradeInventory.setItem(e.getSlot(), player);
                 }

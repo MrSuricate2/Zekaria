@@ -27,7 +27,6 @@ public class DécoCombats extends BukkitRunnable implements Listener {
                 this.causedamage = (Player) e.getDamager();
                 damagelist.put(takedamage,1);
                 damagelist.put(causedamage,1);
-                System.out.println("damage");
                 new DécoCombats().runTaskTimer(Main.getInstance(),0L, 20L);
             }
         }
