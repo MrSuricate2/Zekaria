@@ -1,19 +1,37 @@
 package fr.mrsuricate.zekaria.enchere;
 
+import fr.mrsuricate.zekaria.CoinFlip.utilz.Chat;
 import fr.mrsuricate.zekaria.Main;
+import net.md_5.bungee.api.ChatColor;
+import net.md_5.bungee.api.chat.*;
 import net.milkbowl.vault.economy.Economy;
+import net.minecraft.server.v1_8_R3.NBTTagCompound;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.craftbukkit.v1_8_R3.inventory.CraftItemStack;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.material.MaterialData;
 import org.bukkit.plugin.RegisteredServiceProvider;
+import skinsrestorer.shared.utils.acf.BukkitCommandIssuer;
+
+import java.util.Collection;
+import java.util.Iterator;
 
 public class enchere implements CommandExecutor {
+
+    public String convertItemStackToJsonRegular(ItemStack itemStack) {
+        net.minecraft.server.v1_8_R3.ItemStack nmsItemStack = CraftItemStack.asNMSCopy(itemStack);
+        NBTTagCompound compound = new NBTTagCompound();
+        compound = nmsItemStack.save(compound);
+
+        return compound.toString();
+    }
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String msg, String[] args) {
@@ -46,6 +64,28 @@ public class enchere implements CommandExecutor {
                                             if(!Main.getInstance().data.containsKey(name)){
                                                 if(Main.getInstance().enchereEnCours == 0){
                                                     sender.sendMessage("§aVotre enchere à bien était crée !");
+                                                    Main.getInstance().item2 = new MaterialData(((Player) sender).getItemInHand().getType(), (byte) 0);
+                                                    Main.getInstance().dura = ((Player) sender).getItemInHand().getDurability();
+                                                    Main.getInstance().meta = ((Player) sender).getItemInHand().getItemMeta();
+                                                    Main.getInstance().is = Main.getInstance().item2.toItemStack(Main.getInstance().quantité);
+                                                    Main.getInstance().is.setItemMeta(Main.getInstance().meta);
+                                                    Main.getInstance().is.setDurability(Main.getInstance().dura);
+                                                    Main.getInstance().itemJson = convertItemStackToJsonRegular(Main.getInstance().is);
+
+                                                    Main.getInstance().mat = ((Player) sender).getItemInHand().getType();
+
+                                                    TextComponent message = new TextComponent(ChatColor.GREEN + sender.getName() + ChatColor.AQUA + " vient de mettre au enchere cette item : "+ ChatColor.RED + Main.getInstance().quantité +" "+ ChatColor.RED + Main.getInstance().mat + ChatColor.AQUA + " pour " + ChatColor.RED + Main.getInstance().prixDeDepart + ChatColor.AQUA + " $." );
+                                                    message.setHoverEvent( new HoverEvent( HoverEvent.Action.SHOW_ITEM, new ComponentBuilder(Main.getInstance().itemJson).create()));
+                                                    message.setClickEvent( new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/enchere mise "));
+
+                                                    Collection onlineplayer = Bukkit.getOnlinePlayers();
+                                                    Iterator<Player> itstring = onlineplayer.iterator();
+                                                    Bukkit.broadcastMessage("");
+                                                    while(itstring.hasNext()){
+                                                        Player value = itstring.next();
+                                                        value.spigot().sendMessage(message);
+                                                    }
+                                                    Bukkit.broadcastMessage("");
                                                     Main.getInstance().namecreate = (Player) sender;
                                                     enchereManager((Player) sender);
                                                 } else {
@@ -78,6 +118,19 @@ public class enchere implements CommandExecutor {
                                                     Main.getInstance().lastbid = (Player) sender;
                                                     economy.withdrawPlayer((OfflinePlayer) sender, Main.getInstance().bidup);
                                                     sender.sendMessage("§aVotre Mise à bien était enregistré");
+
+                                                    TextComponent message2 = new TextComponent(ChatColor.GREEN + sender.getName()+ ChatColor.AQUA+" vient de surenchérir pour un total de : "+ChatColor.RED+ Main.getInstance().bidup + ChatColor.AQUA + " $ §bsur l'enchere : "+ChatColor.RED+ Main.getInstance().quantité+ " "+ChatColor.RED+ Main.getInstance().mat );
+                                                    message2.setHoverEvent( new HoverEvent( HoverEvent.Action.SHOW_ITEM, new ComponentBuilder(Main.getInstance().itemJson).create()));
+                                                    message2.setClickEvent( new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/enchere mise "));
+
+                                                    Collection onlineplayer2 = Bukkit.getOnlinePlayers();
+                                                    Iterator<Player> itstring2 = onlineplayer2.iterator();
+                                                    Bukkit.broadcastMessage("");
+                                                    while(itstring2.hasNext()){
+                                                        Player value2 = itstring2.next();
+                                                        value2.spigot().sendMessage(message2);
+                                                    }
+                                                    Bukkit.broadcastMessage("");
                                                 } else {
                                                     if (Main.getInstance().bidup > Main.getInstance().bid.get(Main.getInstance().lastbid)){
                                                         economy.depositPlayer(Main.getInstance().lastbid, Main.getInstance().bid.get(Main.getInstance().lastbid));
@@ -86,6 +139,21 @@ public class enchere implements CommandExecutor {
                                                         Main.getInstance().lastbid = (Player) sender;
                                                         economy.withdrawPlayer((OfflinePlayer) sender, Main.getInstance().bidup);
                                                         sender.sendMessage("§aVotre Mise à bien était enregistré");
+
+                                                        TextComponent message2 = new TextComponent(ChatColor.GREEN + sender.getName()+ ChatColor.AQUA+" vient de surenchérir pour un total de : "+ChatColor.RED+ Main.getInstance().bidup + ChatColor.GREEN +" $ sur l'enchere : "+ChatColor.AQUA+ Main.getInstance().quantité+ " "+ Main.getInstance().mat );
+                                                        message2.setColor( ChatColor.AQUA );
+                                                        message2.setHoverEvent( new HoverEvent( HoverEvent.Action.SHOW_ITEM, new ComponentBuilder(Main.getInstance().itemJson).create()));
+                                                        message2.setClickEvent( new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/enchere mise "));
+
+                                                        Collection onlineplayer2 = Bukkit.getOnlinePlayers();
+                                                        Iterator<Player> itstring2 = onlineplayer2.iterator();
+                                                        Bukkit.broadcastMessage("");
+                                                        while(itstring2.hasNext()){
+                                                            Player value2 = itstring2.next();
+                                                            System.out.println(value2);
+                                                            value2.spigot().sendMessage(message2);
+                                                        }
+                                                        Bukkit.broadcastMessage("");
                                                     } else {
                                                         sender.sendMessage("§aVous n'avez pas surencherie assez. Veuillez mettre plus de "+ Main.getInstance().bid.get(Main.getInstance().lastbid));
                                                     }

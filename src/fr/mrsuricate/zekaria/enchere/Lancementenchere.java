@@ -7,7 +7,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class Lancementenchere extends BukkitRunnable {
 
-    public int tempo = 60;
+    public int tempo = 600;
     public Player player;
     public ItemStack item;
 

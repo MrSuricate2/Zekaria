@@ -24,12 +24,15 @@ import fr.mrsuricate.zekaria.moderation.moderation;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.material.MaterialData;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -69,6 +72,7 @@ public class Main extends JavaPlugin implements Listener {
 
     //enchere
     public static int quantité;
+    public static Material mat;
     public static double prixDeDepart;
     public static HashMap<Player, ItemStack> data = new HashMap<>();
     public static byte enchereEnCours;
@@ -76,6 +80,11 @@ public class Main extends JavaPlugin implements Listener {
     public static double bidup;
     public static Player lastbid;
     public static Player namecreate;
+    public static MaterialData item2;
+    public static short dura;
+    public static ItemMeta meta;
+    public static ItemStack is;
+    public static String itemJson;
     //enchere
 
     //TimeIsMoney
