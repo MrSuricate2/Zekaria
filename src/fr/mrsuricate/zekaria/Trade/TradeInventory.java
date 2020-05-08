@@ -118,6 +118,8 @@ public class TradeInventory
         economy.depositPlayer(player, Main.getInstance().setmoney2);
         economy.withdrawPlayer(p, Main.getInstance().setmoney2);
         economy.depositPlayer(p, Main.getInstance().setmoney);
+        Main.getInstance().setmoney = 0;
+        Main.getInstance().setmoney2 = 0;
         Main.getInstance().trade.remove(player);
         Main.getInstance().trade.remove(p);
         getSender().closeInventory();
