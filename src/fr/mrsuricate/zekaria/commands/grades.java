@@ -97,38 +97,53 @@ public class grades implements CommandExecutor, Listener {
                 switch (current.getType()) {
                     //Gladiateur
                     case IRON_HELMET:
+                        if (p.hasPermission("grades.gladiateur")){
                         if (balance >= 75000.0D) {
                             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "manuadd " + p.getName() + " Gladiateur");
                             economy.withdrawPlayer(p, 75000.0D);
                             p.closeInventory();
                             p.sendMessage("§8[§4Zekaria§8] §6Vous êtes maintenant Gladiateur");
                             break;
+                        } else {
+                            p.sendMessage("§8[§4Zekaria§8] §6Vous n'avez pas assez d'argent !");
                         }
-                        p.sendMessage("§8[§4Zekaria§8] §6Vous n'avez pas assez d'argent !");
+                    } else {
+                            p.sendMessage("§8[§4Zekaria§8] §6Vous ne pouvez pas achetez ce grades");
+                        }
                         p.closeInventory();
                         break;
                     //Duc
                     case GOLD_HELMET:
-                        if (balance >= 350000.0D) {
-                            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "manuadd " + p.getName() + " Duc");
-                            economy.withdrawPlayer(p, 350000.0D);
-                            p.closeInventory();
-                            p.sendMessage("§8[§4Zekaria§8] §6Vous êtes maintenant Duc");
-                            break;
+                        if (p.hasPermission("grades.duc")) {
+                            if (balance >= 350000.0D) {
+                                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "manuadd " + p.getName() + " Duc");
+                                economy.withdrawPlayer(p, 350000.0D);
+                                p.closeInventory();
+                                p.sendMessage("§8[§4Zekaria§8] §6Vous êtes maintenant Duc");
+                                break;
+                            } else {
+                                p.sendMessage("§8[§4Zekaria§8] §6Vous n'avez pas assez d'argent !");
+                            }
+                        } else {
+                            p.sendMessage("§8[§4Zekaria§8] §6Vous ne pouvez pas achetez ce grades");
                         }
-                        p.sendMessage("§8[§4Zekaria§8] §6Vous n'avez pas assez d'argent !");
                         p.closeInventory();
                         break;
                     //Seigneur
                     case DIAMOND_HELMET:
-                        if (balance >= 2000000.0D) {
-                            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "manuadd " + p.getName() + " Seigneur");
-                            economy.withdrawPlayer(p, 2000000.0D);
-                            p.closeInventory();
-                            p.sendMessage("§8[§4Zekaria§8] §6Vous êtes maintenant Seigneur");
-                            break;
+                        if (p.hasPermission("grades.seigneur")) {
+                            if (balance >= 2000000.0D) {
+                                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "manuadd " + p.getName() + " Seigneur");
+                                economy.withdrawPlayer(p, 2000000.0D);
+                                p.closeInventory();
+                                p.sendMessage("§8[§4Zekaria§8] §6Vous êtes maintenant Seigneur");
+                                break;
+                            } else {
+                                p.sendMessage("§8[§4Zekaria§8] §6Vous n'avez pas assez d'argent !");
+                            }
+                        } else {
+                            p.sendMessage("§8[§4Zekaria§8] §6Vous ne pouvez pas achetez ce grades");
                         }
-                        p.sendMessage("§8[§4Zekaria§8] §6Vous n'avez pas assez d'argent !");
                         p.closeInventory();
                         break;
                 }

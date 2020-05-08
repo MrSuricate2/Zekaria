@@ -3,6 +3,7 @@ package fr.mrsuricate.zekaria.moderation;
 import fr.mrsuricate.zekaria.Main;
 import fr.mrsuricate.zekaria.utils.ItemBuilder;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -53,6 +54,9 @@ public class PlayerManager {
         player.setAllowFlight(false);
         player.setFlying(false);
         setVanished(false);
+        if(player.getGameMode() == GameMode.SPECTATOR){
+            player.setGameMode(GameMode.SURVIVAL);
+        }
     }
 
     public static PlayerManager getFromPlayer(Player player){
