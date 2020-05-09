@@ -105,7 +105,7 @@ public class buykit implements CommandExecutor, Listener {
                     case TNT:
                         if (balance >= 200000.0D) {
                             Bukkit.dispatchCommand((CommandSender)Bukkit.getConsoleSender(), "manuaddp " + p.getName() + " essentials.kits.Pillage");
-                            economy.withdrawPlayer((OfflinePlayer)p, 200000.0D);
+                            economy.withdrawPlayer(p, 200000.0D);
                             p.closeInventory();
                             p.sendMessage("§8[§4Zekaria§8] §6Vous avez désormais accès au kit Pillage");
                             break;
@@ -116,7 +116,7 @@ public class buykit implements CommandExecutor, Listener {
                     case POTION:
                         if (balance >= 200000.0D) {
                             Bukkit.dispatchCommand((CommandSender)Bukkit.getConsoleSender(), "manuaddp " + p.getName() + " essentials.kits.Potion");
-                            economy.withdrawPlayer((OfflinePlayer)p, 200000.0D);
+                            economy.withdrawPlayer(p, 200000.0D);
                             p.closeInventory();
                             p.sendMessage("§8[§4Zekaria§8] §6Vous avez désormais accès au kit Potion");
                             break;
@@ -127,7 +127,7 @@ public class buykit implements CommandExecutor, Listener {
                     case OBSIDIAN:
                         if (balance >= 200000.0D) {
                             Bukkit.dispatchCommand((CommandSender)Bukkit.getConsoleSender(), "manuaddp " + p.getName() + " essentials.kits.Construction");
-                            economy.withdrawPlayer((OfflinePlayer)p, 200000.0D);
+                            economy.withdrawPlayer(p, 200000.0D);
                             p.closeInventory();
                             p.sendMessage("§8[§4Zekaria§8] §6Vous avez désormais accès au kit Construction");
                             break;
@@ -138,7 +138,7 @@ public class buykit implements CommandExecutor, Listener {
                     case ENCHANTED_BOOK:
                         if (balance >= 200000.0D) {
                             Bukkit.dispatchCommand((CommandSender)Bukkit.getConsoleSender(), "manuaddp " + p.getName() + " essentials.kits.Enchanteur");
-                            economy.withdrawPlayer((OfflinePlayer)p, 200000.0D);
+                            economy.withdrawPlayer(p, 200000.0D);
                             p.closeInventory();
                             p.sendMessage("§8[§4Zekaria§8] §6Vous avez désormais accès au kit Enchanteur");
                             break;

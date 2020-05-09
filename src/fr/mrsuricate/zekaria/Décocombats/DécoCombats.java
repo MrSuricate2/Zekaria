@@ -1,6 +1,7 @@
 package fr.mrsuricate.zekaria.Décocombats;
 
 import fr.mrsuricate.zekaria.Main;
+import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -8,6 +9,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.HashMap;
@@ -32,11 +34,26 @@ public class DécoCombats extends BukkitRunnable implements Listener {
         }
     }
 
+    public static Economy economy = null;
+
+    private boolean setupEconomy() {
+        RegisteredServiceProvider<Economy> economyProvider = Main.getInstance().getServer().getServicesManager().getRegistration(Economy.class);
+        if (economyProvider != null)
+            economy = economyProvider.getProvider();
+        return (economy != null);
+    }
+
     @EventHandler
     public void OnQuit(PlayerQuitEvent e){
         Player playerquit = e.getPlayer();
+        double balance = economy.getBalance(playerquit);
         if(this.damagelist.containsKey(playerquit)){
             playerquit.setHealth(0);
+            if (setupEconomy()){
+                if (balance >= 500) {
+                    economy.withdrawPlayer(playerquit, 500.0);
+                }
+            }
             Bukkit.broadcastMessage("§cLe déco-combats est interdit");
             damagelist.remove(takedamage);
             damagelist.remove(causedamage);
