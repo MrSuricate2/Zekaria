@@ -46,21 +46,13 @@ public class spawner implements CommandExecutor, Listener {
                 zombie.setItemMeta(zombieM);
                 inv.setItem(1, zombie);
 
-                //Golem
-                ItemStack golem = new ItemStack(Material.DIAMOND_SWORD, 1);
-                ItemMeta golemM = golem.getItemMeta();
-                golemM.setDisplayName("§6Spawner à Golem");
-                golemM.setLore(Arrays.asList(new String[] { "§4Prix: 80 000 $" }));
-                golem.setItemMeta(golemM);
-                inv.setItem(2, golem);
-
                 //Vache
                 ItemStack vache = new ItemStack(Material.COOKED_BEEF, 1);
                 ItemMeta vacheM = vache.getItemMeta();
                 vacheM.setDisplayName("§6Spawner à Vache");
                 vacheM.setLore(Arrays.asList(new String[] { "§4Prix: 4 000 $" }));
                 vache.setItemMeta(vacheM);
-                inv.setItem(8, vache);
+                inv.setItem(2, vache);
 
                 //Cochon
                 ItemStack cochon = new ItemStack(Material.GRILLED_PORK, 1);
@@ -68,7 +60,7 @@ public class spawner implements CommandExecutor, Listener {
                 cochonM.setDisplayName("§6Spawner à Cochon");
                 cochonM.setLore(Arrays.asList(new String[] { "§4Prix: 4 000 $" }));
                 cochon.setItemMeta(cochonM);
-                inv.setItem(7, cochon);
+                inv.setItem(3, cochon);
 
                 //Poulet
                 ItemStack poulet = new ItemStack(Material.COOKED_CHICKEN, 1);
@@ -76,7 +68,7 @@ public class spawner implements CommandExecutor, Listener {
                 pouletM.setDisplayName("§6Spawner à Poulet");
                 pouletM.setLore(Arrays.asList(new String[] { "§4Prix: 4 000 $" }));
                 poulet.setItemMeta(pouletM);
-                inv.setItem(6, poulet);
+                inv.setItem(4, poulet);
 
                 //Vitre
                 ItemStack bars = new ItemStack(Material.STAINED_GLASS_PANE, 1);
@@ -84,8 +76,9 @@ public class spawner implements CommandExecutor, Listener {
                 barsM.setDisplayName(" ");
                 bars.setItemMeta(barsM);
                 inv.setItem(5, bars);
-                inv.setItem(4, bars);
-                inv.setItem(3, bars);
+                inv.setItem(6, bars);
+                inv.setItem(7, bars);
+                inv.setItem(8, bars);
 
                 player.openInventory(inv);
 
@@ -147,23 +140,6 @@ public class spawner implements CommandExecutor, Listener {
                             spawners.setItemMeta(meta);
                             p.getInventory().addItem(spawners);
                             economy.withdrawPlayer(p, 6500.0D);
-                            p.closeInventory();
-                            p.sendMessage("§8[§4Zekaria§8] §6Vous venez de recevoir votre spawner");
-                            break;
-                        }
-                        p.sendMessage("§8[§4Zekaria§8] §6Vous n'avez pas assez d'argent !");
-                        p.closeInventory();
-                        break;
-                    //Golem
-                    case DIAMOND_SWORD:
-                        if (balance >= 80000.0D) {
-                            ItemStack spawners = new ItemStack(Material.MOB_SPAWNER , 1);
-                            ItemMeta meta = spawners.getItemMeta();
-                            meta.setDisplayName("§fSpawner à §eGolem");
-                            meta.setLore(null);
-                            spawners.setItemMeta(meta);
-                            p.getInventory().addItem(spawners);
-                            economy.withdrawPlayer(p, 80000.0D);
                             p.closeInventory();
                             p.sendMessage("§8[§4Zekaria§8] §6Vous venez de recevoir votre spawner");
                             break;
@@ -248,13 +224,6 @@ public class spawner implements CommandExecutor, Listener {
                 creaturename = "ZOMBIE";
                 try{
                     creatureSpawner.setCreatureTypeByName(creaturename);
-                } catch (Exception exception) {}
-                creatureSpawner.update();
-            }
-            if(nomdelitem.equalsIgnoreCase("Golem")){
-                creaturename = "IRON_GOLEM";
-                try{
-                    creatureSpawner.setSpawnedType(EntityType.IRON_GOLEM);
                 } catch (Exception exception) {}
                 creatureSpawner.update();
             }

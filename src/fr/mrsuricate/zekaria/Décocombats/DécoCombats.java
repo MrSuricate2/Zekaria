@@ -34,31 +34,16 @@ public class DécoCombats extends BukkitRunnable implements Listener {
         }
     }
 
-    public static Economy economy = null;
-
-    private boolean setupEconomy() {
-        RegisteredServiceProvider<Economy> economyProvider = Main.getInstance().getServer().getServicesManager().getRegistration(Economy.class);
-        if (economyProvider != null)
-            economy = economyProvider.getProvider();
-        return (economy != null);
-    }
-
     @EventHandler
     public void OnQuit(PlayerQuitEvent e){
         Player playerquit = e.getPlayer();
-        double balance = economy.getBalance(playerquit);
-        if(this.damagelist.containsKey(playerquit)){
-            playerquit.setHealth(0);
-            if (setupEconomy()){
-                if (balance >= 500) {
-                    economy.withdrawPlayer(playerquit, 500.0);
-                }
-            }
-            Bukkit.broadcastMessage("§cLe déco-combats est interdit");
-            damagelist.remove(takedamage);
-            damagelist.remove(causedamage);
+            if (this.damagelist.containsKey(playerquit)) {
+                playerquit.setHealth(0);
+                Bukkit.broadcastMessage("§cLe déco-combats est interdit");
+                damagelist.remove(takedamage);
+                damagelist.remove(causedamage);
 
-        }
+            }
     }
 
     @EventHandler
