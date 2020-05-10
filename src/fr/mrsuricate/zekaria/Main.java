@@ -6,6 +6,7 @@ import fr.mrsuricate.zekaria.CoinFlip.commands.CoinFlipCommand;
 import fr.mrsuricate.zekaria.CoinFlip.events.ClickEvent;
 import fr.mrsuricate.zekaria.CoinFlip.events.PlayerQuitEvent;
 import fr.mrsuricate.zekaria.CoinFlip.utilz.*;
+import fr.mrsuricate.zekaria.CustomEnchant.Enchant;
 import fr.mrsuricate.zekaria.Décocombats.DécoCombats;
 import fr.mrsuricate.zekaria.StaffChat.StaffChat;
 import fr.mrsuricate.zekaria.TimeIsMoney.TimeisMoney;
@@ -161,10 +162,12 @@ public class Main extends JavaPlugin implements Listener {
         this.config2 = YamlConfiguration.loadConfiguration(TimeIsMoney);
         Bukkit.getPluginManager().registerEvents(new TimeisMoney(), this);
         //timemoney
-
         //décocombats
         Bukkit.getPluginManager().registerEvents(new DécoCombats(), this);
         //décocombats
+        //CustomEnchant
+        Bukkit.getPluginManager().registerEvents(new Enchant(), this);
+        //CustomEnchant
 
 
 
