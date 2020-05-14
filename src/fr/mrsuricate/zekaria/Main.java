@@ -6,7 +6,7 @@ import fr.mrsuricate.zekaria.CoinFlip.commands.CoinFlipCommand;
 import fr.mrsuricate.zekaria.CoinFlip.events.ClickEvent;
 import fr.mrsuricate.zekaria.CoinFlip.events.PlayerQuitEvent;
 import fr.mrsuricate.zekaria.CoinFlip.utilz.*;
-import fr.mrsuricate.zekaria.CustomEnchant.Enchant;
+//import fr.mrsuricate.zekaria.CustomEnchant.Enchant;
 import fr.mrsuricate.zekaria.Décocombats.DécoCombats;
 import fr.mrsuricate.zekaria.StaffChat.StaffChat;
 import fr.mrsuricate.zekaria.TimeIsMoney.TimeisMoney;
@@ -127,6 +127,9 @@ public class Main extends JavaPlugin implements Listener {
         getCommand("clearchat").setExecutor(new ClearChat());
         getCommand("chatlock").setExecutor(new ChatLock());
         getServer().getPluginManager().registerEvents(new ChatLock(), this);
+        //Warp
+        getCommand("warp").setExecutor(new Warp());
+        getServer().getPluginManager().registerEvents(new Warp(), this);
         //trade
         getCommand("trade").setExecutor(new trade());
         getServer().getPluginManager().registerEvents(this.tradeHandler = new TradeHandler(), this);
@@ -166,7 +169,7 @@ public class Main extends JavaPlugin implements Listener {
         Bukkit.getPluginManager().registerEvents(new DécoCombats(), this);
         //décocombats
         //CustomEnchant
-        Bukkit.getPluginManager().registerEvents(new Enchant(), this);
+        //Bukkit.getPluginManager().registerEvents(new Enchant(), this);
         //CustomEnchant
 
 
