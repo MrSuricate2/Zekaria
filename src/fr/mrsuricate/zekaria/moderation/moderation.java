@@ -53,7 +53,13 @@ public class moderation implements CommandExecutor, Listener {
                 return false;
             }
 
-            Inventory inv = Bukkit.createInventory(null, 9, "§4Report: §2" + reportedname);
+            if(Bukkit.getPlayer(reportedname).equals(((Player) sender).getPlayer())){
+                player.sendMessage("§4§lVous ne pouvez pas vous report !");
+                return false;
+            }
+
+
+            Inventory inv = Bukkit.createInventory(null, 18, "§4Report: §2" + reportedname);
 
             //Type de hack
 
@@ -123,8 +129,8 @@ public class moderation implements CommandExecutor, Listener {
             //autres
             ItemStack other = new ItemStack(Material.CHEST);
             ItemMeta otherM = reach.getItemMeta();
-            reachM.setDisplayName("§cAutres");
-            reach.setItemMeta(otherM);
+            otherM.setDisplayName("§cAutres");
+            other.setItemMeta(otherM);
             inv.setItem(9, other);
 
             player.openInventory(inv);
