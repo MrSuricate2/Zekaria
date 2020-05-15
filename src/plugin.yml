@@ -10,6 +10,8 @@ commands:
     permission: bc.use
   discord:
     description: Lien discord
+  ts:
+    description: Lien ts
   spawners:
     description: Achat spawner
   grades:

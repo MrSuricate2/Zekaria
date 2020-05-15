@@ -16,6 +16,13 @@ public class discord implements CommandExecutor {
                 player.sendMessage("");
                 return true;
             }
+            if (cmd.getName().equalsIgnoreCase("ts")) {
+                player.sendMessage("");
+                player.sendMessage("§4§lts.zekaria.fr");
+                player.sendMessage("");
+                return true;
+            }
+
         }
         return true;
     }

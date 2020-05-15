@@ -12,6 +12,7 @@ import fr.mrsuricate.zekaria.TimeIsMoney.TimeisMoney;
 import fr.mrsuricate.zekaria.Trade.ItemStackUtils;
 import fr.mrsuricate.zekaria.Trade.TradeHandler;
 import fr.mrsuricate.zekaria.Trade.commands.trade;
+import fr.mrsuricate.zekaria.blockCommand.blockCommand;
 import fr.mrsuricate.zekaria.commands.*;
 import fr.mrsuricate.zekaria.enchere.enchere;
 import fr.mrsuricate.zekaria.events.DeathMoney;
@@ -167,6 +168,9 @@ public class Main extends JavaPlugin implements Listener {
         //CustomEnchant
         //Bukkit.getPluginManager().registerEvents(new Enchant(), this);
         //CustomEnchant
+        //BlockCommand
+        Bukkit.getPluginManager().registerEvents(new blockCommand(), this);
+        //BlockCommand
 
 
 
