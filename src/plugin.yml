@@ -50,3 +50,8 @@ commands:
     description: Mettre des items au enchère
     permission: enchere.use
     aliases: auc
+  warp:
+    description: Api Warp
+    aliases:
+      - warp
+      - wp
