@@ -24,7 +24,7 @@ public class grades implements CommandExecutor, Listener {
     public boolean onCommand(CommandSender sender, Command cmd, String msg, String[] args) {
         if (sender instanceof Player) {
             Player player = (Player) sender;
-            if (cmd.getName().equalsIgnoreCase("grades")) {
+            if (cmd.getName().equalsIgnoreCase("grades") || cmd.getName().equalsIgnoreCase("grade")) {
                 Inventory inv = Bukkit.createInventory(null, 9, "§6Grades");
 
                 //Gladiateur
