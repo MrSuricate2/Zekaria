@@ -120,6 +120,13 @@ public class moderation implements CommandExecutor, Listener {
             reach.setItemMeta(reachM);
             inv.setItem(8, reach);
 
+            //autres
+            ItemStack other = new ItemStack(Material.CHEST);
+            ItemMeta otherM = reach.getItemMeta();
+            reachM.setDisplayName("§cAutres");
+            reach.setItemMeta(otherM);
+            inv.setItem(9, other);
+
             player.openInventory(inv);
 
             return true;
@@ -210,6 +217,15 @@ public class moderation implements CommandExecutor, Listener {
                     break;
                 case ARROW:
                     if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§cReach")){
+                        e.setCancelled(true);
+                        p.closeInventory();
+                        sendToMods(e.getCurrentItem().getItemMeta().getDisplayName(), p.getName(), e.getInventory().getName().substring(12));
+                        p.sendMessage("§2Le joueur a bien été signalé");
+                    }
+                    e.setCancelled(true);
+                    break;
+                case CHEST:
+                    if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§cAutres")){
                         e.setCancelled(true);
                         p.closeInventory();
                         sendToMods(e.getCurrentItem().getItemMeta().getDisplayName(), p.getName(), e.getInventory().getName().substring(12));
