@@ -90,7 +90,7 @@ public class Warp implements CommandExecutor, Listener {
             switch (current.getType()){
                 //Warp clef
                 case TRIPWIRE_HOOK:
-                    Location clef = new Location(Bukkit.getWorld("world"), 194, 73, 234);
+                    Location clef = new Location(Bukkit.getWorld("world"), 194.5, 73.5, 234.5);
                     e.setCancelled(true);
                     p.sendMessage("§8[§4Zekaria§8] §6Téléportation dans 3 secondes");
                     p.closeInventory();
@@ -104,7 +104,7 @@ public class Warp implements CommandExecutor, Listener {
                     break;
                     //warp forge
                 case ANVIL:
-                    Location forge = new Location(Bukkit.getWorld("world"), 174, 73, 254);
+                    Location forge = new Location(Bukkit.getWorld("world"), 174.5, 73.5, 254.5);
                     e.setCancelled(true);
                     p.sendMessage("§8[§4Zekaria§8] §6Téléportation dans 3 secondes");
                     p.closeInventory();
@@ -125,7 +125,7 @@ public class Warp implements CommandExecutor, Listener {
                     e.setCancelled(true);
                     //Warp mine
                 case DIAMOND_PICKAXE:
-                    Location mine = new Location(Bukkit.getWorld("world"), 193, 49, 206);
+                    Location mine = new Location(Bukkit.getWorld("world"), 193.5, 49.5, 206.5);
                     e.setCancelled(true);
                     p.sendMessage("§8[§4Zekaria§8] §6Téléportation dans 3 secondes");
                     p.closeInventory();
