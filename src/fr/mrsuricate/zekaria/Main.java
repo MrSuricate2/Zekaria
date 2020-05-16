@@ -1,6 +1,5 @@
 package fr.mrsuricate.zekaria;
 
-import com.sk89q.worldguard.bukkit.WGBukkit;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import fr.mrsuricate.zekaria.ChatSide.ChatLock;
 import fr.mrsuricate.zekaria.ChatSide.ClearChat;
@@ -19,11 +18,7 @@ import fr.mrsuricate.zekaria.commands.*;
 import fr.mrsuricate.zekaria.enchere.enchere;
 import fr.mrsuricate.zekaria.events.DeathMoney;
 import fr.mrsuricate.zekaria.giveall.Giveall;
-import fr.mrsuricate.zekaria.moderation.ModCancels;
-import fr.mrsuricate.zekaria.moderation.ModsItemsInteract;
-import fr.mrsuricate.zekaria.moderation.PlayerLeave;
-import fr.mrsuricate.zekaria.moderation.PlayerManager;
-import fr.mrsuricate.zekaria.moderation.moderation;
+import fr.mrsuricate.zekaria.moderation.*;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
