@@ -212,46 +212,44 @@ public class spawner implements CommandExecutor, Listener {
             String creaturename;
 
             CreatureSpawner creatureSpawner = (CreatureSpawner) e.getBlock().getState();
-            String nomdelitem = e.getPlayer().getItemInHand().getItemMeta().getDisplayName().substring(14);
-            if(nomdelitem.equalsIgnoreCase("Squelette")){
-                creaturename = "SKELETON";
-                try{
-                    creatureSpawner.setCreatureTypeByName(creaturename);
-                } catch (Exception exception) {}
-                creatureSpawner.update();
+            if (e.getPlayer().getItemInHand().getItemMeta().hasDisplayName()){
+                String nomdelitem = e.getPlayer().getItemInHand().getItemMeta().getDisplayName().substring(14);
+                if(nomdelitem.equalsIgnoreCase("Squelette")){
+                    creaturename = "SKELETON";
+                    try{
+                        creatureSpawner.setCreatureTypeByName(creaturename);
+                    } catch (Exception exception) {}
+                    creatureSpawner.update();
+                }
+                if(nomdelitem.equalsIgnoreCase("Zombie")){
+                    creaturename = "ZOMBIE";
+                    try{
+                        creatureSpawner.setCreatureTypeByName(creaturename);
+                    } catch (Exception exception) {}
+                    creatureSpawner.update();
+                }
+                if(nomdelitem.equalsIgnoreCase("Vache")){
+                    creaturename = "COW";
+                    try{
+                        creatureSpawner.setCreatureTypeByName(creaturename);
+                    } catch (Exception exception) {}
+                    creatureSpawner.update();
+                }
+                if(nomdelitem.equalsIgnoreCase("Cochon")){
+                    creaturename = "PIG";
+                    try{
+                        creatureSpawner.setCreatureTypeByName(creaturename);
+                    } catch (Exception exception) {}
+                    creatureSpawner.update();
+                }
+                if(nomdelitem.equalsIgnoreCase("Poulet")){
+                    creaturename = "CHICKEN";
+                    try{
+                        creatureSpawner.setCreatureTypeByName(creaturename);
+                    } catch (Exception exception) {}
+                    creatureSpawner.update();
+                }
             }
-            if(nomdelitem.equalsIgnoreCase("Zombie")){
-                creaturename = "ZOMBIE";
-                try{
-                    creatureSpawner.setCreatureTypeByName(creaturename);
-                } catch (Exception exception) {}
-                creatureSpawner.update();
-            }
-            if(nomdelitem.equalsIgnoreCase("Vache")){
-                creaturename = "COW";
-                try{
-                    creatureSpawner.setCreatureTypeByName(creaturename);
-                } catch (Exception exception) {}
-                creatureSpawner.update();
-            }
-            if(nomdelitem.equalsIgnoreCase("Cochon")){
-                creaturename = "PIG";
-                try{
-                    creatureSpawner.setCreatureTypeByName(creaturename);
-                } catch (Exception exception) {}
-                creatureSpawner.update();
-            }
-            if(nomdelitem.equalsIgnoreCase("Poulet")){
-                creaturename = "CHICKEN";
-                try{
-                    creatureSpawner.setCreatureTypeByName(creaturename);
-                } catch (Exception exception) {}
-                creatureSpawner.update();
-            }
-
-
         }
     }
-
-
 }
