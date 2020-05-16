@@ -124,9 +124,12 @@ public class Main extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new ModsItemsInteract(), this);
         getServer().getPluginManager().registerEvents(new PlayerLeave(), this);
         getCommand("giveall").setExecutor(new Giveall());
+        //Chat Side
         getCommand("clearchat").setExecutor(new ClearChat());
         getCommand("chatlock").setExecutor(new ChatLock());
         getServer().getPluginManager().registerEvents(new ChatLock(), this);
+        getCommand("localclear").setExecutor(new ClearChat());
+        //Chat Side
         //trade
         getCommand("trade").setExecutor(new trade());
         getServer().getPluginManager().registerEvents(this.tradeHandler = new TradeHandler(), this);

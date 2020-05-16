@@ -118,8 +118,6 @@ public class Warp implements CommandExecutor, Listener {
                     //Warp Jump
                 case FEATHER:
                     e.setCancelled(true);
-                    p.closeInventory();
-                    p.sendMessage("§8[§4Zekaria§8] §6Vous avez été téléporter au warp §bJump 1");
                     //Warp jump 2
                 case STRING:
                     e.setCancelled(true);

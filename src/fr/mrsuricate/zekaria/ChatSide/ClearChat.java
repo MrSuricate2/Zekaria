@@ -13,7 +13,7 @@ public class ClearChat implements CommandExecutor {
 
         if(cmd.getName().equalsIgnoreCase("clearchat")){
             if(!(sender instanceof Player)){
-                sender.sendMessage("Vous devez être en jeu pour éxécuter cette commande");
+                sender.sendMessage("§4Vous devez être en jeu pour éxécuter cette commande");
             }
             if(sender.hasPermission("clearchat.use")){
                 for (int i = 0; i < 100; i++){
@@ -25,6 +25,19 @@ public class ClearChat implements CommandExecutor {
             Bukkit.broadcastMessage("§8[§4Clear Chat§8] §6 Le chat à été réinitialisé !");
         }
 
+        if (cmd.getName().equalsIgnoreCase("localclear")){
+            if(!(sender instanceof Player)){
+                sender.sendMessage("§4Vous devez être en jeu pour éxécuter cette commande");
+            }
+            if(sender.hasPermission("localclear.use")){
+                for (int i = 0; i < 100; i++){
+                    sender.sendMessage("");
+                }
+            } else {
+                sender.sendMessage("§4Vous n'avez pas la permission !");
+            }
+            Bukkit.broadcastMessage("§8[§4Clear Chat§8] §6 Votre chat a été réinitialisé !");
+        }
         return false;
     }
 }
