@@ -134,7 +134,7 @@ public class Warp implements CommandExecutor, Listener {
                     break;
                     //Warp Jump
                 case FEATHER:
-                    Location jump = new Location(Bukkit.getWorld("world"), 213, 70, 269, -92, -6);
+                    Location jump = new Location(Bukkit.getWorld("world"), 213.5, 70.5, 269.5, -92, -6);
                     e.setCancelled(true);
                     p.sendMessage("§8[§4Zekaria§8] §6Téléportation dans 3 secondes");
                     p.closeInventory();
@@ -166,7 +166,7 @@ public class Warp implements CommandExecutor, Listener {
                     break;
                     //Warp Revente
                 case GOLD_INGOT:
-                    Location revente = new Location(Bukkit.getWorld("world"), 157, 60, 270, 39, -1);
+                    Location revente = new Location(Bukkit.getWorld("world"), 157.5, 60.5, 270.5, 39, -1);
                     e.setCancelled(true);
                     p.sendMessage("§8[§4Zekaria§8] §6Téléportation dans 3 secondes");
                     p.closeInventory();
@@ -180,7 +180,7 @@ public class Warp implements CommandExecutor, Listener {
                     break;
                     //Warp Achat
                 case IRON_INGOT:
-                    Location achat = new Location(Bukkit.getWorld("world"), 212, 60, 216, -144, -2);
+                    Location achat = new Location(Bukkit.getWorld("world"), 212.5, 60.5, 216.5, -144, -2);
                     e.setCancelled(true);
                     p.sendMessage("§8[§4Zekaria§8] §6Téléportation dans 3 secondes");
                     p.closeInventory();
