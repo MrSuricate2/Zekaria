@@ -22,6 +22,12 @@ public class discord implements CommandExecutor {
                 player.sendMessage("");
                 return true;
             }
+            if (cmd.getName().equalsIgnoreCase("site")){
+                player.sendMessage("");
+                player.sendMessage("§4§lhttp://zekaria.fr");
+                player.sendMessage("");
+                return true;
+            }
 
         }
         return true;

@@ -12,6 +12,10 @@ commands:
     description: Lien discord
   ts:
     description: Lien ts
+    aliases:
+      - teamspeak
+  site:
+    description: Lien vers le site
   spawners:
     description: Achat spawner
     aliases:
