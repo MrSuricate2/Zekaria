@@ -36,7 +36,7 @@ public class ClearChat implements CommandExecutor {
             } else {
                 sender.sendMessage("§4Vous n'avez pas la permission !");
             }
-            Bukkit.broadcastMessage("§8[§4Clear Chat§8] §6 Votre chat a été réinitialisé !");
+           sender.sendMessage("§8[§4Clear Chat§8] §6 Votre chat a été réinitialisé !");
         }
         return false;
     }

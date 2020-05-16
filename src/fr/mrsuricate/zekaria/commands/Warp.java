@@ -115,12 +115,15 @@ public class Warp implements CommandExecutor, Listener {
                     }
                     p.teleport(forge);
                     p.sendMessage("§8[§4Zekaria§8] §6Vous avez été téléporter au warp §bForge");
+                    break;
                     //Warp Jump
                 case FEATHER:
                     e.setCancelled(true);
+                    break;
                     //Warp jump 2
                 case STRING:
                     e.setCancelled(true);
+                    break;
                     //Warp mine
                 case DIAMOND_PICKAXE:
                     Location mine = new Location(Bukkit.getWorld("world"), 193.5, 49.5, 206.5);
@@ -134,6 +137,9 @@ public class Warp implements CommandExecutor, Listener {
                     }
                     p.teleport(mine);
                     p.sendMessage("§8[§4Zekaria§8] §6Vous avez été téléporter au warp §bMine");
+                    break;
+
+                default: break;
             }
         }
     }

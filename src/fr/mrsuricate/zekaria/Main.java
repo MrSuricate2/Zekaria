@@ -107,6 +107,8 @@ public class Main extends JavaPlugin implements Listener {
     public void onEnable() {
         saveDefaultConfig();
         PluginManager pm = getServer().getPluginManager();
+        getCommand("warp").setExecutor(new Warp());
+        getServer().getPluginManager().registerEvents(new Warp(), this);
         getCommand("alert").setExecutor(new alert());
         getCommand("discord").setExecutor(new discord());
         getCommand("ts").setExecutor(new discord());
