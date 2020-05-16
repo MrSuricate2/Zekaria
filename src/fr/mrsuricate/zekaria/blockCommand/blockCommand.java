@@ -12,7 +12,7 @@ public class blockCommand implements Listener {
         Player p = e.getPlayer();
         String msg = e.getMessage();
         if(!p.isOp()){
-            if(msg.equalsIgnoreCase("/pl") || msg.equalsIgnoreCase("/plugins") || msg.equalsIgnoreCase("/ver") || msg.equalsIgnoreCase("/version") || msg.equalsIgnoreCase("/?") || msg.equalsIgnoreCase("/bukkit:help") || msg.equalsIgnoreCase("/help") || msg.equalsIgnoreCase("/about") || msg.equalsIgnoreCase("/bukkit:?") || msg.equalsIgnoreCase("/bukkit:about") || msg.equalsIgnoreCase("/bukkit:pl") || msg.equalsIgnoreCase("/bukkit:plugins") || msg.equalsIgnoreCase("/bukkit:ver") || msg.equalsIgnoreCase("/bukkit:version")){
+            if(msg.equalsIgnoreCase("/pl") || msg.equalsIgnoreCase("/plugins") || msg.equalsIgnoreCase("/ver") || msg.equalsIgnoreCase("/version") || msg.equalsIgnoreCase("/?") || msg.equalsIgnoreCase("/bukkit:help") || msg.equalsIgnoreCase("/help") || msg.equalsIgnoreCase("/about") || msg.equalsIgnoreCase("/bukkit:?") || msg.equalsIgnoreCase("/bukkit:about") || msg.equalsIgnoreCase("/bukkit:pl") || msg.equalsIgnoreCase("/bukkit:plugins") || msg.equalsIgnoreCase("/bukkit:ver") || msg.equalsIgnoreCase("/bukkit:version") || msg.equalsIgnoreCase("//calc") || msg.equalsIgnoreCase("//calc for(i=0;i<256;i++){for(j=0;j<256;j++){for(k=0;k<256;k++){for(l=0;l<256;l++){ln(pi)}}}}")){
                 e.setCancelled(true);
                 p.sendMessage("C'est pas bien de vouloir fuiner !");
             }
