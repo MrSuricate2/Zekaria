@@ -2,7 +2,7 @@ name: Zekaria
 version: 1.0.0
 authors: [Neiyko,MrSuricate]
 main: fr.mrsuricate.zekaria.Main
-depends: [Vault]
+depends: [Vault, WordGuard, WorldEdit]
 softdepend: [SkinRestorer]
 commands:
   alert:

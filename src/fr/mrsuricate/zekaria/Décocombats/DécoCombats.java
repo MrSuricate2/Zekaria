@@ -1,5 +1,12 @@
 package fr.mrsuricate.zekaria.Décocombats;
 
+import com.sk89q.worldguard.bukkit.RegionContainer;
+import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
+import com.sk89q.worldguard.protection.ApplicableRegionSet;
+import com.sk89q.worldguard.protection.flags.DefaultFlag;
+import com.sk89q.worldguard.protection.flags.StateFlag;
+import com.sk89q.worldguard.protection.managers.RegionManager;
+import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import fr.mrsuricate.zekaria.Main;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
@@ -23,6 +30,7 @@ public class DécoCombats extends BukkitRunnable implements Listener {
 
     public static Economy economy = null;
 
+
     private boolean setupEconomy() {
         RegisteredServiceProvider<Economy> economyProvider = Main.getInstance().getServer().getServicesManager().getRegistration(Economy.class);
         if (economyProvider != null)
@@ -36,9 +44,16 @@ public class DécoCombats extends BukkitRunnable implements Listener {
             if(e.getDamager() instanceof  Player){
                 this.takedamage = ((Player) e.getEntity()).getPlayer();
                 this.causedamage = (Player) e.getDamager();
-                damagelist.put(takedamage,1);
-                damagelist.put(causedamage,1);
-                new DécoCombats().runTaskTimer(Main.getInstance(),0L, 20L);
+                if(takedamage.isOp() || causedamage.isOp()){
+                    return;
+                } else {
+                    StateFlag.State container = Main.getInstance().WorldGuard.getRegionManager(takedamage.getWorld()).getApplicableRegions(takedamage.getLocation()).getFlag(DefaultFlag.PVP);
+                    if(container == null){
+                        damagelist.put(takedamage,1);
+                        damagelist.put(causedamage,1);
+                        new DécoCombats().runTaskTimer(Main.getInstance(),0L, 20L);
+                    }
+                }
             }
         }
     }
@@ -47,17 +62,17 @@ public class DécoCombats extends BukkitRunnable implements Listener {
     public void OnQuit(PlayerQuitEvent e){
         setupEconomy();
         Player playerquit = e.getPlayer();
-            if (this.damagelist.containsKey(playerquit)) {
-                playerquit.setHealth(0);
-                Double balance = economy.getBalance(playerquit);
-                if (balance >= 500D){
-                    economy.withdrawPlayer(playerquit , 500D);
-                }
-                Bukkit.broadcastMessage("§cLe déco-combats est interdit");
-                damagelist.remove(takedamage);
-                damagelist.remove(causedamage);
-
+        if (this.damagelist.containsKey(playerquit)) {
+            playerquit.setHealth(0);
+            Double balance = economy.getBalance(playerquit);
+            if (balance >= 500D){
+                economy.withdrawPlayer(playerquit , 500D);
             }
+            Bukkit.broadcastMessage("§cLe déco-combats est interdit");
+            damagelist.remove(takedamage);
+            damagelist.remove(causedamage);
+
+        }
     }
 
     @EventHandler
@@ -75,6 +90,7 @@ public class DécoCombats extends BukkitRunnable implements Listener {
     public void run() {
         tempo--;
         if(tempo == 0){
+            System.out.println(damagelist);
             damagelist.remove(takedamage);
             damagelist.remove(causedamage);
             tempo = 10;

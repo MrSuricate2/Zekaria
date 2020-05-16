@@ -1,5 +1,7 @@
 package fr.mrsuricate.zekaria;
 
+import com.sk89q.worldguard.bukkit.WGBukkit;
+import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import fr.mrsuricate.zekaria.ChatSide.ChatLock;
 import fr.mrsuricate.zekaria.ChatSide.ClearChat;
 import fr.mrsuricate.zekaria.CoinFlip.commands.CoinFlipCommand;
@@ -90,6 +92,10 @@ public class Main extends JavaPlugin implements Listener {
     public static String itemJson;
     //enchere
 
+    //déco-combats
+    public WorldGuardPlugin WorldGuard;
+    //déco-combats
+
     //TimeIsMoney
     public static File TimeIsMoney;
     public static FileConfiguration config2;
@@ -170,6 +176,8 @@ public class Main extends JavaPlugin implements Listener {
         Bukkit.getPluginManager().registerEvents(new TimeisMoney(), this);
         //timemoney
         //décocombats
+        WorldGuard = (WorldGuardPlugin) Bukkit.getServer().getPluginManager().getPlugin("WorldGuard");
+
         Bukkit.getPluginManager().registerEvents(new DécoCombats(), this);
         //décocombats
         //CustomEnchant
