@@ -1,5 +1,6 @@
 package fr.mrsuricate.zekaria.Décocombats;
 
+import com.massivecraft.factions.entity.MPlayer;
 import com.sk89q.worldguard.protection.flags.DefaultFlag;
 import com.sk89q.worldguard.protection.flags.StateFlag;
 import fr.mrsuricate.zekaria.Main;
@@ -39,6 +40,11 @@ public class DécoCombats extends BukkitRunnable implements Listener {
             if(e.getDamager() instanceof  Player){
                 this.takedamage = ((Player) e.getEntity()).getPlayer();
                 this.causedamage = (Player) e.getDamager();
+                MPlayer mptd = MPlayer.get(this.takedamage);
+                MPlayer mpcd = MPlayer.get(this.causedamage);
+                if(mptd.getFactionName().equalsIgnoreCase(mpcd.getFactionName())){
+                    return;
+                }
                 if(takedamage.isOp() || causedamage.isOp()){
                     return;
                 } else {
