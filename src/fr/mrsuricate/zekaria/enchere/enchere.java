@@ -1,6 +1,5 @@
 package fr.mrsuricate.zekaria.enchere;
 
-import fr.mrsuricate.zekaria.CoinFlip.utilz.Chat;
 import fr.mrsuricate.zekaria.Main;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.*;
@@ -18,7 +17,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.material.MaterialData;
 import org.bukkit.plugin.RegisteredServiceProvider;
-import skinsrestorer.shared.utils.acf.BukkitCommandIssuer;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -150,7 +148,6 @@ public class enchere implements CommandExecutor {
                                                         Bukkit.broadcastMessage("");
                                                         while(itstring2.hasNext()){
                                                             Player value2 = itstring2.next();
-                                                            System.out.println(value2);
                                                             value2.spigot().sendMessage(message2);
                                                         }
                                                         Bukkit.broadcastMessage("");

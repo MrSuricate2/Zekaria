@@ -1,12 +1,7 @@
 package fr.mrsuricate.zekaria.Décocombats;
 
-import com.sk89q.worldguard.bukkit.RegionContainer;
-import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
-import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.flags.DefaultFlag;
 import com.sk89q.worldguard.protection.flags.StateFlag;
-import com.sk89q.worldguard.protection.managers.RegionManager;
-import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import fr.mrsuricate.zekaria.Main;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;

@@ -1,12 +1,14 @@
 package fr.mrsuricate.zekaria;
 
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
+import com.sun.applet2.AppletParameters;
 import fr.mrsuricate.zekaria.ChatSide.ChatLock;
 import fr.mrsuricate.zekaria.ChatSide.ClearChat;
 import fr.mrsuricate.zekaria.CoinFlip.commands.CoinFlipCommand;
 import fr.mrsuricate.zekaria.CoinFlip.events.ClickEvent;
 import fr.mrsuricate.zekaria.CoinFlip.events.PlayerQuitEvent;
 import fr.mrsuricate.zekaria.CoinFlip.utilz.*;
+import fr.mrsuricate.zekaria.CustomEnchant.Enchant;
 import fr.mrsuricate.zekaria.Décocombats.DécoCombats;
 import fr.mrsuricate.zekaria.StaffChat.StaffChat;
 import fr.mrsuricate.zekaria.TimeIsMoney.TimeisMoney;
@@ -97,6 +99,10 @@ public class Main extends JavaPlugin implements Listener {
     public static HashMap<String, Integer> onlinePlayer = new HashMap<>();
     //TimeIsMoney
 
+    //CustomEnchant
+    public static HashMap<Player, Integer> enchant = new HashMap<>();
+    //CustomEnchant
+
 
     public ArrayList<UUID> moderateurs = new ArrayList<>();
     public HashMap<UUID, PlayerManager> players = new HashMap<>();
@@ -176,11 +182,13 @@ public class Main extends JavaPlugin implements Listener {
         Bukkit.getPluginManager().registerEvents(new DécoCombats(), this);
         //décocombats
         //CustomEnchant
-        //Bukkit.getPluginManager().registerEvents(new Enchant(), this);
+        Bukkit.getPluginManager().registerEvents(new Enchant(), this);
+        new Enchant().runTaskTimer(Main.getInstance(),0L, 20L);
         //CustomEnchant
         //BlockCommand
         Bukkit.getPluginManager().registerEvents(new blockCommand(), this);
         //BlockCommand
+
 
 
 
