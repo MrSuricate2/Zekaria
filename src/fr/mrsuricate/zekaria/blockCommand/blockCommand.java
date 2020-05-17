@@ -27,6 +27,13 @@ public class blockCommand implements Listener {
                     }
                 }
             }
+            if(p.getWorld().equals("world_nether")){
+                if(msg.equalsIgnoreCase("/rtp")){
+                    e.setCancelled(true);
+                    p.sendMessage("§cImpossible de random TP dans le nether !");
+                }
+            }
+
         }
     }
 
