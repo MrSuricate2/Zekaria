@@ -160,7 +160,7 @@ public class enchere implements CommandExecutor {
                                             sender.sendMessage("§aVous n'avez pas surencherie assez. Veuillez mettre plus ou égal a "+ Main.getInstance().prixDeDepart);
                                         }
                                     } else {
-                                        sender.sendMessage("§aVous n'avez pas assez d'argent");
+                                        sender.sendMessage("§cVous n'avez pas assez d'argent");
                                     }
 
                                 }
