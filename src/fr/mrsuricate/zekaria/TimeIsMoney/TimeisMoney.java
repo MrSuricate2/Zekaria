@@ -1,6 +1,7 @@
 package fr.mrsuricate.zekaria.TimeIsMoney;
 
 import fr.mrsuricate.zekaria.Main;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -13,9 +14,10 @@ public class TimeisMoney implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent e){
         String p = e.getPlayer().getName();
+        Player player = e.getPlayer();
         if(Main.getInstance().getTimeIsMoneyConfig().contains(p)){
             Main.getInstance().onlinePlayer.put(p,0);
-            new runnable(p).runTaskTimer(Main.getInstance(),0L, 20L);
+            new runnable(p,player).runTaskTimer(Main.getInstance(),0L, 20L);
         } else {
             int a = 0;
             Main.getInstance().getTimeIsMoneyConfig().set(p, a);
@@ -25,7 +27,7 @@ public class TimeisMoney implements Listener {
             } catch (IOException er){
                 er.printStackTrace();
             }
-            new runnable(p).runTaskTimer(Main.getInstance(),0L, 20L);
+            new runnable(p,player).runTaskTimer(Main.getInstance(),0L, 20L);
         }
     }
 
