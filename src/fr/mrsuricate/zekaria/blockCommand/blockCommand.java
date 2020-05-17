@@ -33,7 +33,6 @@ public class blockCommand implements Listener {
                     p.sendMessage("§cImpossible de random TP dans le nether !");
                 }
             }
-
         }
     }
 

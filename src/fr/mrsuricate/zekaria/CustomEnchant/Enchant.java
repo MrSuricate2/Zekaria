@@ -81,11 +81,15 @@ public class Enchant extends BukkitRunnable implements Listener {
     public void onGetXP(PlayerExpChangeEvent e){
         Player p = e.getPlayer();
         int montant = e.getAmount()*2;
-        if(p.getItemInHand().getItemMeta().getLore() != null){
-            if(p.getItemInHand().getItemMeta().getLore().contains("§7Mending I")){
-                if(p.getItemInHand().getDurability() != 0){
-                    p.getItemInHand().setDurability((short) (p.getItemInHand().getDurability() - montant));
-                    return;
+        if(p.getItemInHand() != null){
+            if(p.getItemInHand().getItemMeta() != null){
+                if(p.getItemInHand().getItemMeta().getLore() != null){
+                    if(p.getItemInHand().getItemMeta().getLore().contains("§7Mending I")){
+                        if(p.getItemInHand().getDurability() != 0){
+                            p.getItemInHand().setDurability((short) (p.getItemInHand().getDurability() - montant));
+                            return;
+                        }
+                    }
                 }
             }
         }
