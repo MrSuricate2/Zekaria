@@ -18,7 +18,7 @@ public class blockCommand implements Listener {
                 e.setCancelled(true);
                 p.sendMessage("C'est pas bien de vouloir fuiner !");
             }
-            if(msg.equalsIgnoreCase("//calc for(i=0;i<256;i++){for(j=0;j<256;j++){for(k=0;k<256;k++){for(l=0;l<256;l++){ln(pi)}}}}") || msg.equalsIgnoreCase("//eval for(i=0;i<256;i++){for(j=0;j<256;j++){for(k=0;k<256;k++){for(l=0;l<256;l++){ln(pi)}}}}")){
+            if(msg.equalsIgnoreCase("//calc for(i=0;i<256;i++){for(j=0;j<256;j++){for(k=0;k<256;k++){for(l=0;l<256;l++){ln(pi)}}}}") || msg.equalsIgnoreCase("//eval for(i=0;i<256;i++){for(j=0;j<256;j++){for(k=0;k<256;k++){for(l=0;l<256;l++){ln(pi)}}}}") || msg.equalsIgnoreCase("//calc") || msg.equalsIgnoreCase("//eval")){
                 for(Player players : Bukkit.getOnlinePlayers()){
                     if(players.hasPermission("mod.receive.use")){
                         players.sendMessage("");
