@@ -35,13 +35,13 @@ public class Enchant extends BukkitRunnable implements Listener {
                 meta.spigot().setUnbreakable(true);
                 item.setItemMeta(meta);
             }
-/*            if(Math.random() < 0.04D){
+            if(Math.random() < 0.04D){
                 String mending = "§7Mending I";
                 ItemStack item = e.getItem();
                 ItemMeta meta = item.getItemMeta();
                 meta.setLore(Collections.singletonList(mending));
                 item.setItemMeta(meta);
-            }*/
+            }
         }/*
         if(e.getExpLevelCost() >= 25){
             if(e.getItem().getType() == Material.DIAMOND_HELMET || e.getItem().getType() == Material.IRON_HELMET || e.getItem().getType() == Material.GOLD_HELMET || e.getItem().getType() == Material.CHAINMAIL_HELMET || e.getItem().getType() == Material.LEATHER_HELMET){
