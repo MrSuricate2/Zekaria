@@ -69,6 +69,7 @@ public class DécoCombats extends BukkitRunnable implements Listener {
             if (balance >= 500D){
                 economy.withdrawPlayer(playerquit , 500D);
             }
+            System.out.println(playerquit.getName() + "a ete kill pour deco combat");
             Bukkit.broadcastMessage("§cLe déco-combats est interdit");
             damagelist.remove(takedamage);
             damagelist.remove(causedamage);
