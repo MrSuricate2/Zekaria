@@ -90,7 +90,7 @@ public class Main extends JavaPlugin implements Listener {
     //enchere
 
     //déco-combats
-    public WorldGuardPlugin WorldGuard;
+    //public WorldGuardPlugin WorldGuard;
     //déco-combats
 
     //TimeIsMoney
@@ -177,9 +177,9 @@ public class Main extends JavaPlugin implements Listener {
         Bukkit.getPluginManager().registerEvents(new TimeisMoney(), this);
         //timemoney
         //décocombats
-        WorldGuard = (WorldGuardPlugin) Bukkit.getServer().getPluginManager().getPlugin("WorldGuard");
+        //WorldGuard = (WorldGuardPlugin) Bukkit.getServer().getPluginManager().getPlugin("WorldGuard");
 
-        Bukkit.getPluginManager().registerEvents(new DécoCombats(), this);
+        //Bukkit.getPluginManager().registerEvents(new DécoCombats(), this);
         //décocombats
         //CustomEnchant
         Bukkit.getPluginManager().registerEvents(new Enchant(), this);

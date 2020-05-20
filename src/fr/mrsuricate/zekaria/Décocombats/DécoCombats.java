@@ -36,7 +36,7 @@ public class DécoCombats extends BukkitRunnable implements Listener {
 
     @EventHandler
     public void onEntreringCombats(EntityDamageByEntityEvent e){
-        if (e.getEntity() instanceof Player){
+        /*if (e.getEntity() instanceof Player){
             if(e.getDamager() instanceof  Player){
                 this.takedamage = ((Player) e.getEntity()).getPlayer();
                 this.causedamage = (Player) e.getDamager();
@@ -56,7 +56,7 @@ public class DécoCombats extends BukkitRunnable implements Listener {
                     }
                 }
             }
-        }
+        }*/
     }
 
     @EventHandler
