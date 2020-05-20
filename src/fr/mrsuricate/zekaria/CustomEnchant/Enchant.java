@@ -7,9 +7,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.enchantment.EnchantItemEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerExpChangeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.inventory.AnvilInventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
@@ -26,8 +29,6 @@ public class Enchant extends BukkitRunnable implements Listener {
 
     @EventHandler
     public void onEnhantmentEvent(EnchantItemEvent e) {
-        System.out.println(e.getExpLevelCost());
-
         if(e.getExpLevelCost() == 30){
             if(Math.random() < 0.02D){
                 ItemStack item = e.getItem();
@@ -55,6 +56,25 @@ public class Enchant extends BukkitRunnable implements Listener {
             }
 
         }*/
+    }
+
+    @EventHandler
+    public void onEnclumeEvent(InventoryClickEvent e) {
+        if (e.getInventory().getType() == InventoryType.ANVIL && e.getWhoClicked() instanceof Player) {
+            Player player = (Player)e.getWhoClicked();
+            AnvilInventory inv = (AnvilInventory)e.getInventory();
+            if(e.getSlotType().equals(InventoryType.SlotType.CRAFTING)){
+
+            }
+            ItemStack item2 = inv.getItem(1);
+            int i = e.getRawSlot();
+            InventoryType.SlotType slot = e.getSlotType();
+            ItemStack item = e.getCurrentItem();
+            System.out.println(slot);
+            System.out.println(item);
+            System.out.println(item2);
+            System.out.println(i);
+        }
     }
 
     @Override

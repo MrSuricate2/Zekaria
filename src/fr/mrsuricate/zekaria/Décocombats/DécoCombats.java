@@ -36,10 +36,11 @@ public class DécoCombats extends BukkitRunnable implements Listener {
 
     @EventHandler
     public void onEntreringCombats(EntityDamageByEntityEvent e){
-        /*if (e.getEntity() instanceof Player){
+        if (e.getEntity() instanceof Player){
             if(e.getDamager() instanceof  Player){
                 this.takedamage = ((Player) e.getEntity()).getPlayer();
                 this.causedamage = (Player) e.getDamager();
+                System.out.println(this.takedamage + " vient de recevoir des dégats de " + this.causedamage);
                 MPlayer mptd = MPlayer.get(this.takedamage);
                 MPlayer mpcd = MPlayer.get(this.causedamage);
                 if(mptd.getFactionName().equalsIgnoreCase(mpcd.getFactionName())){
@@ -56,7 +57,7 @@ public class DécoCombats extends BukkitRunnable implements Listener {
                     }
                 }
             }
-        }*/
+        }
     }
 
     @EventHandler
@@ -69,18 +70,19 @@ public class DécoCombats extends BukkitRunnable implements Listener {
             if (balance >= 500D){
                 economy.withdrawPlayer(playerquit , 500D);
             }
-            System.out.println(playerquit.getName() + "a ete kill pour deco combat");
             Bukkit.broadcastMessage("§cLe déco-combats est interdit");
-            damagelist.remove(takedamage);
-            damagelist.remove(causedamage);
-
+            System.out.println(playerquit + " c'est déco");
+            System.out.println(this.takedamage + " a était retirer de la liste vu qu'un c'est déco");
+            System.out.println(this.causedamage + " a était retirer de la liste vu qu'un c'est déco");
+            damagelist.remove(this.takedamage);
+            damagelist.remove(this.causedamage);
+            System.out.println(damagelist);
         }
     }
 
     @EventHandler
     public void commandDisable(PlayerCommandPreprocessEvent e){
         Player p = e.getPlayer();
-        String msg = e.getMessage();
         if (damagelist.containsKey(p)){
             e.setCancelled(true);
             p.sendMessage("§cAucune commande n'est autorisé en combat");
@@ -93,9 +95,12 @@ public class DécoCombats extends BukkitRunnable implements Listener {
         tempo--;
         if(tempo == 0){
             System.out.println(damagelist);
-            damagelist.remove(takedamage);
-            damagelist.remove(causedamage);
+            System.out.println(this.takedamage + " a pris des dégats");
+            System.out.println(this.causedamage + " a donner des degats");
+            damagelist.remove(this.takedamage);
+            damagelist.remove(this.causedamage);
             tempo = 10;
+            System.out.println(damagelist);
             this.cancel();
         }
     }
