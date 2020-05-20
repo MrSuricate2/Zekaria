@@ -43,7 +43,7 @@ public class Enchant extends BukkitRunnable implements Listener {
                 meta.setLore(Collections.singletonList(mending));
                 item.setItemMeta(meta);
             }
-        }/*
+        }
         if(e.getExpLevelCost() >= 25){
             if(e.getItem().getType() == Material.DIAMOND_HELMET || e.getItem().getType() == Material.IRON_HELMET || e.getItem().getType() == Material.GOLD_HELMET || e.getItem().getType() == Material.CHAINMAIL_HELMET || e.getItem().getType() == Material.LEATHER_HELMET){
                 if(Math.random() < 0.06D){
@@ -55,7 +55,7 @@ public class Enchant extends BukkitRunnable implements Listener {
                 }
             }
 
-        }*/
+        }
     }
 
     @EventHandler
@@ -63,17 +63,21 @@ public class Enchant extends BukkitRunnable implements Listener {
         if (e.getInventory().getType() == InventoryType.ANVIL && e.getWhoClicked() instanceof Player) {
             Player player = (Player)e.getWhoClicked();
             AnvilInventory inv = (AnvilInventory)e.getInventory();
-            if(e.getSlotType().equals(InventoryType.SlotType.CRAFTING)){
-
+            if(e.getRawSlot() == 2){
+                if(inv.getItem(1) != null){
+                    ItemMeta meta = inv.getItem(1).getItemMeta();
+                    if(meta.spigot().isUnbreakable()){
+                        if(inv.getItem(2) != null){
+                            ItemStack item = inv.getItem(2);
+                            ItemMeta meta2 = item.getItemMeta();
+                            meta2.spigot().setUnbreakable(true);
+                            item.setItemMeta(meta2);
+                            inv.setItem(2,item);
+                            return;
+                        }
+                    }
+                }
             }
-            ItemStack item2 = inv.getItem(1);
-            int i = e.getRawSlot();
-            InventoryType.SlotType slot = e.getSlotType();
-            ItemStack item = e.getCurrentItem();
-            System.out.println(slot);
-            System.out.println(item);
-            System.out.println(item2);
-            System.out.println(i);
         }
     }
 
