@@ -10,6 +10,7 @@ import fr.mrsuricate.zekaria.CoinFlip.events.PlayerQuitEvent;
 import fr.mrsuricate.zekaria.CoinFlip.utilz.*;
 import fr.mrsuricate.zekaria.CustomEnchant.Enchant;
 import fr.mrsuricate.zekaria.Décocombats.DécoCombats;
+import fr.mrsuricate.zekaria.Décocombats.runnable2;
 import fr.mrsuricate.zekaria.StaffChat.StaffChat;
 import fr.mrsuricate.zekaria.TimeIsMoney.TimeisMoney;
 import fr.mrsuricate.zekaria.Trade.ItemStackUtils;
@@ -90,6 +91,8 @@ public class Main extends JavaPlugin implements Listener {
     //enchere
 
     //déco-combats
+    public static File Déco_Combats;
+    public static FileConfiguration config3;
     public WorldGuardPlugin WorldGuard;
     //déco-combats
 
@@ -177,8 +180,18 @@ public class Main extends JavaPlugin implements Listener {
         Bukkit.getPluginManager().registerEvents(new TimeisMoney(), this);
         //timemoney
         //décocombats
+        this.Déco_Combats = new File(getDataFolder() + File.separator + "Déco_combats.yml");
+        if(!Déco_Combats.exists()){
+            try{
+                Déco_Combats.createNewFile();
+            }catch(IOException e){
+                e.printStackTrace();
+            }
+        }
+        this.config3 = YamlConfiguration.loadConfiguration(Déco_Combats);
         WorldGuard = (WorldGuardPlugin) Bukkit.getServer().getPluginManager().getPlugin("WorldGuard");
         Bukkit.getPluginManager().registerEvents(new DécoCombats(), this);
+        new runnable2().runTaskTimer(Main.getInstance(),0L, 20L);
         //décocombats
         //CustomEnchant
         Bukkit.getPluginManager().registerEvents(new Enchant(), this);
@@ -246,6 +259,12 @@ public class Main extends JavaPlugin implements Listener {
         return config2;
     }
     //TimeIsMoney
+
+    //Déco-combats
+    public FileConfiguration getDéco_cobatsConfig(){
+        return config3;
+    }
+    //Déco-combats
 
 
     @Override

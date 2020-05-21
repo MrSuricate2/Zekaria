@@ -83,21 +83,21 @@ public class Enchant extends BukkitRunnable implements Listener {
 
     @Override
     public void run() {
-
         Collection onlineplayer = Bukkit.getOnlinePlayers();
         Iterator<Player> itstring = onlineplayer.iterator();
         while(itstring.hasNext()){
             this.value = itstring.next();
-        }
-        if(this.value != null){
-            if(this.value.getPlayer().getInventory().getHelmet() != null){
-                if(this.value.getPlayer().getInventory().getHelmet().getItemMeta().getLore() != null){
-                    if (this.value.getPlayer().getInventory().getHelmet().getItemMeta().getLore().contains("§7Vision nocturne I")){
-                        value.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION,60, 0,false,false));
+            if(this.value != null){
+                if(this.value.getPlayer().getInventory().getHelmet() != null){
+                    if(this.value.getPlayer().getInventory().getHelmet().getItemMeta().getLore() != null){
+                        if (this.value.getPlayer().getInventory().getHelmet().getItemMeta().getLore().contains("§7Vision nocturne I")){
+                            value.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION,60, 0,false,false));
+                        }
                     }
                 }
             }
         }
+
     }
 
 

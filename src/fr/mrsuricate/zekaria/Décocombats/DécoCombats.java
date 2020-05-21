@@ -13,14 +13,10 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.RegisteredServiceProvider;
-import org.bukkit.scheduler.BukkitRunnable;
+import java.io.IOException;
 
-import java.util.HashMap;
+public class DécoCombats implements Listener {
 
-public class DécoCombats extends BukkitRunnable implements Listener {
-
-    private static HashMap<Player, Integer> damagelist = new HashMap<>();
-    private short tempo = 10;
     private static Player takedamage;
     private static Player causedamage;
 
@@ -37,23 +33,35 @@ public class DécoCombats extends BukkitRunnable implements Listener {
     @EventHandler
     public void onEntreringCombats(EntityDamageByEntityEvent e){
         if (e.getEntity() instanceof Player){
-            if(e.getDamager() instanceof  Player){
+            if(e.getDamager() instanceof  Player) {
                 this.takedamage = ((Player) e.getEntity()).getPlayer();
                 this.causedamage = (Player) e.getDamager();
-                System.out.println(this.takedamage + " vient de recevoir des dégats de " + this.causedamage);
                 MPlayer mptd = MPlayer.get(this.takedamage);
                 MPlayer mpcd = MPlayer.get(this.causedamage);
-                if(mptd.getFactionName().equalsIgnoreCase(mpcd.getFactionName())){
+                if (mptd.getFactionName().equalsIgnoreCase(mpcd.getFactionName())) {
+                    if(!mptd.hasFaction() || !mpcd.hasFaction()){
+                        Main.getInstance().getDéco_cobatsConfig().set(this.takedamage.getName(),10);
+                        Main.getInstance().getDéco_cobatsConfig().set(this.causedamage.getName(),10);
+                        try{
+                            Main.getInstance().getDéco_cobatsConfig().save(Main.getInstance().Déco_Combats);
+                        } catch (IOException er){
+                            er.printStackTrace();
+                        }
+                    } else {
+                        return;
+                    }
+                }
+                if (takedamage.isOp() || causedamage.isOp()) {
                     return;
                 }
-                if(takedamage.isOp() || causedamage.isOp()){
-                    return;
-                } else {
-                    StateFlag.State container = Main.getInstance().WorldGuard.getRegionManager(takedamage.getWorld()).getApplicableRegions(takedamage.getLocation()).getFlag(DefaultFlag.PVP);
-                    if(container == null){
-                        damagelist.put(takedamage,1);
-                        damagelist.put(causedamage,1);
-                        new DécoCombats().runTaskTimer(Main.getInstance(),0L, 20L);
+                StateFlag.State container = Main.getInstance().WorldGuard.getRegionManager(takedamage.getWorld()).getApplicableRegions(takedamage.getLocation()).getFlag(DefaultFlag.PVP);
+                if (container == null) {
+                    Main.getInstance().getDéco_cobatsConfig().set(this.takedamage.getName(),10);
+                    Main.getInstance().getDéco_cobatsConfig().set(this.causedamage.getName(),10);
+                    try{
+                        Main.getInstance().getDéco_cobatsConfig().save(Main.getInstance().Déco_Combats);
+                    } catch (IOException er){
+                        er.printStackTrace();
                     }
                 }
             }
@@ -64,44 +72,30 @@ public class DécoCombats extends BukkitRunnable implements Listener {
     public void OnQuit(PlayerQuitEvent e){
         setupEconomy();
         Player playerquit = e.getPlayer();
-        if (this.damagelist.containsKey(playerquit)) {
+        if ((int)Main.getInstance().getDéco_cobatsConfig().get(playerquit.getName()) !=0) {
             playerquit.setHealth(0);
             Double balance = economy.getBalance(playerquit);
             if (balance >= 500D){
                 economy.withdrawPlayer(playerquit , 500D);
             }
             Bukkit.broadcastMessage("§cLe déco-combats est interdit");
-            System.out.println(playerquit + " c'est déco");
-            System.out.println(this.takedamage + " a était retirer de la liste vu qu'un c'est déco");
-            System.out.println(this.causedamage + " a était retirer de la liste vu qu'un c'est déco");
-            damagelist.remove(this.takedamage);
-            damagelist.remove(this.causedamage);
-            System.out.println(damagelist);
+            Main.getInstance().getDéco_cobatsConfig().set(playerquit.getName(),0);
+            try{
+                Main.getInstance().getDéco_cobatsConfig().save(Main.getInstance().Déco_Combats);
+            } catch (IOException er){
+                er.printStackTrace();
+            }
         }
     }
 
     @EventHandler
     public void commandDisable(PlayerCommandPreprocessEvent e){
         Player p = e.getPlayer();
-        if (damagelist.containsKey(p)){
-            e.setCancelled(true);
-            p.sendMessage("§cAucune commande n'est autorisé en combat");
-        }
-    }
-
-
-    @Override
-    public void run() {
-        tempo--;
-        if(tempo == 0){
-            System.out.println(damagelist);
-            System.out.println(this.takedamage + " a pris des dégats");
-            System.out.println(this.causedamage + " a donner des degats");
-            damagelist.remove(this.takedamage);
-            damagelist.remove(this.causedamage);
-            tempo = 10;
-            System.out.println(damagelist);
-            this.cancel();
+        if (Main.getInstance().getDéco_cobatsConfig().contains(p.getName())){
+            if((int)Main.getInstance().getDéco_cobatsConfig().get(p.getName()) != 0){
+                e.setCancelled(true);
+                p.sendMessage("§cAucune commande n'est autorisé en combat");
+            }
         }
     }
 }
