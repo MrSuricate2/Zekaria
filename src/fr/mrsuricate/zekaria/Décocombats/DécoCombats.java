@@ -72,18 +72,20 @@ public class DécoCombats implements Listener {
     public void OnQuit(PlayerQuitEvent e){
         setupEconomy();
         Player playerquit = e.getPlayer();
-        if ((int)Main.getInstance().getDéco_cobatsConfig().get(playerquit.getName()) !=0) {
-            playerquit.setHealth(0);
-            Double balance = economy.getBalance(playerquit);
-            if (balance >= 500D){
-                economy.withdrawPlayer(playerquit , 500D);
-            }
-            Bukkit.broadcastMessage("§cLe déco-combats est interdit");
-            Main.getInstance().getDéco_cobatsConfig().set(playerquit.getName(),0);
-            try{
-                Main.getInstance().getDéco_cobatsConfig().save(Main.getInstance().Déco_Combats);
-            } catch (IOException er){
-                er.printStackTrace();
+        if(Main.getInstance().getDéco_cobatsConfig().contains(playerquit.getName())) {
+            if ((int) Main.getInstance().getDéco_cobatsConfig().get(playerquit.getName()) != 0) {
+                playerquit.setHealth(0);
+                Double balance = economy.getBalance(playerquit);
+                if (balance >= 500D) {
+                    economy.withdrawPlayer(playerquit, 500D);
+                }
+                Bukkit.broadcastMessage("§cLe déco-combats est interdit");
+                Main.getInstance().getDéco_cobatsConfig().set(playerquit.getName(), 0);
+                try {
+                    Main.getInstance().getDéco_cobatsConfig().save(Main.getInstance().Déco_Combats);
+                } catch (IOException er) {
+                    er.printStackTrace();
+                }
             }
         }
     }
