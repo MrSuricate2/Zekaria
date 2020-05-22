@@ -76,51 +76,56 @@ public class Enchant extends BukkitRunnable implements Listener, CommandExecutor
                             return;
                         }
                     }
-                    if(meta.getLore().contains("§7Mending I")){
-                        if(inv.getItem(2) != null){
-                            String mending = "§7Mending I";
-                            List<String> list = inv.getItem(0).getItemMeta().getLore();
-                            if(list == null){
-                                ItemStack item = inv.getItem(2);
-                                ItemMeta meta2 = item.getItemMeta();
-                                meta2.setLore(Collections.singletonList(mending));
-                                item.setItemMeta(meta2);
-                                inv.setItem(2,item);
-                                return;
-                            }
-                            if(!list.contains(mending)){
-                                list.add(mending);
-                                ItemStack item = inv.getItem(2);
-                                ItemMeta meta2 = item.getItemMeta();
-                                meta2.setLore(list);
-                                item.setItemMeta(meta2);
-                                inv.setItem(2,item);
-                                return;
+                    if(meta.getLore() != null) {
+                        if(meta.getLore().contains("§7Mending I")){
+                            if(inv.getItem(2) != null){
+                                String mending = "§7Mending I";
+                                List<String> list = inv.getItem(0).getItemMeta().getLore();
+                                if(list == null){
+                                    ItemStack item = inv.getItem(2);
+                                    ItemMeta meta2 = item.getItemMeta();
+                                    meta2.setLore(Collections.singletonList(mending));
+                                    item.setItemMeta(meta2);
+                                    inv.setItem(2,item);
+                                    return;
+                                }
+                                if(!list.contains(mending)){
+                                    list.add(mending);
+                                    ItemStack item = inv.getItem(2);
+                                    ItemMeta meta2 = item.getItemMeta();
+                                    meta2.setLore(list);
+                                    item.setItemMeta(meta2);
+                                    inv.setItem(2,item);
+                                    return;
+                                }
                             }
                         }
                     }
+
                     if(inv.getItem(0) != null){
                         if(inv.getItem(0).getType().equals(Material.LEATHER_HELMET) || inv.getItem(0).getType().equals(Material.IRON_HELMET) || inv.getItem(0).getType().equals(Material.GOLD_HELMET) || inv.getItem(0).getType().equals(Material.CHAINMAIL_HELMET) || inv.getItem(0).getType().equals(Material.DIAMOND_HELMET)){
-                            if(meta.getLore().contains("§7Vision nocturne I")){
-                                if(inv.getItem(2) != null){
-                                    String mending = "§7Vision nocturne I";
-                                    List<String> list = inv.getItem(0).getItemMeta().getLore();
-                                    if(list == null){
-                                        ItemStack item = inv.getItem(2);
-                                        ItemMeta meta2 = item.getItemMeta();
-                                        meta2.setLore(Collections.singletonList(mending));
-                                        item.setItemMeta(meta2);
-                                        inv.setItem(2,item);
-                                        return;
-                                    }
-                                    if(!list.contains(mending)){
-                                        list.add(mending);
-                                        ItemStack item = inv.getItem(2);
-                                        ItemMeta meta2 = item.getItemMeta();
-                                        meta2.setLore(list);
-                                        item.setItemMeta(meta2);
-                                        inv.setItem(2,item);
-                                        return;
+                            if (meta.getLore() != null){
+                                if(meta.getLore().contains("§7Vision nocturne I")){
+                                    if(inv.getItem(2) != null){
+                                        String mending = "§7Vision nocturne I";
+                                        List<String> list = inv.getItem(0).getItemMeta().getLore();
+                                        if(list == null){
+                                            ItemStack item = inv.getItem(2);
+                                            ItemMeta meta2 = item.getItemMeta();
+                                            meta2.setLore(Collections.singletonList(mending));
+                                            item.setItemMeta(meta2);
+                                            inv.setItem(2,item);
+                                            return;
+                                        }
+                                        if(!list.contains(mending)){
+                                            list.add(mending);
+                                            ItemStack item = inv.getItem(2);
+                                            ItemMeta meta2 = item.getItemMeta();
+                                            meta2.setLore(list);
+                                            item.setItemMeta(meta2);
+                                            inv.setItem(2,item);
+                                            return;
+                                        }
                                     }
                                 }
                             }
