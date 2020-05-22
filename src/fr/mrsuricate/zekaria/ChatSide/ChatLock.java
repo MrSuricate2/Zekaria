@@ -16,10 +16,10 @@ public class ChatLock implements CommandExecutor, Listener {
         if(cmd.getName().equalsIgnoreCase("chatlock")){
             if(sender.hasPermission("lockchat.use")){
                 if(!Main.chatlock){
-                    Bukkit.broadcastMessage("§8[§4Chat Lock§8] §6 " + sender.getName() + " §6a verrouiller le chat !");
+                    Bukkit.broadcastMessage("§8[§4Chat Lock§8] §b " + sender.getName() + " §6a verrouiller le chat !");
                     Main.chatlock = true;
                 } else if (Main.chatlock){
-                    Bukkit.broadcastMessage("§8[§4Chat Lock§8] §6 " + sender.getName() + " §6a déverrouiller le chat !");
+                    Bukkit.broadcastMessage("§8[§4Chat Lock§8] §b " + sender.getName() + " §6a déverrouiller le chat !");
                     Main.chatlock = false;
                 }
             } else {

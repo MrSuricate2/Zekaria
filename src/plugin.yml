@@ -70,3 +70,7 @@ commands:
     description: Clear chat local
     aliases:
       - lc
+  rules:
+    description: Réglement du serveur
+    aliases:
+      - rule

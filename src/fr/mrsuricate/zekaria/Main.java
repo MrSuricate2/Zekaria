@@ -168,6 +168,9 @@ public class Main extends JavaPlugin implements Listener {
         getCommand("enchere").setExecutor(new enchere());
         //enchere
         //timemoney
+        //Rules
+        getCommand("rules").setExecutor(new Rules());
+        //Fin Rules
         this.TimeIsMoney = new File(getDataFolder() + File.separator + "TimeIsMoney.yml");
         if(!TimeIsMoney.exists()){
             try{
