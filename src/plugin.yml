@@ -8,6 +8,9 @@ commands:
   alert:
     description: Broadcast custom
     permission: bc.use
+  CustomEnchant:
+    description: Give CustomEnchant
+    permission: ce.give
   discord:
     description: Lien discord
   ts:
