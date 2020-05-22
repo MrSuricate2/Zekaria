@@ -180,7 +180,7 @@ public class Main extends JavaPlugin implements Listener {
         Bukkit.getPluginManager().registerEvents(new TimeisMoney(), this);
         //timemoney
         //décocombats
-        this.Déco_Combats = new File(getDataFolder() + File.separator + "Déco_combats.yml");
+        this.Déco_Combats = new File(getDataFolder() + File.separator + "Deco_combats.yml");
         if(!Déco_Combats.exists()){
             try{
                 Déco_Combats.createNewFile();
@@ -196,6 +196,7 @@ public class Main extends JavaPlugin implements Listener {
         //CustomEnchant
         Bukkit.getPluginManager().registerEvents(new Enchant(), this);
         new Enchant().runTaskTimer(Main.getInstance(),0L, 20L);
+        getCommand("CustomEnchant").setExecutor(new Enchant());
         //CustomEnchant
         //BlockCommand
         Bukkit.getPluginManager().registerEvents(new blockCommand(), this);

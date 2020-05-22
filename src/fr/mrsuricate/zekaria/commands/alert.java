@@ -19,9 +19,6 @@ public class alert implements CommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             if (cmd.getName().equalsIgnoreCase("alert")) {
-
-
-
                 if (args.length == 0)
                     player.sendMessage("Il faut préciser le texte à envoyé !");
                 if (args.length >= 1) {
