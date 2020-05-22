@@ -57,17 +57,21 @@ public class ModsItemsInteract implements Listener {
             //Freeze
 
             case PACKED_ICE:
-                if(Main.getInstance().freezedPlayers.containsKey(target.getUniqueId())){
-                    Main.getInstance().freezedPlayers.remove(target.getUniqueId());
-                    target.sendMessage("§6Vous avez été unfreeze par §b" + player.getName());
-                    player.sendMessage("§6Vous avez unfreeze §b" + target.getName());
+                if (!target.hasPermission("freeze.bypass")) {
+                    if (Main.getInstance().freezedPlayers.containsKey(target.getUniqueId())) {
+                        Main.getInstance().freezedPlayers.remove(target.getUniqueId());
+                        target.sendMessage("§6Vous avez été unfreeze par §b" + player.getName());
+                        player.sendMessage("§6Vous avez unfreeze §b" + target.getName());
+                    } else {
+                        Main.getInstance().freezedPlayers.put(target.getUniqueId(), target.getLocation());
+                        target.sendMessage("");
+                        target.sendMessage("§6Vous avez été freeze par §b" + player.getName());
+                        target.sendMessage("§6Merci de venir sur discord : §bhttps://discord.gg/knXYnBG");
+                        target.sendMessage("");
+                        player.sendMessage("§6Vous avez freeze §b" + target.getName());
+                    }
                 } else {
-                    Main.getInstance().freezedPlayers.put(target.getUniqueId(), target.getLocation());
-                    target.sendMessage("");
-                    target.sendMessage("§6Vous avez été freeze par §b" + player.getName());
-                    target.sendMessage("§6Merci de venir sur discord : §bhttps://discord.gg/knXYnBG");
-                    target.sendMessage("");
-                    player.sendMessage("§6Vous avez freeze §b" + target.getName());
+                    player.sendMessage("§6Vous ne pouvez pas freeze §b" + target.getName());
                 }
                 break;
 
