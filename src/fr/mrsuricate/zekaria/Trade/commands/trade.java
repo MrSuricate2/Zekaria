@@ -16,7 +16,7 @@ public class trade implements CommandExecutor{
 
             if (args.length == 0) {
 
-                if (sender instanceof Player && sender.hasPermission("trade.use")) {
+                if (sender instanceof Player) {
                     sender.sendMessage("§7/trade §c<joueur>");
                 }
             }
@@ -31,7 +31,7 @@ public class trade implements CommandExecutor{
 
             if (args.length == 1)
             {
-                if (sender instanceof Player && sender.hasPermission("trade.use") && !args[0].equalsIgnoreCase("reload")) {
+                if (sender instanceof Player && !args[0].equalsIgnoreCase("reload")) {
 
                     Player player = (Player)sender;
 
