@@ -8,6 +8,8 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 public class PlayerManager {
 
@@ -27,6 +29,7 @@ public class PlayerManager {
         saveInventory();
         player.setAllowFlight(true);
         player.setFlying(true);
+        player.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, 999999, 1, false, false));
 
         ItemBuilder invSee = new ItemBuilder(Material.PAPER).setName("§eVoir l'inventaire").setLore("§6Clique droit sur un joueur", "§6pour voir son inventaire.");
         ItemBuilder reports = new ItemBuilder(Material.BOOK).setName("§eVoir les signalements").setLore("§6Clique droit sur un joueur", "§6pour voir ses signalements.");
@@ -56,6 +59,9 @@ public class PlayerManager {
         setVanished(false);
         if(player.getGameMode() == GameMode.SPECTATOR){
             player.setGameMode(GameMode.SURVIVAL);
+        }
+        if (player.hasPotionEffect(PotionEffectType.NIGHT_VISION)){
+            player.removePotionEffect(PotionEffectType.NIGHT_VISION);
         }
     }
 
