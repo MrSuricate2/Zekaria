@@ -148,7 +148,17 @@ public class Warp implements CommandExecutor, Listener {
                     break;
                     //Warp jump 2
                 case STRING:
+                    Location jumpb = new Location(Bukkit.getWorld("world"), 153.3, 70, 276.599, -3.4F, -5.9F);
                     e.setCancelled(true);
+                    p.sendMessage("§8[§4Zekaria§8] §6Téléportation dans 3 secondes");
+                    p.closeInventory();
+                    try {
+                        TimeUnit.SECONDS.sleep(3);
+                    } catch (InterruptedException a){
+                        System.out.println(a);
+                    }
+                    p.teleport(jumpb);
+                    p.sendMessage("§8[§4Zekaria§8] §6Vous avez été téléporter au warp §bJump");
                     break;
                     //Warp mine
                 case DIAMOND_PICKAXE:
