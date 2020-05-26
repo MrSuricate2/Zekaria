@@ -11,6 +11,7 @@ import fr.mrsuricate.zekaria.CoinFlip.utilz.*;
 import fr.mrsuricate.zekaria.CustomEnchant.Enchant;
 import fr.mrsuricate.zekaria.Décocombats.DécoCombats;
 import fr.mrsuricate.zekaria.Décocombats.runnable2;
+import fr.mrsuricate.zekaria.HeadDrop.Headdrop;
 import fr.mrsuricate.zekaria.StaffChat.StaffChat;
 import fr.mrsuricate.zekaria.TimeIsMoney.TimeisMoney;
 import fr.mrsuricate.zekaria.Trade.ItemStackUtils;
@@ -171,6 +172,9 @@ public class Main extends JavaPlugin implements Listener {
         //Rules
         getCommand("rules").setExecutor(new Rules());
         //Fin Rules
+        //HeadDrop
+        Bukkit.getPluginManager().registerEvents(new Headdrop(), this);
+        //Fin HeadDrop
         this.TimeIsMoney = new File(getDataFolder() + File.separator + "TimeIsMoney.yml");
         if(!TimeIsMoney.exists()){
             try{
