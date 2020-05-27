@@ -2,8 +2,6 @@ package fr.mrsuricate.zekaria.HeadDrop;
 
 import fr.mrsuricate.zekaria.Main;
 import org.bukkit.Material;
-import org.bukkit.SkullType;
-import org.bukkit.block.Skull;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -18,6 +16,7 @@ public class Headdrop implements Listener {
 
     @EventHandler
     public void death(PlayerDeathEvent e){
+
         ItemStack skull = new ItemStack(Material.SKULL_ITEM, 1, (short)3);
         SkullMeta meta = (SkullMeta) skull.getItemMeta();
         if(this.config.getString("SkinRestorer-enable").equalsIgnoreCase("true")){
