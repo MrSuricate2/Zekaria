@@ -44,7 +44,12 @@ public class ModCancels implements Listener {
     }
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent e){
-        e.setCancelled(PlayerManager.isInModerationMod(e.getPlayer()) || Main.getInstance().isFreeze(e.getPlayer()));
+        if (PlayerManager.isInModerationMod(e.getPlayer())){
+            e.setCancelled(true);
+        }
+        if (Main.getInstance().isFreeze(e.getPlayer())){
+            e.setCancelled(true);
+        }
     }
 
     @EventHandler
