@@ -124,8 +124,6 @@ public class Main extends JavaPlugin implements Listener {
         getCommand("discord").setExecutor(new discord());
         getCommand("ts").setExecutor(new discord());
         getCommand("site").setExecutor(new discord());
-        getCommand("spawners").setExecutor(new spawner());
-        getServer().getPluginManager().registerEvents(new spawner(), this);
         getCommand("grades").setExecutor(new grades());
         getServer().getPluginManager().registerEvents(new grades(), this);
         getCommand("buykits").setExecutor(new buykit());

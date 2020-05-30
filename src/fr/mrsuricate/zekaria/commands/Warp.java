@@ -66,22 +66,6 @@ public class Warp implements CommandExecutor, Listener {
                 mine.setItemMeta(mineM);
                 inv.setItem(4, mine);
 
-                //Warp Revente
-                ItemStack revente = new ItemStack(Material.GOLD_INGOT, 1);
-                ItemMeta reventeM = revente.getItemMeta();
-                reventeM.setDisplayName("§bWarp Revente");
-                reventeM.setLore(Arrays.asList("§9Clique ici pour te téléporter"));
-                revente.setItemMeta(reventeM);
-                inv.setItem(5, revente);
-
-                //Warp Achat
-                ItemStack achat = new ItemStack(Material.IRON_INGOT);
-                ItemMeta achatM = achat.getItemMeta();
-                achatM.setDisplayName("§bWarp Achat");
-                achatM.setLore(Arrays.asList("§9Clique ici pour te téléporter"));
-                achat.setItemMeta(achatM);
-                inv.setItem(6, achat);
-
                 p.openInventory(inv);
 
                 return true;
@@ -106,7 +90,7 @@ public class Warp implements CommandExecutor, Listener {
             switch (current.getType()){
                 //Warp clef
                 case TRIPWIRE_HOOK:
-                    Location clef = new Location(Bukkit.getWorld("world"), 194.5, 73.5, 234.5);
+                    Location clef = new Location(Bukkit.getWorld("world"), 195.502, 73, 236.395, -134, 4.2F);
                     e.setCancelled(true);
                     p.sendMessage("§8[§4Zekaria§8] §6Téléportation dans 3 secondes");
                     p.closeInventory();
@@ -120,7 +104,7 @@ public class Warp implements CommandExecutor, Listener {
                     break;
                     //warp forge
                 case ANVIL:
-                    Location forge = new Location(Bukkit.getWorld("world"), 174.5, 73.5, 254.5);
+                    Location forge = new Location(Bukkit.getWorld("world"), 174.109, 73, 257.795, 44, -0);
                     e.setCancelled(true);
                     p.sendMessage("§8[§4Zekaria§8] §6Téléportation dans 3 secondes");
                     p.closeInventory();
@@ -134,7 +118,7 @@ public class Warp implements CommandExecutor, Listener {
                     break;
                     //Warp Jump
                 case FEATHER:
-                    Location jump = new Location(Bukkit.getWorld("world"), 213.5, 70.5, 269.5, -92, -6);
+                    Location jump = new Location(Bukkit.getWorld("world"), 214.276, 70, 272.439, -90, 2);
                     e.setCancelled(true);
                     p.sendMessage("§8[§4Zekaria§8] §6Téléportation dans 3 secondes");
                     p.closeInventory();
@@ -148,7 +132,7 @@ public class Warp implements CommandExecutor, Listener {
                     break;
                     //Warp jump 2
                 case STRING:
-                    Location jumpb = new Location(Bukkit.getWorld("world"), 153.3, 70, 276.599, -3.4F, -5.9F);
+                    Location jumpb = new Location(Bukkit.getWorld("world"), 153.571, 70, 280.123, 1, -1);
                     e.setCancelled(true);
                     p.sendMessage("§8[§4Zekaria§8] §6Téléportation dans 3 secondes");
                     p.closeInventory();
@@ -162,7 +146,7 @@ public class Warp implements CommandExecutor, Listener {
                     break;
                     //Warp mine
                 case DIAMOND_PICKAXE:
-                    Location mine = new Location(Bukkit.getWorld("world"), 193.5, 49.5, 206.5);
+                    Location mine = new Location(Bukkit.getWorld("world"), 194.434, 49, 210.479, 1, -1);
                     e.setCancelled(true);
                     p.sendMessage("§8[§4Zekaria§8] §6Téléportation dans 3 secondes");
                     p.closeInventory();
@@ -174,35 +158,6 @@ public class Warp implements CommandExecutor, Listener {
                     p.teleport(mine);
                     p.sendMessage("§8[§4Zekaria§8] §6Vous avez été téléporter au warp §bMine");
                     break;
-                    //Warp Revente
-                case GOLD_INGOT:
-                    Location revente = new Location(Bukkit.getWorld("world"), 157.5, 60.5, 270.5, 39, -1);
-                    e.setCancelled(true);
-                    p.sendMessage("§8[§4Zekaria§8] §6Téléportation dans 3 secondes");
-                    p.closeInventory();
-                    try {
-                        TimeUnit.SECONDS.sleep(3);
-                    } catch (InterruptedException a){
-                        System.out.println(a);
-                    }
-                    p.teleport(revente);
-                    p.sendMessage("§8[§4Zekaria§8] §6Vous avez été téléporter au warp §bRevente");
-                    break;
-                    //Warp Achat
-                case IRON_INGOT:
-                    Location achat = new Location(Bukkit.getWorld("world"), 212.5, 60.5, 216.5, -144, -2);
-                    e.setCancelled(true);
-                    p.sendMessage("§8[§4Zekaria§8] §6Téléportation dans 3 secondes");
-                    p.closeInventory();
-                    try {
-                        TimeUnit.SECONDS.sleep(3);
-                    } catch (InterruptedException a){
-                        System.out.println(a);
-                    }
-                    p.teleport(achat);
-                    p.sendMessage("§8[§4Zekaria§8] §6Vous avez été téléporter au warp §bAchat");
-                    break;
-
                 default: break;
             }
         }
