@@ -220,10 +220,10 @@ public class Enchant extends BukkitRunnable implements Listener, CommandExecutor
             Player player = (Player) sender;
             if (cmd.getName().equalsIgnoreCase("CustomEnchant")) {
                 if (args.length == 0){
-                    player.sendMessage("/CustomEnchant give");
+                    player.sendMessage("/CustomEnchant give/apply");
                 }
                 if (args.length == 1){
-                    if(args[0].equalsIgnoreCase("give")){
+                    if(args[0].equalsIgnoreCase("give")|| args[0].equalsIgnoreCase("apply")){
                         player.sendMessage("Mending, incassable, night_vision");
                     }
                 }
@@ -252,6 +252,52 @@ public class Enchant extends BukkitRunnable implements Listener, CommandExecutor
                             item.setItemMeta(meta);
                             ((Player) sender).getInventory().addItem(item);
                         }
+                    }
+                    if (args[0].equalsIgnoreCase("apply")){
+                        if(!(((Player) sender).getItemInHand().getType() == Material.AIR)){
+                            ItemStack item = ((Player) sender).getItemInHand();
+                            if(args[1].equalsIgnoreCase("mending")){
+                                String mending = "§7Mending I";
+                                ItemMeta meta = item.getItemMeta();
+                                if(meta.hasLore()){
+                                    List<String> lore = meta.getLore();
+                                    if(!lore.contains("§7Mending I")){
+                                        lore.add(mending);
+                                        meta.setLore(lore);
+                                        item.setItemMeta(meta);
+                                    } else {
+                                        sender.sendMessage("Cette item contient déja mending");
+                                    }
+                                } else {
+                                    meta.setLore(Collections.singletonList(mending));
+                                    item.setItemMeta(meta);
+                                }
+                            }
+                            if(args[1].equalsIgnoreCase("incassable")){
+                                ItemMeta meta = item.getItemMeta();
+                                meta.spigot().setUnbreakable(true);
+                                item.setItemMeta(meta);
+
+                            }
+                            if(args[1].equalsIgnoreCase("night_vision")){
+                                String mending = "§7Vision nocturne I";
+                                ItemMeta meta = item.getItemMeta();
+                                if(meta.hasLore()){
+                                    List<String> lore = meta.getLore();
+                                    if(!lore.contains("§7Vision nocturne I")){
+                                        lore.add(mending);
+                                        meta.setLore(lore);
+                                        item.setItemMeta(meta);
+                                    } else {
+                                        sender.sendMessage("Cette item contient déja night vision");
+                                    }
+                                } else {
+                                    meta.setLore(Collections.singletonList(mending));
+                                    item.setItemMeta(meta);
+                                }
+                            }
+                        }
+
                     }
                 }
             }
