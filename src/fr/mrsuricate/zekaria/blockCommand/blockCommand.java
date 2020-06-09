@@ -33,7 +33,7 @@ public class blockCommand implements Listener {
                     p.sendMessage("§cImpossible de random TP dans le nether !");
                 }
             }
-            if(msg.equalsIgnoreCase("/mine")){
+            if(msg.equalsIgnoreCase("/mine") || msg.equalsIgnoreCase("/ap") || msg.equalsIgnoreCase("/autopickup")){
                 e.setCancelled(true);
             }
         }

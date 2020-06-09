@@ -12,31 +12,34 @@ public class ClearChat implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command cmd, String msg, String[] args) {
 
         if(cmd.getName().equalsIgnoreCase("clearchat")){
-            if(!(sender instanceof Player)){
-                sender.sendMessage("§4Vous devez être en jeu pour éxécuter cette commande");
-            }
-            if(sender.hasPermission("clearchat.use")){
-                for (int i = 0; i < 100; i++){
-                    Bukkit.getOnlinePlayers().forEach(players -> players.sendMessage(""));
+            if(sender instanceof Player){
+                if(sender.hasPermission("clearchat.use")){
+                    for (int i = 0; i < 100; i++){
+                        Bukkit.getOnlinePlayers().forEach(players -> players.sendMessage(""));
+                    }
+                } else {
+                    sender.sendMessage("§4Vous n'avez pas la permission !");
                 }
-            } else {
-                sender.sendMessage("§4Vous n'avez pas la permission !");
+                Bukkit.broadcastMessage("§8[§4Clear Chat§8] §6 Le chat à été réinitialisé !");
+                return true;
             }
-            Bukkit.broadcastMessage("§8[§4Clear Chat§8] §6 Le chat à été réinitialisé !");
+            return false;
+
         }
 
         if (cmd.getName().equalsIgnoreCase("localclear")){
-            if(!(sender instanceof Player)){
-                sender.sendMessage("§4Vous devez être en jeu pour éxécuter cette commande");
-            }
-            if(sender.hasPermission("localclear.use")){
-                for (int i = 0; i < 100; i++){
-                    sender.sendMessage("");
+            if(sender instanceof Player){
+                if(sender.hasPermission("localclear.use")){
+                    for (int i = 0; i < 100; i++){
+                        sender.sendMessage("");
+                    }
+                } else {
+                    sender.sendMessage("§4Vous n'avez pas la permission !");
                 }
-            } else {
-                sender.sendMessage("§4Vous n'avez pas la permission !");
+                sender.sendMessage("§8[§4Clear Chat§8] §6 Votre chat a été réinitialisé !");
+                return true;
             }
-           sender.sendMessage("§8[§4Clear Chat§8] §6 Votre chat a été réinitialisé !");
+            return false;
         }
         return false;
     }
