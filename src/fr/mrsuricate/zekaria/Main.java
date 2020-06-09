@@ -8,6 +8,7 @@ import fr.mrsuricate.zekaria.CoinFlip.commands.CoinFlipCommand;
 import fr.mrsuricate.zekaria.CoinFlip.events.ClickEvent;
 import fr.mrsuricate.zekaria.CoinFlip.events.PlayerQuitEvent;
 import fr.mrsuricate.zekaria.CoinFlip.utilz.*;
+import fr.mrsuricate.zekaria.Cooldownenderpearl.CooldownEnderPearl;
 import fr.mrsuricate.zekaria.CustomEnchant.Enchant;
 import fr.mrsuricate.zekaria.Décocombats.DécoCombats;
 import fr.mrsuricate.zekaria.Décocombats.runnable2;
@@ -106,6 +107,11 @@ public class Main extends JavaPlugin implements Listener {
     //CustomEnchant
     public static HashMap<Player, Integer> enchant = new HashMap<>();
     //CustomEnchant
+
+    //cooldown_enderpearl
+    public static File Cenderpearl;
+    public static FileConfiguration config5;
+    //cooldown_enderpearl
 
 
     public ArrayList<UUID> moderateurs = new ArrayList<>();
@@ -206,6 +212,20 @@ public class Main extends JavaPlugin implements Listener {
         //BlockCommand
         Bukkit.getPluginManager().registerEvents(new blockCommand(), this);
         //BlockCommand
+        //cooldown_enderpearl
+
+        this.Cenderpearl = new File(getDataFolder() + File.separator + "Cooldown enderpearl.yml");
+        if(!Cenderpearl.exists()){
+            try{
+                Cenderpearl.createNewFile();
+            }catch(IOException e){
+                e.printStackTrace();
+            }
+        }
+        this.config5 = YamlConfiguration.loadConfiguration(Cenderpearl);
+        Bukkit.getPluginManager().registerEvents(new CooldownEnderPearl(), this);
+        new CooldownEnderPearl().runTaskTimer(Main.getInstance(),0L, 20L);
+        //cooldown_enderpearl
 
 
 
@@ -271,6 +291,12 @@ public class Main extends JavaPlugin implements Listener {
         return config3;
     }
     //Déco-combats
+
+    //cooldown_enderpearl
+    public FileConfiguration getCenderPearl(){
+        return config5;
+    }
+    //cooldown_enderpearl
 
 
     @Override
