@@ -21,9 +21,7 @@ public class ClearChat implements CommandExecutor {
                     sender.sendMessage("§4Vous n'avez pas la permission !");
                 }
                 Bukkit.broadcastMessage("§8[§4Clear Chat§8] §6 Le chat à été réinitialisé !");
-                return true;
             }
-            return false;
 
         }
 
@@ -32,14 +30,13 @@ public class ClearChat implements CommandExecutor {
                 if(sender.hasPermission("localclear.use")){
                     for (int i = 0; i < 100; i++){
                         sender.sendMessage("");
+                        sender.sendMessage("§8[§4Clear Chat§8] §6 Votre chat a été réinitialisé !");
                     }
                 } else {
                     sender.sendMessage("§4Vous n'avez pas la permission !");
                 }
-                sender.sendMessage("§8[§4Clear Chat§8] §6 Votre chat a été réinitialisé !");
-                return true;
+
             }
-            return false;
         }
         return false;
     }
