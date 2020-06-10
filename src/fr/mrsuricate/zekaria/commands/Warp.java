@@ -1,13 +1,11 @@
 package fr.mrsuricate.zekaria.commands;
 
-import fr.mrsuricate.zekaria.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -15,8 +13,6 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
@@ -90,11 +86,10 @@ public class Warp implements CommandExecutor, Listener {
         }
 
         if (inv.getName().equalsIgnoreCase("§6Warp")){
-
+            CommandSender console = Bukkit.getServer().getConsoleSender();
             switch (current.getType()){
                 //Warp clef
                 case TRIPWIRE_HOOK:
-                    Location clef = new Location(Bukkit.getWorld("world"), 195.502, 73, 236.395, -134, 4.2F);
                     e.setCancelled(true);
                     p.sendMessage("§8[§4Zekaria§8] §6Téléportation dans 3 secondes");
                     p.closeInventory();
@@ -103,12 +98,10 @@ public class Warp implements CommandExecutor, Listener {
                     } catch (InterruptedException a){
                         System.out.println(a);
                     }
-                    p.teleport(clef);
-                    p.sendMessage("§8[§4Zekaria§8] §6Vous avez été téléporter au warp §bClef");
+                    Bukkit.dispatchCommand(console, "essentials:warp clef " + e.getWhoClicked().getName());
                     break;
                     //warp forge
                 case ANVIL:
-                    Location forge = new Location(Bukkit.getWorld("world"), 174.109, 73, 257.795, 44, -0);
                     e.setCancelled(true);
                     p.sendMessage("§8[§4Zekaria§8] §6Téléportation dans 3 secondes");
                     p.closeInventory();
@@ -117,12 +110,10 @@ public class Warp implements CommandExecutor, Listener {
                     } catch (InterruptedException a){
                         System.out.println(a);
                     }
-                    p.teleport(forge);
-                    p.sendMessage("§8[§4Zekaria§8] §6Vous avez été téléporter au warp §bForge");
+                    Bukkit.dispatchCommand(console, "essentials:warp forge " + e.getWhoClicked().getName());
                     break;
                     //Warp Jump
                 case FEATHER:
-                    Location jump = new Location(Bukkit.getWorld("world"), 214.276, 70, 272.439, -90, 2);
                     e.setCancelled(true);
                     p.sendMessage("§8[§4Zekaria§8] §6Téléportation dans 3 secondes");
                     p.closeInventory();
@@ -131,12 +122,10 @@ public class Warp implements CommandExecutor, Listener {
                     } catch (InterruptedException a){
                         System.out.println(a);
                     }
-                    p.teleport(jump);
-                    p.sendMessage("§8[§4Zekaria§8] §6Vous avez été téléporter au warp §bJump");
+                    Bukkit.dispatchCommand(console, "essentials:warp jump " + e.getWhoClicked().getName());
                     break;
                     //Warp jump 2
                 case STRING:
-                    Location jumpb = new Location(Bukkit.getWorld("world"), 153.571, 70, 280.123, 1, -1);
                     e.setCancelled(true);
                     p.sendMessage("§8[§4Zekaria§8] §6Téléportation dans 3 secondes");
                     p.closeInventory();
@@ -145,12 +134,10 @@ public class Warp implements CommandExecutor, Listener {
                     } catch (InterruptedException a){
                         System.out.println(a);
                     }
-                    p.teleport(jumpb);
-                    p.sendMessage("§8[§4Zekaria§8] §6Vous avez été téléporter au warp §bJump");
+                    Bukkit.dispatchCommand(console, "essentials:warp jump2 " + e.getWhoClicked().getName());
                     break;
                     //Warp mine
                 case DIAMOND_PICKAXE:
-                    Location mine = new Location(Bukkit.getWorld("world"), 194.434, 49, 210.479, 1, -1);
                     e.setCancelled(true);
                     p.sendMessage("§8[§4Zekaria§8] §6Téléportation dans 3 secondes");
                     p.closeInventory();
@@ -159,8 +146,7 @@ public class Warp implements CommandExecutor, Listener {
                     } catch (InterruptedException a){
                         System.out.println(a);
                     }
-                    p.teleport(mine);
-                    p.sendMessage("§8[§4Zekaria§8] §6Vous avez été téléporter au warp §bMine");
+                    Bukkit.dispatchCommand(console, "essentials:warp mine " + e.getWhoClicked().getName());
                     break;
 
                 default: break;
