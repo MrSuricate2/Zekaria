@@ -99,7 +99,7 @@ public class grades implements CommandExecutor, Listener {
                     case IRON_HELMET:
                         if (p.hasPermission("grades.gladiateur")){
                         if (balance >= 75000.0D) {
-                            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "manuadd " + p.getName() + " Gladiateur");
+                            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "lp user " + p.getName() + " parent set Gladiateur");
                             economy.withdrawPlayer(p, 75000.0D);
                             p.closeInventory();
                             p.sendMessage("§8[§4Zekaria§8] §6Vous êtes maintenant Gladiateur");
@@ -116,7 +116,7 @@ public class grades implements CommandExecutor, Listener {
                     case GOLD_HELMET:
                         if (p.hasPermission("grades.duc")) {
                             if (balance >= 350000.0D) {
-                                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "manuadd " + p.getName() + " Duc");
+                                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "lp user " + p.getName() + " parent set Duc");
                                 economy.withdrawPlayer(p, 350000.0D);
                                 p.closeInventory();
                                 p.sendMessage("§8[§4Zekaria§8] §6Vous êtes maintenant Duc");
@@ -133,7 +133,7 @@ public class grades implements CommandExecutor, Listener {
                     case DIAMOND_HELMET:
                         if (p.hasPermission("grades.seigneur")) {
                             if (balance >= 2000000.0D) {
-                                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "manuadd " + p.getName() + " Seigneur");
+                                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "lp user " + p.getName() + " parent set Seigneur");
                                 economy.withdrawPlayer(p, 2000000.0D);
                                 p.closeInventory();
                                 p.sendMessage("§8[§4Zekaria§8] §6Vous êtes maintenant Seigneur");
