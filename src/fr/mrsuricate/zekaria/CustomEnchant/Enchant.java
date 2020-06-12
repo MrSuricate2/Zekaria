@@ -58,6 +58,8 @@ public class Enchant extends BukkitRunnable implements Listener, CommandExecutor
         }
     }
 
+
+    //todo changer pour PrepareAnvilEvent
     @EventHandler
     public void onEnclumeEvent(InventoryClickEvent e) {
         if (e.getInventory().getType() == InventoryType.ANVIL && e.getWhoClicked() instanceof Player) {
