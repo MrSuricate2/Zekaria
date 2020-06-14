@@ -3,7 +3,7 @@ version: 1.0.0
 authors: [Neiyko,MrSuricate]
 main: fr.mrsuricate.zekaria.Main
 depends: [Vault, WordGuard, WorldEdit, MassiveCore, Factions]
-softdepend: [SkinRestorer]
+softdepend: [SkinRestorer,HolographicDisplays]
 commands:
   alert:
     description: Broadcast custom
@@ -74,3 +74,5 @@ commands:
     description: Réglement du serveur
     aliases:
       - rule
+  faction:
+    description: Donne le top faction

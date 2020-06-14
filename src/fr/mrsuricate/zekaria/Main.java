@@ -15,6 +15,7 @@ import fr.mrsuricate.zekaria.Décocombats.runnable2;
 import fr.mrsuricate.zekaria.HeadDrop.Headdrop;
 import fr.mrsuricate.zekaria.StaffChat.StaffChat;
 import fr.mrsuricate.zekaria.TimeIsMoney.TimeisMoney;
+import fr.mrsuricate.zekaria.TopFaction.TopFaction;
 import fr.mrsuricate.zekaria.Trade.ItemStackUtils;
 import fr.mrsuricate.zekaria.Trade.TradeHandler;
 import fr.mrsuricate.zekaria.Trade.commands.trade;
@@ -113,6 +114,12 @@ public class Main extends JavaPlugin implements Listener {
     public static FileConfiguration config5;
     //cooldown_enderpearl
 
+    //top faction
+    public static File TopFaction;
+    public static FileConfiguration config6;
+    private boolean useHolographicDisplays;
+    //top faction
+
 
     public ArrayList<UUID> moderateurs = new ArrayList<>();
     public HashMap<UUID, PlayerManager> players = new HashMap<>();
@@ -123,6 +130,12 @@ public class Main extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         saveDefaultConfig();
+        if (!Bukkit.getPluginManager().isPluginEnabled("HolographicDisplays")) {
+            getLogger().severe("*** HolographicDisplays is not installed or not enabled. ***");
+            getLogger().severe("*** This plugin will be disabled. ***");
+            this.setEnabled(false);
+            return;
+        }
         PluginManager pm = getServer().getPluginManager();
         getCommand("warp").setExecutor(new Warp());
         getServer().getPluginManager().registerEvents(new Warp(), this);
@@ -227,6 +240,22 @@ public class Main extends JavaPlugin implements Listener {
         new CooldownEnderPearl().runTaskTimer(Main.getInstance(),0L, 20L);
         //cooldown_enderpearl
 
+        //top faction
+        this.TopFaction = new File(getDataFolder() + File.separator + "Top Faction.yml");
+        if(!TopFaction.exists()){
+            try{
+                TopFaction.createNewFile();
+            }catch(IOException e){
+                e.printStackTrace();
+            }
+        }
+        this.config6 = YamlConfiguration.loadConfiguration(TopFaction);
+        useHolographicDisplays = Bukkit.getPluginManager().isPluginEnabled("HolographicDisplays");
+        Bukkit.getPluginManager().registerEvents(new TopFaction(), this);
+        getCommand("faction").setExecutor(new TopFaction());
+        new TopFaction().runTaskTimer(Main.getInstance(),0L, 200L);
+        //top faction
+
 
 
 
@@ -297,6 +326,12 @@ public class Main extends JavaPlugin implements Listener {
         return config5;
     }
     //cooldown_enderpearl
+
+    //Top Faction
+    public FileConfiguration getTopFaction(){
+        return config6;
+    }
+    //Top Faction
 
 
     @Override
