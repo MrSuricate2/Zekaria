@@ -21,6 +21,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.text.DecimalFormat;
 import java.util.*;
 
 public class TopFaction extends BukkitRunnable implements CommandExecutor, Listener {
@@ -114,11 +115,12 @@ public class TopFaction extends BukkitRunnable implements CommandExecutor, Liste
                                 }
                                 i++;
                             }
+                            DecimalFormat df = new DecimalFormat("0.00");
                             sender.sendMessage("§a§m---------§a Top 3 faction §a§m---------");
                             sender.sendMessage("");
-                            sender.sendMessage("§6Top 1 : §b"+ top1name + "§6 avec §d"+ top1 + " ZekaCoins");
-                            sender.sendMessage("§6Top 2 : §b"+ top2name + "§6 avec §d"+ top2 + " ZekaCoins");
-                            sender.sendMessage("§6Top 3 : §b"+ top3name + "§6 avec §d"+ top3 + " ZekaCoins");
+                            sender.sendMessage("§6Top 1 : §b"+ top1name + "§6 avec §d"+ df.format(this.top1) + " ZekaCoins");
+                            sender.sendMessage("§6Top 2 : §b"+ top2name + "§6 avec §d"+ df.format(this.top2) + " ZekaCoins");
+                            sender.sendMessage("§6Top 3 : §b"+ top3name + "§6 avec §d"+ df.format(this.top3) + " ZekaCoins");
                             sender.sendMessage("");
                             sender.sendMessage("§a§m-------------------------------");
                         }
@@ -203,11 +205,12 @@ public class TopFaction extends BukkitRunnable implements CommandExecutor, Liste
         Plugin plugin = Main.getInstance();
         Location where = new Location(Bukkit.getWorld("world"), 171.5,76,234.5);
         Hologram hologram = HologramsAPI.createHologram(plugin,where);
+        DecimalFormat df = new DecimalFormat("0.00");
         TextLine textLine0 = hologram.insertTextLine(0 ,"§a§m---------§a Top 3 faction §a§m---------" );
         TextLine textLine1 = hologram.insertTextLine(1 ,"" );
-        TextLine textLine2 = hologram.insertTextLine(2 ,"§6Top 1 : §b"+ this.top1name + "§6 avec §d"+ this.top1 + " ZekaCoins" );
-        TextLine textLine3 = hologram.insertTextLine(3 ,"§6Top 2 : §b"+ this.top2name + "§6 avec §d"+ this.top2 + " ZekaCoins" );
-        TextLine textLine4 = hologram.insertTextLine(4 ,"§6Top 3 : §b"+ this.top3name + "§6 avec §d"+ this.top3 + " ZekaCoins" );
+        TextLine textLine2 = hologram.insertTextLine(2 ,"§6Top 1 : §b"+ this.top1name + "§6 avec §d"+ df.format(this.top1) + " ZekaCoins" );
+        TextLine textLine3 = hologram.insertTextLine(3 ,"§6Top 2 : §b"+ this.top2name + "§6 avec §d"+ df.format(this.top2) + " ZekaCoins" );
+        TextLine textLine4 = hologram.insertTextLine(4 ,"§6Top 3 : §b"+ this.top3name + "§6 avec §d"+ df.format(this.top3) + " ZekaCoins" );
         TextLine textLine5 = hologram.insertTextLine(5 ,"" );
         TextLine textLine6 = hologram.insertTextLine(6 ,"§a§m-------------------------------" );
         for (Hologram holograms : HologramsAPI.getHolograms(plugin)) {

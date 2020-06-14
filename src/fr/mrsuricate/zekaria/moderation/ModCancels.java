@@ -21,12 +21,12 @@ public class ModCancels implements Listener {
     public void onBlockPlace(BlockPlaceEvent e){
         e.setCancelled(PlayerManager.isInModerationMod(e.getPlayer()) || Main.getInstance().isFreeze(e.getPlayer()));
     }
-
+/*
     @EventHandler
     public void onBlockBreak(BlockBreakEvent e){
         e.setCancelled(PlayerManager.isInModerationMod(e.getPlayer()) || Main.getInstance().isFreeze(e.getPlayer()));
     }
-
+*/
     @EventHandler
     public void onItemPickup(PlayerPickupItemEvent e){
         e.setCancelled(PlayerManager.isInModerationMod(e.getPlayer()) || Main.getInstance().isFreeze(e.getPlayer()));

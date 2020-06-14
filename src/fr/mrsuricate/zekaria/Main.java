@@ -115,8 +115,6 @@ public class Main extends JavaPlugin implements Listener {
     //cooldown_enderpearl
 
     //top faction
-    public static File TopFaction;
-    public static FileConfiguration config6;
     private boolean useHolographicDisplays;
     //top faction
 
@@ -149,12 +147,14 @@ public class Main extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new buykit(), this);
         getServer().getPluginManager().registerEvents(new DeathMoney(), this);
         //TODO getServer().getPluginManager().registerEvents(new EffectBlood(), this);
+/*
         getCommand("moderation").setExecutor(new moderation());
         getCommand("report").setExecutor(new moderation());
         getServer().getPluginManager().registerEvents(new moderation(), this);
         getServer().getPluginManager().registerEvents(new ModCancels(), this);
         getServer().getPluginManager().registerEvents(new ModsItemsInteract(), this);
         getServer().getPluginManager().registerEvents(new PlayerLeave(), this);
+*/
         getCommand("giveall").setExecutor(new Giveall());
         //Chat Side
         getCommand("clearchat").setExecutor(new ClearChat());
@@ -178,10 +178,14 @@ public class Main extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new PlayerQuitEvent(), this);
         setupEconomy();
         //cf
+
+
         //StaffChat
         getCommand("staffchat").setExecutor(new StaffChat());
         Bukkit.getPluginManager().registerEvents(new StaffChat(), this);
         //StaffChat
+
+
         //enchere
         getCommand("enchere").setExecutor(new enchere());
         //enchere
@@ -217,16 +221,21 @@ public class Main extends JavaPlugin implements Listener {
         Bukkit.getPluginManager().registerEvents(new DécoCombats(), this);
         new runnable2().runTaskTimer(Main.getInstance(),0L, 20L);
         //décocombats
+
+
         //CustomEnchant
         Bukkit.getPluginManager().registerEvents(new Enchant(), this);
         new Enchant().runTaskTimer(Main.getInstance(),0L, 20L);
         getCommand("CustomEnchant").setExecutor(new Enchant());
         //CustomEnchant
+
+
         //BlockCommand
         Bukkit.getPluginManager().registerEvents(new blockCommand(), this);
         //BlockCommand
-        //cooldown_enderpearl
 
+
+        //cooldown_enderpearl
         this.Cenderpearl = new File(getDataFolder() + File.separator + "Cooldown enderpearl.yml");
         if(!Cenderpearl.exists()){
             try{
@@ -240,16 +249,8 @@ public class Main extends JavaPlugin implements Listener {
         new CooldownEnderPearl().runTaskTimer(Main.getInstance(),0L, 20L);
         //cooldown_enderpearl
 
+
         //top faction
-        this.TopFaction = new File(getDataFolder() + File.separator + "Top Faction.yml");
-        if(!TopFaction.exists()){
-            try{
-                TopFaction.createNewFile();
-            }catch(IOException e){
-                e.printStackTrace();
-            }
-        }
-        this.config6 = YamlConfiguration.loadConfiguration(TopFaction);
         useHolographicDisplays = Bukkit.getPluginManager().isPluginEnabled("HolographicDisplays");
         Bukkit.getPluginManager().registerEvents(new TopFaction(), this);
         getCommand("faction").setExecutor(new TopFaction());
@@ -326,12 +327,6 @@ public class Main extends JavaPlugin implements Listener {
         return config5;
     }
     //cooldown_enderpearl
-
-    //Top Faction
-    public FileConfiguration getTopFaction(){
-        return config6;
-    }
-    //Top Faction
 
 
     @Override
