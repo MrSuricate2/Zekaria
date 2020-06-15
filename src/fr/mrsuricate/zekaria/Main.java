@@ -1,5 +1,6 @@
 package fr.mrsuricate.zekaria;
 
+import com.bgsoftware.wildstacker.api.WildStackerAPI;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sun.applet2.AppletParameters;
 import fr.mrsuricate.zekaria.ChatSide.ChatLock;
@@ -13,6 +14,7 @@ import fr.mrsuricate.zekaria.CustomEnchant.Enchant;
 import fr.mrsuricate.zekaria.Décocombats.DécoCombats;
 import fr.mrsuricate.zekaria.Décocombats.runnable2;
 import fr.mrsuricate.zekaria.HeadDrop.Headdrop;
+import fr.mrsuricate.zekaria.RewardKill.KillReward;
 import fr.mrsuricate.zekaria.StaffChat.StaffChat;
 import fr.mrsuricate.zekaria.TimeIsMoney.TimeisMoney;
 import fr.mrsuricate.zekaria.TopFaction.TopFaction;
@@ -117,6 +119,11 @@ public class Main extends JavaPlugin implements Listener {
     //top faction
     private boolean useHolographicDisplays;
     //top faction
+
+    //Reward kill
+    public static File Killr;
+    public static FileConfiguration config6;
+    //Reward kill
 
 
     public ArrayList<UUID> moderateurs = new ArrayList<>();
@@ -257,6 +264,20 @@ public class Main extends JavaPlugin implements Listener {
         new TopFaction().runTaskTimer(Main.getInstance(),0L, 200L);
         //top faction
 
+        //Reward kill
+        this.Killr = new File(getDataFolder() + File.separator + "Kill Reward.yml");
+        if(!Killr.exists()){
+            try{
+                Killr.createNewFile();
+                new KillReward().createFile();
+            }catch(IOException e){
+                e.printStackTrace();
+            }
+        }
+        this.config6 = YamlConfiguration.loadConfiguration(Killr);
+        Bukkit.getPluginManager().registerEvents(new KillReward(), this);
+        //Reward kill
+
 
 
 
@@ -327,6 +348,12 @@ public class Main extends JavaPlugin implements Listener {
         return config5;
     }
     //cooldown_enderpearl
+
+    //Reward kill
+    public FileConfiguration getKillRward(){
+        return config6;
+    }
+    //Reward kill
 
 
     @Override

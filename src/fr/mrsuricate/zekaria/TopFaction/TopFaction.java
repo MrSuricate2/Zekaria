@@ -33,9 +33,13 @@ public class TopFaction extends BukkitRunnable implements CommandExecutor, Liste
     public static String top1name;
     public static String top2name;
     public static String top3name;
+    public static String top4name;
+    public static String top5name;
     public static double top1;
     public static double top2;
     public static double top3;
+    public static double top4;
+    public static double top5;
 
     private boolean setupEconomy() {
         RegisteredServiceProvider<Economy> economyProvider = Main.getInstance().getServer().getServicesManager().getRegistration(Economy.class);
@@ -180,39 +184,68 @@ public class TopFaction extends BukkitRunnable implements CommandExecutor, Liste
             }
             Arrays.sort(moneyf);
             int longueru = moneyf.length;
-            this.top1 = moneyf[longueru-1];
-            this.top2 = moneyf[longueru-2];
-            this.top3 = moneyf[longueru-3];
+            if(longueru >= 1){
+                this.top1 = moneyf[longueru-1];
+            }
+            if(longueru >= 2){
+                this.top2 = moneyf[longueru-2];
+            }
+            if(longueru >= 3){
+                this.top3 = moneyf[longueru-3];
+            }
+            if(longueru >= 4){
+                this.top4 = moneyf[longueru-4];
+            }
+            if(longueru >= 5){
+                this.top5 = moneyf[longueru-5];
+            }
             i=0;
             while(i != test2.length){
                 int intnamep = test2[i].lastIndexOf("=");
                 String faction = test2[i].substring(0, intnamep);
                 String money = test2[i].substring(intnamep+1);
-
-                if(Double.parseDouble(money) == top1){
-                    top1name = faction;
+                if(longueru >= 1){
+                    if(Double.parseDouble(money) == top1){
+                        top1name = faction;
+                    }
                 }
-                if(Double.parseDouble(money) == top2){
-                    top2name = faction;
+                if(longueru >= 2){
+                    if(Double.parseDouble(money) == top2){
+                        top2name = faction;
+                    }
                 }
-                if(Double.parseDouble(money) == top3){
-                    top3name = faction;
+                if(longueru >= 3){
+                    if(Double.parseDouble(money) == top3){
+                        top3name = faction;
+                    }
+                }
+                if(longueru >= 4){
+                    if(Double.parseDouble(money) == top4){
+                        top4name = faction;
+                    }
+                }
+                if(longueru >= 5){
+                    if(Double.parseDouble(money) == top5){
+                        top5name = faction;
+                    }
                 }
                 i++;
             }
         }
         baltop.clear();
         Plugin plugin = Main.getInstance();
-        Location where = new Location(Bukkit.getWorld("world"), 171.5,76,234.5);
+        Location where = new Location(Bukkit.getWorld("world"), 171.5,77,234.5);
         Hologram hologram = HologramsAPI.createHologram(plugin,where);
-        DecimalFormat df = new DecimalFormat("0.00");
-        TextLine textLine0 = hologram.insertTextLine(0 ,"§a§m---------§a Top 3 faction §a§m---------" );
+        DecimalFormat df = new DecimalFormat("###,###,###.##");
+        TextLine textLine0 = hologram.insertTextLine(0 ,"§a§m---------§a Top 5 faction §a§m---------" );
         TextLine textLine1 = hologram.insertTextLine(1 ,"" );
-        TextLine textLine2 = hologram.insertTextLine(2 ,"§6Top 1 : §b"+ this.top1name + "§6 avec §d"+ df.format(this.top1) + " ZekaCoins" );
-        TextLine textLine3 = hologram.insertTextLine(3 ,"§6Top 2 : §b"+ this.top2name + "§6 avec §d"+ df.format(this.top2) + " ZekaCoins" );
-        TextLine textLine4 = hologram.insertTextLine(4 ,"§6Top 3 : §b"+ this.top3name + "§6 avec §d"+ df.format(this.top3) + " ZekaCoins" );
-        TextLine textLine5 = hologram.insertTextLine(5 ,"" );
-        TextLine textLine6 = hologram.insertTextLine(6 ,"§a§m-------------------------------" );
+        TextLine textLine2 = hologram.insertTextLine(2 ,"§6Top 1 : §b"+ this.top1name + "§6 avec §d"+ df.format(this.top1).replace(" "," ") + " ZekaCoins" );
+        TextLine textLine3 = hologram.insertTextLine(3 ,"§6Top 2 : §b"+ this.top2name + "§6 avec §d"+ df.format(this.top2).replace(" "," ") + " ZekaCoins" );
+        TextLine textLine4 = hologram.insertTextLine(4 ,"§6Top 3 : §b"+ this.top3name + "§6 avec §d"+ df.format(this.top3).replace(" "," ") + " ZekaCoins" );
+        TextLine textLine5 = hologram.insertTextLine(5 ,"§6Top 4 : §b"+ this.top4name + "§6 avec §d"+ df.format(this.top4).replace(" "," ") + " ZekaCoins" );
+        TextLine textLine6 = hologram.insertTextLine(6 ,"§6Top 5 : §b"+ this.top5name + "§6 avec §d"+ df.format(this.top5).replace(" "," ") + " ZekaCoins" );
+        TextLine textLine7 = hologram.insertTextLine(7 ,"" );
+        TextLine textLine8 = hologram.insertTextLine(8 ,"§a§m-------------------------------" );
         for (Hologram holograms : HologramsAPI.getHolograms(plugin)) {
             deleteIfOld(holograms);
         }
