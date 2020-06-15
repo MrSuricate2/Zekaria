@@ -104,7 +104,7 @@ public class buykit implements CommandExecutor, Listener {
                 switch (current.getType()) {
                     case TNT:
                         if (balance >= 200000.0D) {
-                            Bukkit.dispatchCommand((CommandSender)Bukkit.getConsoleSender(), "manuaddp " + p.getName() + " essentials.kits.Pillage");
+                            Bukkit.dispatchCommand((CommandSender)Bukkit.getConsoleSender(), "lp user " + p.getName() + " permission set essentials.kits.Pillage");
                             economy.withdrawPlayer(p, 200000.0D);
                             p.closeInventory();
                             p.sendMessage("§8[§4Zekaria§8] §6Vous avez désormais accès au kit Pillage");
@@ -115,7 +115,7 @@ public class buykit implements CommandExecutor, Listener {
                         break;
                     case POTION:
                         if (balance >= 200000.0D) {
-                            Bukkit.dispatchCommand((CommandSender)Bukkit.getConsoleSender(), "manuaddp " + p.getName() + " essentials.kits.Potion");
+                            Bukkit.dispatchCommand((CommandSender)Bukkit.getConsoleSender(), "lp user " + p.getName() + " permission set essentials.kits.Potion");
                             economy.withdrawPlayer(p, 200000.0D);
                             p.closeInventory();
                             p.sendMessage("§8[§4Zekaria§8] §6Vous avez désormais accès au kit Potion");
@@ -126,7 +126,7 @@ public class buykit implements CommandExecutor, Listener {
                         break;
                     case OBSIDIAN:
                         if (balance >= 200000.0D) {
-                            Bukkit.dispatchCommand((CommandSender)Bukkit.getConsoleSender(), "manuaddp " + p.getName() + " essentials.kits.Construction");
+                            Bukkit.dispatchCommand((CommandSender)Bukkit.getConsoleSender(), "lp user " + p.getName() + " permission set essentials.kits.Construction");
                             economy.withdrawPlayer(p, 200000.0D);
                             p.closeInventory();
                             p.sendMessage("§8[§4Zekaria§8] §6Vous avez désormais accès au kit Construction");
@@ -137,7 +137,7 @@ public class buykit implements CommandExecutor, Listener {
                         break;
                     case ENCHANTED_BOOK:
                         if (balance >= 200000.0D) {
-                            Bukkit.dispatchCommand((CommandSender)Bukkit.getConsoleSender(), "manuaddp " + p.getName() + " essentials.kits.Enchanteur");
+                            Bukkit.dispatchCommand((CommandSender)Bukkit.getConsoleSender(), "lp user " + p.getName() + " permission set essentials.kits.Enchanteur");
                             economy.withdrawPlayer(p, 200000.0D);
                             p.closeInventory();
                             p.sendMessage("§8[§4Zekaria§8] §6Vous avez désormais accès au kit Enchanteur");
