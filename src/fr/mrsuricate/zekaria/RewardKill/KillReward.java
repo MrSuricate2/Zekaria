@@ -3,22 +3,26 @@ package fr.mrsuricate.zekaria.RewardKill;
 import com.bgsoftware.wildstacker.api.WildStackerAPI;
 import fr.mrsuricate.zekaria.Main;
 import net.milkbowl.vault.economy.Economy;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.RegisteredServiceProvider;
-
-import java.io.File;
+import org.bukkit.scheduler.BukkitRunnable;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Random;
 
-public class KillReward implements Listener {
+import static org.bukkit.Bukkit.getServer;
+
+public class KillReward extends BukkitRunnable implements Listener {
 
     public static Economy economy = null;
+    public short tempo = 3;
+    public static HashMap<String, Double> map = new HashMap<>();
 
     private boolean setupEconomy() {
         RegisteredServiceProvider<Economy> economyProvider = Main.getInstance().getServer().getServicesManager().getRegistration(Economy.class);
@@ -59,7 +63,14 @@ public class KillReward implements Listener {
                 money = money/100;
                 money = money * nbr;
                 economy.depositPlayer(p,money);
-                p.sendMessage("Vous avez gagnez "+ money+ " ZekaCoins pour avoir tuer " + nbr + " " + nameEntity + ".");
+                if(!this.map.containsKey(p.getName())){
+                    this.map.put(p.getName(),money);
+                } else {
+                    double mon = this.map.get(p.getName());
+                    mon = mon + money;
+                    this.map.remove(p.getName());
+                    this.map.put(p.getName(), mon);
+                }
             }
 
         }
@@ -138,4 +149,28 @@ public class KillReward implements Listener {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void run() {
+        if(setupEconomy()){
+            tempo --;
+            if (tempo == 0){
+                Player[] arrayOfPlayer;
+                byte b2;
+                int j;
+                for (j = (arrayOfPlayer = getServer().getOnlinePlayers().toArray(new Player[0])).length, b2 = 0; b2 < j; ) {
+                    Player p = arrayOfPlayer[b2];
+                    String name = p.getName();
+                    if(this.map.containsKey(name)){
+                        double money = map.get(name);
+                        p.sendMessage("§aVous avez gagnez §b"+ money + " ZekaCoins §apour tout les mobs tuer en 30 secondes.");
+                        this.map.clear();
+                    }
+                    b2++;
+                }
+                tempo = 3;
+            }
+        }
+    }
+
 }

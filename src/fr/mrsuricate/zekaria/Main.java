@@ -276,6 +276,7 @@ public class Main extends JavaPlugin implements Listener {
         }
         this.config6 = YamlConfiguration.loadConfiguration(Killr);
         Bukkit.getPluginManager().registerEvents(new KillReward(), this);
+        new KillReward().runTaskTimer(Main.getInstance(),0L, 200L);
         //Reward kill
 
 

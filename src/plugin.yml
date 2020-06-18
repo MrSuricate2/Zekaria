@@ -19,10 +19,6 @@ commands:
       - teamspeak
   site:
     description: Lien vers le site
-  spawners:
-    description: Achat spawner
-    aliases:
-      - spawner
   grades:
     description: Achat grade
   buykits:
