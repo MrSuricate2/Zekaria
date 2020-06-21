@@ -41,7 +41,6 @@ public class Zekaria extends BukkitRunnable implements CommandExecutor {
 
     @Override
     public void run() {
-        System.out.println(this.temps);
         if(this.temps >= 0){
             this.temps --;
             if(temps == 600){
