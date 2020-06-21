@@ -16,17 +16,19 @@ public class StaffChat implements CommandExecutor, Listener {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String msg, String[] args) {
         if(sender instanceof Player && sender.hasPermission("staffchat.use")){
-            if(args.length == 0){
-                sender.sendMessage("§6/sc §aon§7/§coff");
-            }
-            if(args.length == 1){
-                if(args[0].equalsIgnoreCase("on")){
-                    sender.sendMessage("§4Vous entrez dans le StaffChat");
-                    Main.getInstance().map.put(sender.getName(), 1);
+            if (cmd.getName().equalsIgnoreCase("staffchat")){
+                if(args.length == 0){
+                    sender.sendMessage("§6/sc §aon§7/§coff");
                 }
-                if(args[0].equalsIgnoreCase("off")){
-                    sender.sendMessage("§4Vous quittez le StaffChat");
-                    Main.getInstance().map.put(sender.getName(), 0);
+                if(args.length == 1){
+                    if(args[0].equalsIgnoreCase("on")){
+                        sender.sendMessage("§4Vous entrez dans le StaffChat");
+                        Main.getInstance().map.put(sender.getName(), 1);
+                    }
+                    if(args[0].equalsIgnoreCase("off")){
+                        sender.sendMessage("§4Vous quittez le StaffChat");
+                        Main.getInstance().map.put(sender.getName(), 0);
+                    }
                 }
             }
         }

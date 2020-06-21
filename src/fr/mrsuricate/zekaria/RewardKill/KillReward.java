@@ -50,29 +50,37 @@ public class KillReward extends BukkitRunnable implements Listener {
                     nameEntity = "Rabbit";
                 }
                 int nbr = WildStackerAPI.getEntityAmount(e.getEntity());
-                Double dmin = (double) Main.getInstance().getKillRward().get(nameEntity+".min")*100;
-                Double dmax = (double) Main.getInstance().getKillRward().get(nameEntity+".max")*100;
-                int min = dmin.intValue();
-                int max = dmax.intValue();
-                Player p = e.getEntity().getKiller();
-                int i = 0;
-                Random random = new Random();
-                int nb;
-                nb = min+random.nextInt(max-min);
-                double money = nb;
-                money = money/100;
-                money = money * nbr;
-                economy.depositPlayer(p,money);
-                if(!this.map.containsKey(p.getName())){
-                    this.map.put(p.getName(),money);
+                if(Main.getInstance().getKillRward().get(nameEntity+".min") != null){
+                    Double dmin = (double) Main.getInstance().getKillRward().get(nameEntity+".min")*100;
+                    Double dmax = (double) Main.getInstance().getKillRward().get(nameEntity+".max")*100;
+                    int min = dmin.intValue();
+                    int max = dmax.intValue();
+                    Player p = e.getEntity().getKiller();
+                    int i = 0;
+                    Random random = new Random();
+                    int nb;
+                    nb = min+random.nextInt(max-min);
+                    double money = nb;
+                    money = money/100;
+                    money = money * nbr;
+                    economy.depositPlayer(p,money);
+                    if(!this.map.containsKey(p.getName())){
+                        this.map.put(p.getName(),money);
+                    } else {
+                        double mon = this.map.get(p.getName());
+                        mon = mon + money;
+                        this.map.remove(p.getName());
+                        this.map.put(p.getName(), mon);
+                    }
                 } else {
-                    double mon = this.map.get(p.getName());
-                    mon = mon + money;
-                    this.map.remove(p.getName());
-                    this.map.put(p.getName(), mon);
+                    System.out.println("Kill rewards ajouter le "+ nameEntity);
+                    System.out.println("Kill rewards ajouter le "+ nameEntity);
+                    System.out.println("Kill rewards ajouter le "+ nameEntity);
+                    System.out.println("Kill rewards ajouter le "+ nameEntity);
+                    System.out.println("Kill rewards ajouter le "+ nameEntity);
+                    System.out.println("Kill rewards ajouter le "+ nameEntity);
                 }
             }
-
         }
     }
 

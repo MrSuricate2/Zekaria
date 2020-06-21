@@ -1,8 +1,6 @@
 package fr.mrsuricate.zekaria;
 
-import com.bgsoftware.wildstacker.api.WildStackerAPI;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
-import com.sun.applet2.AppletParameters;
 import fr.mrsuricate.zekaria.ChatSide.ChatLock;
 import fr.mrsuricate.zekaria.ChatSide.ClearChat;
 import fr.mrsuricate.zekaria.CoinFlip.commands.CoinFlipCommand;
@@ -135,12 +133,7 @@ public class Main extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         saveDefaultConfig();
-        if (!Bukkit.getPluginManager().isPluginEnabled("HolographicDisplays")) {
-            getLogger().severe("*** HolographicDisplays is not installed or not enabled. ***");
-            getLogger().severe("*** This plugin will be disabled. ***");
-            this.setEnabled(false);
-            return;
-        }
+        useHolographicDisplays = Bukkit.getPluginManager().isPluginEnabled("HolographicDisplays");
         PluginManager pm = getServer().getPluginManager();
         getCommand("warp").setExecutor(new Warp());
         getServer().getPluginManager().registerEvents(new Warp(), this);

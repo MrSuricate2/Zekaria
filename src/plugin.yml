@@ -2,8 +2,8 @@ name: Zekaria
 version: 1.0.0
 authors: [Neiyko,MrSuricate]
 main: fr.mrsuricate.zekaria.Main
-depends: [Vault, WordGuard, WorldEdit, MassiveCore, Factions]
-softdepend: [SkinRestorer,HolographicDisplays]
+depends: [Vault, WordGuard, WorldEdit, MassiveCore, Factions,SkinRestorer,HolographicDisplays, Citizens, WildStacker]
+api-version: 1.13
 commands:
   alert:
     description: Broadcast custom
@@ -15,8 +15,7 @@ commands:
     description: Lien discord
   ts:
     description: Lien ts
-    aliases:
-      - teamspeak
+    aliases: teamspeak
   site:
     description: Lien vers le site
   grades:
@@ -26,8 +25,7 @@ commands:
   moderation:
     description: Interface de moderation
     permission: moderation.mod
-    aliases:
-      - mod
+    aliases: mod
   report:
     description: Commande de report
   coinflip:
@@ -38,18 +36,15 @@ commands:
   giveall:
     description: Commande faite pour le giveall
     permission: giveall.use
-    aliases:
-      - ga
+    aliases: ga
   clearchat:
     description: Commande clear chat
     permission: clearchat.use
-    aliases:
-      - cc
+    aliases: cc
   chatlock:
     description: Commande lock chat
     permission: lockchat.use
-    aliases:
-      - cl
+    aliases: cl
   staffchat:
     permission: staffchat.use
     aliases: sc
@@ -68,7 +63,6 @@ commands:
       - lc
   rules:
     description: Réglement du serveur
-    aliases:
-      - rule
+    aliases: rule
   faction:
     description: Donne le top faction

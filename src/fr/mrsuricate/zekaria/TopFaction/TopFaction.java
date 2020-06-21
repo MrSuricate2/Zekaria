@@ -119,12 +119,12 @@ public class TopFaction extends BukkitRunnable implements CommandExecutor, Liste
                                 }
                                 i++;
                             }
-                            DecimalFormat df = new DecimalFormat("0.00");
+                            DecimalFormat df = new DecimalFormat("###,###,###.##");
                             sender.sendMessage("§a§m---------§a Top 3 faction §a§m---------");
                             sender.sendMessage("");
-                            sender.sendMessage("§6Top 1 : §b"+ top1name + "§6 avec §d"+ df.format(this.top1) + " ZekaCoins");
-                            sender.sendMessage("§6Top 2 : §b"+ top2name + "§6 avec §d"+ df.format(this.top2) + " ZekaCoins");
-                            sender.sendMessage("§6Top 3 : §b"+ top3name + "§6 avec §d"+ df.format(this.top3) + " ZekaCoins");
+                            sender.sendMessage("§6Top 1 : §b"+ top1name + "§6 avec §d"+ df.format(this.top1).replace(","," ") + " ZekaCoins");
+                            sender.sendMessage("§6Top 2 : §b"+ top2name + "§6 avec §d"+ df.format(this.top2).replace(","," ") + " ZekaCoins");
+                            sender.sendMessage("§6Top 3 : §b"+ top3name + "§6 avec §d"+ df.format(this.top3).replace(","," ") + " ZekaCoins");
                             sender.sendMessage("");
                             sender.sendMessage("§a§m-------------------------------");
                         }
