@@ -66,3 +66,6 @@ commands:
     aliases: rule
   faction:
     description: Donne le top faction
+  zekaria:
+    description: reload ou restart le serveur
+    permission: zekaria.use

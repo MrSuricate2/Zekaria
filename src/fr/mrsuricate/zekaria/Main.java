@@ -272,6 +272,8 @@ public class Main extends JavaPlugin implements Listener {
         new KillReward().runTaskTimer(Main.getInstance(),0L, 200L);
         //Reward kill
 
+        getCommand("zekaria").setExecutor(new Zekaria());
+        new Zekaria().runTaskTimer(Main.getInstance(),0L, 20L);
 
 
 
