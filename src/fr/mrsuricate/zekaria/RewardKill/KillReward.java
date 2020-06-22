@@ -12,6 +12,7 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.scheduler.BukkitRunnable;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -170,7 +171,8 @@ public class KillReward extends BukkitRunnable implements Listener {
                     String name = p.getName();
                     if(this.map.containsKey(name)){
                         double money = map.get(name);
-                        p.sendMessage("§aVous avez gagnez §b"+ money + " ZekaCoins §apour tout les mobs tuer en 30 secondes.");
+                        DecimalFormat df = new DecimalFormat("###.##");
+                        p.sendMessage("§aVous avez gagnez §b"+ df.format(money) + " ZekaCoins §apour tout les mobs tuer en 30 secondes.");
                         this.map.clear();
                     }
                     b2++;
