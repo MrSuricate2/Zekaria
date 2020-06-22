@@ -11,20 +11,19 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.util.Arrays;
+import java.util.HashMap;
+
 public class PlayerManager {
 
     private Player player;
-    private ItemStack[] items = new ItemStack[40];
-    private boolean vanished;
+    private static HashMap<String, ItemStack[]> inventaire = new HashMap<String, ItemStack[]>();
 
     public PlayerManager(Player player){
         this.player = player;
-        vanished = false;
     }
 
     public void init(){
-        Main.getInstance().players.put(player.getUniqueId(), this);
-        Main.getInstance().moderateurs.add(player.getUniqueId());
         player.sendMessage("§aVous êtes à présent en mode modération");
         saveInventory();
         player.setAllowFlight(true);
@@ -49,14 +48,12 @@ public class PlayerManager {
     }
 
     public void destroy(){
-        Main.getInstance().players.remove(player.getUniqueId());
-        Main.getInstance().moderateurs.remove(player.getUniqueId());
         player.getInventory().clear();
         player.sendMessage("§cVous n'êtes maintenant plus en mode modération");
-        giveInventory();
+        giveInventory(player.getName());
         player.setAllowFlight(false);
         player.setFlying(false);
-        setVanished(false);
+        setVanished();
         if(player.getGameMode() == GameMode.SPECTATOR){
             player.setGameMode(GameMode.SURVIVAL);
         }
@@ -65,25 +62,8 @@ public class PlayerManager {
         }
     }
 
-    public static PlayerManager getFromPlayer(Player player){
-        return Main.getInstance().players.get(player.getUniqueId());
-    }
-
-    public static boolean isInModerationMod(Player player){
-        return Main.getInstance().moderateurs.contains(player.getUniqueId());
-    }
-
-    public ItemStack[] getItems() {
-        return items;
-    }
-
-    public boolean isVanished() {
-        return vanished;
-    }
-
-    public void setVanished(boolean vanished){
-        this.vanished = vanished;
-        if(vanished){
+    public void setVanished(){
+        if(Main.getInstance().vanish.containsKey(player.getName())){
             Bukkit.getOnlinePlayers().forEach(players -> players.hidePlayer(player));
         } else {
             Bukkit.getOnlinePlayers().forEach(players -> players.showPlayer(player));
@@ -91,6 +71,8 @@ public class PlayerManager {
     }
 
     public void saveInventory(){
+        ItemStack[] items = new ItemStack[40];
+
         for(int slot = 0; slot < 36; slot++){
             ItemStack item = player.getInventory().getItem(slot);
             if(item != null){
@@ -108,21 +90,22 @@ public class PlayerManager {
         player.getInventory().setChestplate(null);
         player.getInventory().setLeggings(null);
         player.getInventory().setBoots(null);
+        inventaire.put(player.getName(), items);
     }
 
-    public void giveInventory(){
-        player.getInventory().clear();
-
+    public void giveInventory(String name){
+        ItemStack[] it = inventaire.get(name);
         for(int slot = 0; slot < 36; slot++){
-            ItemStack item = items[slot];
+            ItemStack item = it[slot];
             if(item != null){
                 player.getInventory().setItem(slot, item);
             }
         }
 
-        player.getInventory().setHelmet(items[36]);
-        player.getInventory().setChestplate(items[37]);
-        player.getInventory().setLeggings(items[38]);
-        player.getInventory().setBoots(items[39]);
+        player.getInventory().setHelmet(it[36]);
+        player.getInventory().setChestplate(it[37]);
+        player.getInventory().setLeggings(it[38]);
+        player.getInventory().setBoots(it[39]);
+        inventaire.remove(name);
     }
 }

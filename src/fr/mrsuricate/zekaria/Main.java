@@ -72,9 +72,12 @@ public class Main extends JavaPlugin implements Listener {
     public static HashMap<String, Integer> map = new HashMap<>();
     //StaffChat
 
-    //report
+    //modération
+    public static HashMap<String, Integer> modlist = new HashMap<>();
+    public static HashMap<String, Integer> freeze = new HashMap<>();
+    public static HashMap<String, Integer> vanish = new HashMap<>();
     public static String reportgetname;
-    //report
+    //modération
 
     //enchere
     public static int quantité;
@@ -123,11 +126,6 @@ public class Main extends JavaPlugin implements Listener {
     public static FileConfiguration config6;
     //Reward kill
 
-
-    public ArrayList<UUID> moderateurs = new ArrayList<>();
-    public HashMap<UUID, PlayerManager> players = new HashMap<>();
-    public HashMap<UUID, Location> freezedPlayers = new HashMap<>();
-    public boolean isFreeze(Player player) {return freezedPlayers.containsKey(player.getUniqueId());}
     public static boolean chatlock = false;
 
     @Override
@@ -147,14 +145,17 @@ public class Main extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new buykit(), this);
         getServer().getPluginManager().registerEvents(new DeathMoney(), this);
         //TODO getServer().getPluginManager().registerEvents(new EffectBlood(), this);
-/*
+
+
+        //modération
         getCommand("moderation").setExecutor(new moderation());
         getCommand("report").setExecutor(new moderation());
         getServer().getPluginManager().registerEvents(new moderation(), this);
         getServer().getPluginManager().registerEvents(new ModCancels(), this);
         getServer().getPluginManager().registerEvents(new ModsItemsInteract(), this);
         getServer().getPluginManager().registerEvents(new PlayerLeave(), this);
-*/
+        //modération
+
         getCommand("giveall").setExecutor(new Giveall());
         //Chat Side
         getCommand("clearchat").setExecutor(new ClearChat());

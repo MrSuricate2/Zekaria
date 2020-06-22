@@ -21,7 +21,6 @@ public class ModsItemsInteract implements Listener {
     @EventHandler
     public void onInteract(PlayerInteractEntityEvent e){
         Player player = e.getPlayer();
-        if(!PlayerManager.isInModerationMod(player)) return;
         if(!(e.getRightClicked() instanceof  Player)) return;
         Player target = (Player) e.getRightClicked();
 
@@ -58,12 +57,12 @@ public class ModsItemsInteract implements Listener {
 
             case PACKED_ICE:
                 if (!target.hasPermission("freeze.bypass")) {
-                    if (Main.getInstance().freezedPlayers.containsKey(target.getUniqueId())) {
-                        Main.getInstance().freezedPlayers.remove(target.getUniqueId());
+                    if (Main.getInstance().freeze.containsKey(target.getName())) {
+                        Main.getInstance().freeze.remove(target.getName());
                         target.sendMessage("§6Vous avez été unfreeze par §b" + player.getName());
                         player.sendMessage("§6Vous avez unfreeze §b" + target.getName());
                     } else {
-                        Main.getInstance().freezedPlayers.put(target.getUniqueId(), target.getLocation());
+                        Main.getInstance().freeze.put(target.getName(), 1);
                         target.sendMessage("");
                         target.sendMessage("§6Vous avez été freeze par §b" + player.getName());
                         target.sendMessage("§6Merci de venir sur discord : §bhttps://discord.gg/knXYnBG");
@@ -87,7 +86,6 @@ public class ModsItemsInteract implements Listener {
     @EventHandler
     public void onInteract(PlayerInteractEvent e){
         Player player = e.getPlayer();
-        if(!PlayerManager.isInModerationMod(player)) return;
         if(e.getAction() != Action.RIGHT_CLICK_BLOCK && e.getAction() != Action.RIGHT_CLICK_AIR) return;
 
         switch(player.getInventory().getItemInHand().getType()){
@@ -101,34 +99,31 @@ public class ModsItemsInteract implements Listener {
                     player.sendMessage("§cIl n'y a aucun joueur sur lequel vous téléporter.");
                     return;
                 }
-
-                Player target = list.get(new Random().nextInt(list.size()));
+                int i = list.size();
+                if(i == 0){
+                    i = list.size();
+                }
+                Player target = list.get(i);
                 player.teleport(target.getLocation());
                 player.sendMessage("§aVous avez été téléporté à §e" + target.getName());
+                i--;
                 break;
 
             //Vanish
 
             case GLASS:
-                PlayerManager mod = PlayerManager.getFromPlayer(player);
-                mod.setVanished(!mod.isVanished());
-                player.sendMessage(mod.isVanished() ? "§avous êtes à présent invisible !" : "§bVous êtes à présent visible !");
+                if(Main.getInstance().vanish.containsKey(player.getName())){
+                    Main.getInstance().vanish.remove(player.getName());
+                    new PlayerManager(player).setVanished();
+                    player.sendMessage("§bVous êtes à présent visible !");
+                } else {
+                    Main.getInstance().vanish.put(player.getName(), 1);
+                    new PlayerManager(player).setVanished();
+                    player.sendMessage("§avous êtes à présent invisible !");
+                }
                 break;
 
             default: break;
-        }
-    }
-
-    @EventHandler
-    public void onJoin(PlayerJoinEvent e){
-        Player player = e.getPlayer();
-        for(Player players : Bukkit.getOnlinePlayers()){
-            if(PlayerManager.isInModerationMod(players)){
-                PlayerManager pm = PlayerManager.getFromPlayer(players);
-                if(pm.isVanished()){
-                    player.hidePlayer(players);
-                }
-            }
         }
     }
 }
