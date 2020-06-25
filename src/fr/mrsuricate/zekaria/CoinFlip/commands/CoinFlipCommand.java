@@ -3,8 +3,11 @@ package fr.mrsuricate.zekaria.CoinFlip.commands;
 import fr.mrsuricate.zekaria.CoinFlip.utilz.Chat;
 import fr.mrsuricate.zekaria.CoinFlip.utilz.CoinManager;
 import fr.mrsuricate.zekaria.CoinFlip.utilz.InventoryManager;
+import fr.mrsuricate.zekaria.CoinFlip.utilz.StatsManager;
 import fr.mrsuricate.zekaria.Main;
 import java.text.DecimalFormat;
+
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -52,7 +55,9 @@ public class CoinFlipCommand implements CommandExecutor {
                     p.sendMessage(Chat.color(Main.getInstance().getConfig().getString("Messages.NotInBet")));
                 } else {
                     p.sendMessage(Chat.color(Main.getInstance().getConfig().getString("Messages.CanceledHelp")));
-                    return false;
+                }
+                if(args[0].equalsIgnoreCase("stat")){
+                    StatsManager.toString(p);
                 }
             }
             if (args.length == 2)

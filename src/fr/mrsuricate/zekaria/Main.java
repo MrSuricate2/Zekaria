@@ -5,7 +5,7 @@ import fr.mrsuricate.zekaria.ChatSide.ChatLock;
 import fr.mrsuricate.zekaria.ChatSide.ClearChat;
 import fr.mrsuricate.zekaria.CoinFlip.commands.CoinFlipCommand;
 import fr.mrsuricate.zekaria.CoinFlip.events.ClickEvent;
-import fr.mrsuricate.zekaria.CoinFlip.events.PlayerQuitEvent;
+import fr.mrsuricate.zekaria.CoinFlip.events.PlayerEvent;
 import fr.mrsuricate.zekaria.CoinFlip.utilz.*;
 import fr.mrsuricate.zekaria.Cooldownenderpearl.CooldownEnderPearl;
 import fr.mrsuricate.zekaria.CustomEnchant.Enchant;
@@ -27,7 +27,6 @@ import fr.mrsuricate.zekaria.giveall.Giveall;
 import fr.mrsuricate.zekaria.moderation.*;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -37,15 +36,12 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.material.MaterialData;
-import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.UUID;
 
 public class Main extends JavaPlugin implements Listener {
 
@@ -53,6 +49,8 @@ public class Main extends JavaPlugin implements Listener {
         return JavaPlugin.getPlugin(Main.class);
     }
     //cf
+    public static File cf;
+    public static FileConfiguration config7;
     private CoinManager coins;
     private StatsManager stats;
     private InventoryManager menu;
@@ -168,6 +166,15 @@ public class Main extends JavaPlugin implements Listener {
         ItemStackUtils.loadUtils();
         //trade
         //cf
+        this.cf = new File(getDataFolder() + File.separator + "CoinFlip.yml");
+        if(!cf.exists()){
+            try{
+                cf.createNewFile();
+            }catch(IOException e){
+                e.printStackTrace();
+            }
+        }
+        this.config7 = YamlConfiguration.loadConfiguration(cf);
         this.broadcast = new BroadcastManager();
         this.stats = new StatsManager();
         this.coins = new CoinManager();
@@ -175,7 +182,7 @@ public class Main extends JavaPlugin implements Listener {
         this.animation = new AnimationManager();
         getCommand("coinflip").setExecutor(new CoinFlipCommand());
         getServer().getPluginManager().registerEvents(new ClickEvent(), this);
-        getServer().getPluginManager().registerEvents(new PlayerQuitEvent(), this);
+        getServer().getPluginManager().registerEvents(new PlayerEvent(), this);
         setupEconomy();
         //cf
 
@@ -281,6 +288,10 @@ public class Main extends JavaPlugin implements Listener {
     }
 
     //cf
+    public FileConfiguration getcf(){
+        return config7;
+    }
+
     public BroadcastManager getBroadcast() {
         return this.broadcast;
     }
