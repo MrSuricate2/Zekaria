@@ -32,14 +32,32 @@ public class DécoCombats implements Listener {
 
     @EventHandler
     public void onEntreringCombats(EntityDamageByEntityEvent e){
+        boolean isCitizensNPC = e.getEntity().hasMetadata("NPC");
         if (e.getEntity() instanceof Player){
             if(e.getDamager() instanceof  Player) {
-                this.takedamage = ((Player) e.getEntity()).getPlayer();
-                this.causedamage = (Player) e.getDamager();
-                MPlayer mptd = MPlayer.get(this.takedamage);
-                MPlayer mpcd = MPlayer.get(this.causedamage);
-                if (mptd.getFactionName().equalsIgnoreCase(mpcd.getFactionName())) {
-                    if(!mptd.hasFaction() || !mpcd.hasFaction()){
+                if(!isCitizensNPC){
+                    this.takedamage = ((Player) e.getEntity()).getPlayer();
+                    this.causedamage = (Player) e.getDamager();
+                    MPlayer mptd = MPlayer.get(this.takedamage);
+                    MPlayer mpcd = MPlayer.get(this.causedamage);
+                    if (mptd.getFactionName().equalsIgnoreCase(mpcd.getFactionName())) {
+                        if(!mptd.hasFaction() || !mpcd.hasFaction()){
+                            Main.getInstance().getDéco_cobatsConfig().set(this.takedamage.getName(),10);
+                            Main.getInstance().getDéco_cobatsConfig().set(this.causedamage.getName(),10);
+                            try{
+                                Main.getInstance().getDéco_cobatsConfig().save(Main.getInstance().Déco_Combats);
+                            } catch (IOException er){
+                                er.printStackTrace();
+                            }
+                        } else {
+                            return;
+                        }
+                    }
+                    if (takedamage.isOp() || causedamage.isOp()) {
+                        return;
+                    }
+                    StateFlag.State container = Main.getInstance().WorldGuard.getRegionManager(takedamage.getWorld()).getApplicableRegions(takedamage.getLocation()).getFlag(DefaultFlag.PVP);
+                    if (container == null) {
                         Main.getInstance().getDéco_cobatsConfig().set(this.takedamage.getName(),10);
                         Main.getInstance().getDéco_cobatsConfig().set(this.causedamage.getName(),10);
                         try{
@@ -47,21 +65,6 @@ public class DécoCombats implements Listener {
                         } catch (IOException er){
                             er.printStackTrace();
                         }
-                    } else {
-                        return;
-                    }
-                }
-                if (takedamage.isOp() || causedamage.isOp()) {
-                    return;
-                }
-                StateFlag.State container = Main.getInstance().WorldGuard.getRegionManager(takedamage.getWorld()).getApplicableRegions(takedamage.getLocation()).getFlag(DefaultFlag.PVP);
-                if (container == null) {
-                    Main.getInstance().getDéco_cobatsConfig().set(this.takedamage.getName(),10);
-                    Main.getInstance().getDéco_cobatsConfig().set(this.causedamage.getName(),10);
-                    try{
-                        Main.getInstance().getDéco_cobatsConfig().save(Main.getInstance().Déco_Combats);
-                    } catch (IOException er){
-                        er.printStackTrace();
                     }
                 }
             }
