@@ -132,7 +132,6 @@ public class Main extends JavaPlugin implements Listener {
     public void onEnable() {
         saveDefaultConfig();
         useHolographicDisplays = Bukkit.getPluginManager().isPluginEnabled("HolographicDisplays");
-        PluginManager pm = getServer().getPluginManager();
         getCommand("warp").setExecutor(new Warp());
         getServer().getPluginManager().registerEvents(new Warp(), this);
         getCommand("alert").setExecutor(new alert());

@@ -21,6 +21,7 @@ public class ModsItemsInteract implements Listener {
     @EventHandler
     public void onInteract(PlayerInteractEntityEvent e){
         Player player = e.getPlayer();
+        boolean isCitizensNPC = e.getRightClicked().hasMetadata("NPC");
         if(Main.getInstance().modlist.containsKey(player.getName())){
             if(!(e.getRightClicked() instanceof  Player)) return;
             Player target = (Player) e.getRightClicked();
@@ -77,7 +78,9 @@ public class ModsItemsInteract implements Listener {
 
                 //Kill player
                 case BLAZE_ROD:
-                    target.damage(target.getHealth());
+                    if(!isCitizensNPC){
+                        target.damage(target.getHealth());
+                    }
                     break;
 
                 default: break;
