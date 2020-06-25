@@ -53,8 +53,6 @@ public class CoinFlipCommand implements CommandExecutor {
                         return false;
                     }
                     p.sendMessage(Chat.color(Main.getInstance().getConfig().getString("Messages.NotInBet")));
-                } else {
-                    p.sendMessage(Chat.color(Main.getInstance().getConfig().getString("Messages.CanceledHelp")));
                 }
                 if(args[0].equalsIgnoreCase("stat")){
                     StatsManager.toString(p);
