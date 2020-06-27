@@ -1,11 +1,14 @@
 package fr.mrsuricate.zekaria.commands;
 
+import fr.mrsuricate.zekaria.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import java.io.IOException;
 
 import static org.bukkit.Bukkit.getServer;
 
@@ -15,25 +18,59 @@ public class Zekaria extends BukkitRunnable implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String msg, String[] args) {
-        if(cmd.getName().equalsIgnoreCase("zekaria")){
-            if (args.length == 1){
-                if(args[0].equalsIgnoreCase("restart")){
-                    sender.sendMessage("Merci de priciser dans combient de temps (en secondes)");
+        if(sender.hasPermission("zekaria.use")){
+            if(cmd.getName().equalsIgnoreCase("zekaria")){
+                if (args.length == 1){
+                    if(args[0].equalsIgnoreCase("restart")){
+                        sender.sendMessage("Merci de préciser dans combient de temps (en secondes)");
+                    }
                 }
-            }
-            if (args.length == 2){
-                if(args[0].equalsIgnoreCase("restart")){
-                    String tempo = args[1];
-                    int tempos = 0;
-                    try {
-                        tempos = Integer.parseInt(tempo);
-                    } catch(NumberFormatException nfe){
+                if (args.length == 2){
+                    if(args[0].equalsIgnoreCase("restart")){
+                        String tempo = args[1];
+                        int tempos = 0;
+                        try {
+                            tempos = Integer.parseInt(tempo);
+                        } catch(NumberFormatException nfe){
+
+                        }
+                        this.temps = tempos;
 
                     }
-                    this.temps = tempos;
 
                 }
+                if(args.length == 3){
+                    if(args[0].equalsIgnoreCase("potion")){
+                        String name = args[2];
+                        if(args[1].equalsIgnoreCase("NightVision")){
+                            Main.getInstance().getpotion().set(name+".NightVision", true);
+                            try {
+                                Main.getInstance().getpotion().save(Main.getInstance().potion);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        if(args[1].equalsIgnoreCase("Hast")){
+                            Main.getInstance().getpotion().set(name+".Hast", true);
+                            try {
+                                Main.getInstance().getpotion().save(Main.getInstance().potion);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        if(args[1].equalsIgnoreCase("speed")){
+                            Main.getInstance().getpotion().set(name+".speed", true);
+                            try {
+                                Main.getInstance().getpotion().save(Main.getInstance().potion);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }
             }
+        } else {
+            sender.sendMessage("§cDésolé, mais vous n'avez pas la permission d'exécuter cette commande !");
         }
         return false;
     }

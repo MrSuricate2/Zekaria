@@ -24,7 +24,6 @@ commands:
     description: Achat de kit
   moderation:
     description: Interface de moderation
-    permission: moderation.mod
     aliases: mod
   report:
     description: Commande de report
@@ -68,4 +67,3 @@ commands:
     description: Donne le top faction
   zekaria:
     description: reload ou restart le serveur
-    permission: zekaria.use

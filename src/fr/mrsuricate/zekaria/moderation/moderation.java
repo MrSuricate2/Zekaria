@@ -20,113 +20,117 @@ public class moderation implements CommandExecutor, Listener {
     public boolean onCommand(CommandSender sender, Command cmd, String msg, String[] args) {
         Player player = (Player) sender;
         if(sender instanceof Player){
-            if(cmd.getName().equalsIgnoreCase("moderation")){
-                if(Main.getInstance().modlist.containsKey(sender.getName())){
-                    Main.getInstance().modlist.remove(sender.getName());
-                    new PlayerManager(player).destroy();
-                } else {
-                    Main.getInstance().modlist.put(sender.getName(),1);
-                    new PlayerManager(player).init();
-                }
-            }
-
-            if(cmd.getName().equalsIgnoreCase("report")){
-                if(args.length != 1){
-                    player.sendMessage("§4§lMerci de préciser le pseudo d'un joueur");
-                    return false;
+            if(sender.hasPermission("moderation.mod")){
+                if(cmd.getName().equalsIgnoreCase("moderation")){
+                    if(Main.getInstance().modlist.containsKey(sender.getName())){
+                        Main.getInstance().modlist.remove(sender.getName());
+                        new PlayerManager(player).destroy();
+                    } else {
+                        Main.getInstance().modlist.put(sender.getName(),1);
+                        new PlayerManager(player).init();
+                    }
                 }
 
-                String reportedname = args[0];
-                Main.getInstance().reportgetname = args[0];
+                if(cmd.getName().equalsIgnoreCase("report")){
+                    if(args.length != 1){
+                        player.sendMessage("§4§lMerci de préciser le pseudo d'un joueur");
+                        return false;
+                    }
 
-                if(Bukkit.getPlayer(reportedname) == null){
-                    player.sendMessage("§4§lCe joueur n'est pas connécté !");
-                    return false;
+                    String reportedname = args[0];
+                    Main.getInstance().reportgetname = args[0];
+
+                    if(Bukkit.getPlayer(reportedname) == null){
+                        player.sendMessage("§4§lCe joueur n'est pas connécté !");
+                        return false;
+                    }
+
+                    if(Bukkit.getPlayer(reportedname).equals(((Player) sender).getPlayer())){
+                        player.sendMessage("§4§lVous ne pouvez pas vous report !");
+                        return false;
+                    }
+
+
+                    Inventory inv = Bukkit.createInventory(null, 18, "§4Report: §2" + reportedname);
+
+                    //Type de hack
+
+                    //ForceField
+                    ItemStack forcefield = new ItemStack(Material.DIAMOND_SWORD);
+                    ItemMeta forcefieldM = forcefield.getItemMeta();
+                    forcefieldM.setDisplayName("§cForceField");
+                    forcefield.setItemMeta(forcefieldM);
+                    inv.setItem(0, forcefield);
+
+                    //SpamBow
+                    ItemStack spambow = new ItemStack(Material.BOW);
+                    ItemMeta spambowM = spambow.getItemMeta();
+                    spambowM.setDisplayName("§cSpamBow");
+                    spambow.setItemMeta(spambowM);
+                    inv.setItem(1, spambow);
+
+                    //AntiKnockBack
+                    ItemStack antiknockback = new ItemStack(Material.STICK);
+                    ItemMeta antiknockbackM = antiknockback.getItemMeta();
+                    antiknockbackM.setDisplayName("§cAnti-KB");
+                    antiknockback.setItemMeta(antiknockbackM);
+                    inv.setItem(2, antiknockback);
+
+                    //Blink
+                    ItemStack blink = new ItemStack(Material.ENDER_PEARL);
+                    ItemMeta blinkM = blink.getItemMeta();
+                    blinkM.setDisplayName("§cBlink");
+                    blink.setItemMeta(blinkM);
+                    inv.setItem(3, blink);
+
+                    //Spider
+                    ItemStack spider = new ItemStack(Material.SPIDER_EYE);
+                    ItemMeta spiderM = spider.getItemMeta();
+                    spiderM.setDisplayName("§cClimb / Spider");
+                    spider.setItemMeta(spiderM);
+                    inv.setItem(4, spider);
+
+                    //Criticals
+                    ItemStack criticals = new ItemStack(Material.BARRIER);
+                    ItemMeta criticalsM = criticals.getItemMeta();
+                    criticalsM.setDisplayName("§cCriticals");
+                    criticals.setItemMeta(criticalsM);
+                    inv.setItem(5, criticals);
+
+                    //Dolphin
+                    ItemStack dolphin = new ItemStack(Material.PACKED_ICE);
+                    ItemMeta dolphinM = dolphin.getItemMeta();
+                    dolphinM.setDisplayName("§cDolphin");
+                    dolphin.setItemMeta(dolphinM);
+                    inv.setItem(6, dolphin);
+
+                    //Nuker
+                    ItemStack nuker = new ItemStack(Material.TNT);
+                    ItemMeta nukerM = nuker.getItemMeta();
+                    nukerM.setDisplayName("§cNuker");
+                    nuker.setItemMeta(nukerM);
+                    inv.setItem(7, nuker);
+
+                    //Reach
+                    ItemStack reach = new ItemStack(Material.ARROW);
+                    ItemMeta reachM = reach.getItemMeta();
+                    reachM.setDisplayName("§cReach");
+                    reach.setItemMeta(reachM);
+                    inv.setItem(8, reach);
+
+                    //autres
+                    ItemStack other = new ItemStack(Material.CHEST);
+                    ItemMeta otherM = reach.getItemMeta();
+                    otherM.setDisplayName("§cAutres");
+                    other.setItemMeta(otherM);
+                    inv.setItem(9, other);
+
+                    player.openInventory(inv);
+
+                    return true;
                 }
-
-                if(Bukkit.getPlayer(reportedname).equals(((Player) sender).getPlayer())){
-                    player.sendMessage("§4§lVous ne pouvez pas vous report !");
-                    return false;
-                }
-
-
-                Inventory inv = Bukkit.createInventory(null, 18, "§4Report: §2" + reportedname);
-
-                //Type de hack
-
-                //ForceField
-                ItemStack forcefield = new ItemStack(Material.DIAMOND_SWORD);
-                ItemMeta forcefieldM = forcefield.getItemMeta();
-                forcefieldM.setDisplayName("§cForceField");
-                forcefield.setItemMeta(forcefieldM);
-                inv.setItem(0, forcefield);
-
-                //SpamBow
-                ItemStack spambow = new ItemStack(Material.BOW);
-                ItemMeta spambowM = spambow.getItemMeta();
-                spambowM.setDisplayName("§cSpamBow");
-                spambow.setItemMeta(spambowM);
-                inv.setItem(1, spambow);
-
-                //AntiKnockBack
-                ItemStack antiknockback = new ItemStack(Material.STICK);
-                ItemMeta antiknockbackM = antiknockback.getItemMeta();
-                antiknockbackM.setDisplayName("§cAnti-KB");
-                antiknockback.setItemMeta(antiknockbackM);
-                inv.setItem(2, antiknockback);
-
-                //Blink
-                ItemStack blink = new ItemStack(Material.ENDER_PEARL);
-                ItemMeta blinkM = blink.getItemMeta();
-                blinkM.setDisplayName("§cBlink");
-                blink.setItemMeta(blinkM);
-                inv.setItem(3, blink);
-
-                //Spider
-                ItemStack spider = new ItemStack(Material.SPIDER_EYE);
-                ItemMeta spiderM = spider.getItemMeta();
-                spiderM.setDisplayName("§cClimb / Spider");
-                spider.setItemMeta(spiderM);
-                inv.setItem(4, spider);
-
-                //Criticals
-                ItemStack criticals = new ItemStack(Material.BARRIER);
-                ItemMeta criticalsM = criticals.getItemMeta();
-                criticalsM.setDisplayName("§cCriticals");
-                criticals.setItemMeta(criticalsM);
-                inv.setItem(5, criticals);
-
-                //Dolphin
-                ItemStack dolphin = new ItemStack(Material.PACKED_ICE);
-                ItemMeta dolphinM = dolphin.getItemMeta();
-                dolphinM.setDisplayName("§cDolphin");
-                dolphin.setItemMeta(dolphinM);
-                inv.setItem(6, dolphin);
-
-                //Nuker
-                ItemStack nuker = new ItemStack(Material.TNT);
-                ItemMeta nukerM = nuker.getItemMeta();
-                nukerM.setDisplayName("§cNuker");
-                nuker.setItemMeta(nukerM);
-                inv.setItem(7, nuker);
-
-                //Reach
-                ItemStack reach = new ItemStack(Material.ARROW);
-                ItemMeta reachM = reach.getItemMeta();
-                reachM.setDisplayName("§cReach");
-                reach.setItemMeta(reachM);
-                inv.setItem(8, reach);
-
-                //autres
-                ItemStack other = new ItemStack(Material.CHEST);
-                ItemMeta otherM = reach.getItemMeta();
-                otherM.setDisplayName("§cAutres");
-                other.setItemMeta(otherM);
-                inv.setItem(9, other);
-
-                player.openInventory(inv);
-
-                return true;
+            } else {
+                sender.sendMessage("Désolé, mais vous n'avez pas la permission d'exécuter cette commande !");
             }
         }
         return false;
