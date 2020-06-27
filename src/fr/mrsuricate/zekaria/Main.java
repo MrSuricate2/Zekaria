@@ -124,6 +124,11 @@ public class Main extends JavaPlugin implements Listener {
     public static FileConfiguration config6;
     //Reward kill
 
+    //potion
+    public static File potion;
+    public static FileConfiguration config8;
+    //potion
+
     public static boolean chatlock = false;
 
     @Override
@@ -142,6 +147,7 @@ public class Main extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new buykit(), this);
         getServer().getPluginManager().registerEvents(new DeathMoney(), this);
         //TODO getServer().getPluginManager().registerEvents(new EffectBlood(), this);
+
 
 
         //modération
@@ -279,6 +285,16 @@ public class Main extends JavaPlugin implements Listener {
         new KillReward().runTaskTimer(Main.getInstance(),0L, 200L);
         //Reward kill
 
+        this.potion = new File(getDataFolder() + File.separator + "Potion.yml");
+        if(!potion.exists()){
+            try{
+                potion.createNewFile();
+                new KillReward().createFile();
+            }catch(IOException e){
+                e.printStackTrace();
+            }
+        }
+        this.config8 = YamlConfiguration.loadConfiguration(potion);
         getCommand("zekaria").setExecutor(new Zekaria());
         new Zekaria().runTaskTimer(Main.getInstance(),0L, 20L);
 
@@ -361,6 +377,12 @@ public class Main extends JavaPlugin implements Listener {
         return config6;
     }
     //Reward kill
+
+    //potion
+    public FileConfiguration getpotion(){
+        return config8;
+    }
+    //potion
 
 
     @Override

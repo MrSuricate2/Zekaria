@@ -18,5 +18,13 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Spigot" level="project" />
     <orderEntry type="library" name="Vault" level="project" />
+    <orderEntry type="library" name="SkinsRestorer" level="project" />
+    <orderEntry type="library" name="Citizens" level="project" />
+    <orderEntry type="library" name="Factions" level="project" />
+    <orderEntry type="library" name="MassiveCore" level="project" />
+    <orderEntry type="library" name="worldedit-bukkit-6.1" level="project" />
+    <orderEntry type="library" name="worldguard-6.1" level="project" />
+    <orderEntry type="library" name="HolographicDisplays" level="project" />
+    <orderEntry type="library" name="WildStacker-3.0.2" level="project" />
   </component>
 </module>

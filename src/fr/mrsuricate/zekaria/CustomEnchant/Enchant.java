@@ -1,5 +1,6 @@
 package fr.mrsuricate.zekaria.CustomEnchant;
 
+import fr.mrsuricate.zekaria.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -9,6 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.enchantment.EnchantItemEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerExpChangeEvent;
@@ -18,6 +20,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
@@ -145,6 +149,7 @@ public class Enchant extends BukkitRunnable implements Listener, CommandExecutor
         while(itstring.hasNext()){
             this.value = itstring.next();
             if(this.value != null){
+                String name = this.value.getName();
                 if(this.value.getPlayer().getInventory().getHelmet() != null){
                     if(this.value.getPlayer().getInventory().getHelmet().getItemMeta().getLore() != null){
                         if (this.value.getPlayer().getInventory().getHelmet().getItemMeta().getLore().contains("§7Vision nocturne I")){
@@ -159,9 +164,40 @@ public class Enchant extends BukkitRunnable implements Listener, CommandExecutor
                         }
                     }
                 }
+                if(Main.getInstance().getpotion().contains(name)){
+                    if(Main.getInstance().getpotion().getBoolean(name+".NightVision")){
+                        if(!value.hasPotionEffect(PotionEffectType.NIGHT_VISION)){
+                            value.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION,600, 0,false,false));
+                        } else {
+                            value.removePotionEffect(PotionEffectType.NIGHT_VISION);
+                            if(!value.hasPotionEffect(PotionEffectType.NIGHT_VISION)){
+                                value.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION,600, 0,false,false));
+                            }
+                        }
+                    }
+                    if(Main.getInstance().getpotion().getBoolean(name+".Hast")){
+                        if(!value.hasPotionEffect(PotionEffectType.FAST_DIGGING)){
+                            value.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING,600, 0,false,false));
+                        } else {
+                            value.removePotionEffect(PotionEffectType.FAST_DIGGING);
+                            if(!value.hasPotionEffect(PotionEffectType.FAST_DIGGING)){
+                                value.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING,600, 0,false,false));
+                            }
+                        }
+                    }
+                    if(Main.getInstance().getpotion().getBoolean(name+".speed")){
+                        if(!value.hasPotionEffect(PotionEffectType.SPEED)){
+                            value.addPotionEffect(new PotionEffect(PotionEffectType.SPEED,600, 0,false,false));
+                        } else {
+                            value.removePotionEffect(PotionEffectType.SPEED);
+                            if(!value.hasPotionEffect(PotionEffectType.SPEED)){
+                                value.addPotionEffect(new PotionEffect(PotionEffectType.SPEED,600, 0,false,false));
+                            }
+                        }
+                    }
+                }
             }
         }
-
     }
 
 
@@ -314,5 +350,20 @@ public class Enchant extends BukkitRunnable implements Listener, CommandExecutor
             }
         }
         return false;
+    }
+
+    @EventHandler
+    public void onDeath(PlayerDeathEvent e){
+        String name = e.getEntity().getName();
+        if(Main.getInstance().getpotion().contains(name)){
+            Main.getInstance().getpotion().set(name+".NightVision", false);
+            Main.getInstance().getpotion().set(name+".Hast", false);
+            Main.getInstance().getpotion().set(name+".speed", false);
+            try {
+                Main.getInstance().getpotion().save(Main.getInstance().potion);
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        }
     }
 }
