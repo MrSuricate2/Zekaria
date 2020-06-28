@@ -132,6 +132,11 @@ public class Main extends JavaPlugin implements Listener {
     public static FileConfiguration config8;
     //potion
 
+    //Bienvenue
+    public static File NewPlayer;
+    public static FileConfiguration config9;
+    //Bienvenue
+
     public static boolean chatlock = false;
 
     @Override
@@ -147,6 +152,18 @@ public class Main extends JavaPlugin implements Listener {
         getCommand("grades").setExecutor(new grades());
         getServer().getPluginManager().registerEvents(new grades(), this);
         getCommand("buykits").setExecutor(new buykit());
+        this.NewPlayer = new File(getDataFolder() + File.separator + "NewPlayer.yml");
+        if(!NewPlayer.exists()){
+            try{
+                NewPlayer.createNewFile();
+            }catch(IOException e){
+                e.printStackTrace();
+            }
+        }
+        this.config9 = YamlConfiguration.loadConfiguration(NewPlayer);
+        getServer().getPluginManager().registerEvents(new bienvenue(), this);
+        getCommand("bienvenue").setExecutor(new bienvenue());
+        new bienvenue().runTaskTimer(Main.getInstance(),0L, 20L);
         getServer().getPluginManager().registerEvents(new buykit(), this);
         getServer().getPluginManager().registerEvents(new DeathMoney(), this);
         //TODO getServer().getPluginManager().registerEvents(new EffectBlood(), this);
@@ -386,6 +403,12 @@ public class Main extends JavaPlugin implements Listener {
         return config8;
     }
     //potion
+
+    //Bienvenue
+    public FileConfiguration getNewPlayer(){
+        return config9;
+    }
+    //Bienvenue
 
 
     @Override
