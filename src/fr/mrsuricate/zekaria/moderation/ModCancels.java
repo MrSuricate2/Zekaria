@@ -87,6 +87,9 @@ public class ModCancels implements Listener {
         if(Main.getInstance().saturation.containsKey(e.getPlayer().getName())){
             e.getPlayer().setSaturation(20);
         }
+        if(Main.getInstance().food.containsKey(e.getPlayer().getName())){
+            e.getPlayer().setFoodLevel(20);
+        }
         if (Main.getInstance().freeze.containsKey(e.getPlayer().getName())){
             e.setTo(e.getFrom());
         }

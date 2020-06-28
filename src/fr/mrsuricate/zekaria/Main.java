@@ -73,6 +73,8 @@ public class Main extends JavaPlugin implements Listener {
     //modération
     public static HashMap<String, Integer> modlist = new HashMap<>();
     public static HashMap<String, Float> saturation = new HashMap<>();
+    public static HashMap<String, Integer> food = new HashMap<>();
+    public static HashMap<String, Double> heal = new HashMap<>();
     public static HashMap<String, Integer> freeze = new HashMap<>();
     public static HashMap<String, Integer> vanish = new HashMap<>();
     public static String reportgetname;

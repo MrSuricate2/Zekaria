@@ -26,13 +26,23 @@ public class moderation implements CommandExecutor, Listener {
                         Main.getInstance().modlist.remove(sender.getName());
                         new PlayerManager(player).destroy();
                         float satu = Main.getInstance().saturation.get(sender.getName());
+                        int food = Main.getInstance().food.get(sender.getName());
+                        double heal = Main.getInstance().heal.get(sender.getName());
+                        ((Player) sender).setFoodLevel(food);
                         ((Player) sender).setSaturation(satu);
+                        ((Player) sender).setHealth(heal);
                         Main.getInstance().saturation.remove(sender.getName());
+                        Main.getInstance().food.remove(sender.getName());
+                        Main.getInstance().heal.remove(sender.getName());
 
                     } else {
                         Main.getInstance().modlist.put(sender.getName(),1);
                         Main.getInstance().saturation.put(sender.getName(),((Player) sender).getSaturation());
+                        Main.getInstance().food.put(sender.getName(),((Player) sender).getFoodLevel());
+                        Main.getInstance().heal.put(sender.getName(),((Player) sender).getHealth());
+                        ((Player) sender).setFoodLevel(20);
                         ((Player) sender).setSaturation(20);
+                        ((Player) sender).setHealth(20);
                         new PlayerManager(player).init();
                     }
                 }
