@@ -68,6 +68,9 @@ public class bienvenue extends BukkitRunnable implements CommandExecutor, Listen
         if(!Main.getInstance().getNewPlayer().contains(player.getName())){
             Main.getInstance().getNewPlayer().set(player.getName()+".dateofjoin",LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
             Main.getInstance().getNewPlayer().set(player.getName()+".timer",30);
+            if(Bukkit.getOnlinePlayers().size() > 1){
+                Bukkit.broadcastMessage("§aMerci de souhaiter la bienvenue à "+player.getDisplayName());
+            }
             try {
                 Main.getInstance().getNewPlayer().save(Main.getInstance().NewPlayer);
             } catch (IOException ioException) {
