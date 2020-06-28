@@ -84,6 +84,9 @@ public class ModCancels implements Listener {
     }
     @EventHandler
     public void onMove(PlayerMoveEvent e){
+        if(Main.getInstance().saturation.containsKey(e.getPlayer().getName())){
+            e.getPlayer().setSaturation(20);
+        }
         if (Main.getInstance().freeze.containsKey(e.getPlayer().getName())){
             e.setTo(e.getFrom());
         }

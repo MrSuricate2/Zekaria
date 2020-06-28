@@ -25,8 +25,14 @@ public class moderation implements CommandExecutor, Listener {
                     if(Main.getInstance().modlist.containsKey(sender.getName())){
                         Main.getInstance().modlist.remove(sender.getName());
                         new PlayerManager(player).destroy();
+                        float satu = Main.getInstance().saturation.get(sender.getName());
+                        ((Player) sender).setSaturation(satu);
+                        Main.getInstance().saturation.remove(sender.getName());
+
                     } else {
                         Main.getInstance().modlist.put(sender.getName(),1);
+                        Main.getInstance().saturation.put(sender.getName(),((Player) sender).getSaturation());
+                        ((Player) sender).setSaturation(20);
                         new PlayerManager(player).init();
                     }
                 }
