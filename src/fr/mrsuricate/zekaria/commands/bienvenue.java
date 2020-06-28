@@ -29,7 +29,7 @@ public class bienvenue extends BukkitRunnable implements CommandExecutor, Listen
             if (cmd.getName().equalsIgnoreCase("bienvenue")) {
                 if (args.length == 1){
                     String name = args[0];
-                    if(sender.getName() != name){
+                    if(!sender.getName().equalsIgnoreCase(name)){
                         if (Main.getInstance().getNewPlayer().contains(name)){
                             int timer = Main.getInstance().getNewPlayer().getInt(name+".timer");
                             if(timer != 0){
