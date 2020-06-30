@@ -1,5 +1,8 @@
 package fr.mrsuricate.zekaria.CustomEnchant;
 
+import com.massivecraft.factions.entity.MPlayer;
+import com.sk89q.worldguard.protection.flags.DefaultFlag;
+import com.sk89q.worldguard.protection.flags.StateFlag;
 import fr.mrsuricate.zekaria.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -10,6 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.enchantment.EnchantItemEvent;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
@@ -30,6 +34,7 @@ import java.util.List;
 public class Enchant extends BukkitRunnable implements Listener, CommandExecutor {
 
     private static Player value;
+    private static boolean hasantivenin = false;
 
     @EventHandler
     public void onEnhantmentEvent(EnchantItemEvent e) {
@@ -46,6 +51,32 @@ public class Enchant extends BukkitRunnable implements Listener, CommandExecutor
                 ItemMeta meta = item.getItemMeta();
                 meta.setLore(Collections.singletonList(mending));
                 item.setItemMeta(meta);
+            }
+            if(Math.random() < 0.03D){
+                if(e.getItem().getType() == Material.BOOK || e.getItem().getType() == Material.DIAMOND_SWORD || e.getItem().getType() == Material.GOLD_SWORD || e.getItem().getType() == Material.STONE_SWORD || e.getItem().getType() == Material.IRON_SWORD || e.getItem().getType() == Material.WOOD_SWORD){
+                    String mending = "§2Venin";
+                    ItemStack item = e.getItem();
+                    ItemMeta meta = item.getItemMeta();
+                    meta.setLore(Collections.singletonList(mending));
+                    item.setItemMeta(meta);
+                }
+            }
+            if(Math.random() < 0.05D){
+                if(e.getItem().getType() != Material.DIAMOND_SWORD && e.getItem().getType() != Material.GOLD_SWORD && e.getItem().getType() != Material.STONE_SWORD && e.getItem().getType() != Material.IRON_SWORD && e.getItem().getType() != Material.WOOD_SWORD){
+                    if(e.getItem().getType() != Material.DIAMOND_PICKAXE && e.getItem().getType() != Material.GOLD_PICKAXE && e.getItem().getType() != Material.STONE_PICKAXE && e.getItem().getType() != Material.IRON_PICKAXE && e.getItem().getType() != Material.WOOD_PICKAXE){
+                        if(e.getItem().getType() != Material.DIAMOND_AXE && e.getItem().getType() != Material.GOLD_AXE && e.getItem().getType() != Material.STONE_AXE && e.getItem().getType() != Material.IRON_AXE && e.getItem().getType() != Material.WOOD_AXE){
+                            if(e.getItem().getType() != Material.DIAMOND_SPADE && e.getItem().getType() != Material.GOLD_SPADE && e.getItem().getType() != Material.STONE_SPADE && e.getItem().getType() != Material.IRON_SPADE && e.getItem().getType() != Material.WOOD_SPADE){
+                                if(e.getItem().getType() != Material.DIAMOND_HOE && e.getItem().getType() != Material.GOLD_HOE && e.getItem().getType() != Material.STONE_HOE && e.getItem().getType() != Material.IRON_HOE && e.getItem().getType() != Material.WOOD_HOE){
+                                    String mending = "§2Anti-Venin";
+                                    ItemStack item = e.getItem();
+                                    ItemMeta meta = item.getItemMeta();
+                                    meta.setLore(Collections.singletonList(mending));
+                                    item.setItemMeta(meta);
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
         if(e.getExpLevelCost() >= 25){
@@ -114,6 +145,70 @@ public class Enchant extends BukkitRunnable implements Listener, CommandExecutor
                                 if(meta.getLore().contains("§7Vision nocturne I")){
                                     if(inv.getItem(2) != null){
                                         String mending = "§7Vision nocturne I";
+                                        List<String> list = inv.getItem(0).getItemMeta().getLore();
+                                        if(list == null){
+                                            ItemStack item = inv.getItem(2);
+                                            ItemMeta meta2 = item.getItemMeta();
+                                            meta2.setLore(Collections.singletonList(mending));
+                                            item.setItemMeta(meta2);
+                                            inv.setItem(2,item);
+                                            return;
+                                        }
+                                        if(!list.contains(mending)){
+                                            list.add(mending);
+                                            ItemStack item = inv.getItem(2);
+                                            ItemMeta meta2 = item.getItemMeta();
+                                            meta2.setLore(list);
+                                            item.setItemMeta(meta2);
+                                            inv.setItem(2,item);
+                                            return;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if(inv.getItem(0) != null){
+                        if(inv.getItem(0).getType().equals(Material.LEATHER_HELMET) || inv.getItem(0).getType().equals(Material.IRON_HELMET) || inv.getItem(0).getType().equals(Material.GOLD_HELMET) || inv.getItem(0).getType().equals(Material.CHAINMAIL_HELMET) || inv.getItem(0).getType().equals(Material.DIAMOND_HELMET)){
+                            if(inv.getItem(0).getType().equals(Material.LEATHER_CHESTPLATE) || inv.getItem(0).getType().equals(Material.IRON_CHESTPLATE) || inv.getItem(0).getType().equals(Material.GOLD_CHESTPLATE) || inv.getItem(0).getType().equals(Material.CHAINMAIL_CHESTPLATE) || inv.getItem(0).getType().equals(Material.DIAMOND_CHESTPLATE)){
+                                if(inv.getItem(0).getType().equals(Material.LEATHER_LEGGINGS) || inv.getItem(0).getType().equals(Material.IRON_LEGGINGS) || inv.getItem(0).getType().equals(Material.GOLD_LEGGINGS) || inv.getItem(0).getType().equals(Material.CHAINMAIL_LEGGINGS) || inv.getItem(0).getType().equals(Material.DIAMOND_LEGGINGS)){
+                                    if(inv.getItem(0).getType().equals(Material.LEATHER_BOOTS) || inv.getItem(0).getType().equals(Material.IRON_BOOTS) || inv.getItem(0).getType().equals(Material.GOLD_BOOTS) || inv.getItem(0).getType().equals(Material.CHAINMAIL_BOOTS) || inv.getItem(0).getType().equals(Material.DIAMOND_BOOTS)){
+                                        if (meta.getLore() != null){
+                                            if(meta.getLore().contains("§2Anti-Venin")){
+                                                if(inv.getItem(2) != null){
+                                                    String mending = "§2Anti-Venin";
+                                                    List<String> list = inv.getItem(0).getItemMeta().getLore();
+                                                    if(list == null){
+                                                        ItemStack item = inv.getItem(2);
+                                                        ItemMeta meta2 = item.getItemMeta();
+                                                        meta2.setLore(Collections.singletonList(mending));
+                                                        item.setItemMeta(meta2);
+                                                        inv.setItem(2,item);
+                                                        return;
+                                                    }
+                                                    if(!list.contains(mending)){
+                                                        list.add(mending);
+                                                        ItemStack item = inv.getItem(2);
+                                                        ItemMeta meta2 = item.getItemMeta();
+                                                        meta2.setLore(list);
+                                                        item.setItemMeta(meta2);
+                                                        inv.setItem(2,item);
+                                                        return;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if(inv.getItem(0) != null){
+                        if(inv.getItem(0).getType().equals(Material.DIAMOND_SWORD) || inv.getItem(0).getType().equals(Material.IRON_SWORD) || inv.getItem(0).getType().equals(Material.GOLD_SWORD) || inv.getItem(0).getType().equals(Material.STONE_SWORD) || inv.getItem(0).getType().equals(Material.WOOD_SWORD)){
+                            if (meta.getLore() != null){
+                                if(meta.getLore().contains("§2Venin")){
+                                    if(inv.getItem(2) != null){
+                                        String mending = "§2Venin";
                                         List<String> list = inv.getItem(0).getItemMeta().getLore();
                                         if(list == null){
                                             ItemStack item = inv.getItem(2);
@@ -271,7 +366,7 @@ public class Enchant extends BukkitRunnable implements Listener, CommandExecutor
                 }
                 if (args.length == 1){
                     if(args[0].equalsIgnoreCase("give")|| args[0].equalsIgnoreCase("apply")){
-                        player.sendMessage("Mending, incassable, night_vision");
+                        player.sendMessage("Mending, incassable, night_vision, Venin, Anti-Venin");
                     }
                 }
                 if (args.length == 2){
@@ -293,6 +388,22 @@ public class Enchant extends BukkitRunnable implements Listener, CommandExecutor
                         }
                         if(args[1].equalsIgnoreCase("night_vision")){
                             String mending = "§7Vision nocturne I";
+                            ItemStack item = new ItemStack(Material.ENCHANTED_BOOK,1);
+                            ItemMeta meta = item.getItemMeta();
+                            meta.setLore(Collections.singletonList(mending));
+                            item.setItemMeta(meta);
+                            ((Player) sender).getInventory().addItem(item);
+                        }
+                        if(args[1].equalsIgnoreCase("Venin")){
+                            String mending = "§2Venin";
+                            ItemStack item = new ItemStack(Material.ENCHANTED_BOOK,1);
+                            ItemMeta meta = item.getItemMeta();
+                            meta.setLore(Collections.singletonList(mending));
+                            item.setItemMeta(meta);
+                            ((Player) sender).getInventory().addItem(item);
+                        }
+                        if(args[1].equalsIgnoreCase("Anti-Venin")){
+                            String mending = "§2Anti-Venin";
                             ItemStack item = new ItemStack(Material.ENCHANTED_BOOK,1);
                             ItemMeta meta = item.getItemMeta();
                             meta.setLore(Collections.singletonList(mending));
@@ -343,6 +454,40 @@ public class Enchant extends BukkitRunnable implements Listener, CommandExecutor
                                     item.setItemMeta(meta);
                                 }
                             }
+                            if(args[1].equalsIgnoreCase("Venin")){
+                                String mending = "§2Venin";
+                                ItemMeta meta = item.getItemMeta();
+                                if(meta.hasLore()){
+                                    List<String> lore = meta.getLore();
+                                    if(!lore.contains("§2Venin")){
+                                        lore.add(mending);
+                                        meta.setLore(lore);
+                                        item.setItemMeta(meta);
+                                    } else {
+                                        sender.sendMessage("Cette item contient déja le Venin");
+                                    }
+                                } else {
+                                    meta.setLore(Collections.singletonList(mending));
+                                    item.setItemMeta(meta);
+                                }
+                            }
+                            if(args[1].equalsIgnoreCase("Anti-Venin")){
+                                String mending = "§2Anti-Venin";
+                                ItemMeta meta = item.getItemMeta();
+                                if(meta.hasLore()){
+                                    List<String> lore = meta.getLore();
+                                    if(!lore.contains("§2Anti-Venin")){
+                                        lore.add(mending);
+                                        meta.setLore(lore);
+                                        item.setItemMeta(meta);
+                                    } else {
+                                        sender.sendMessage("Cette item contient déja l'Anti-Venin");
+                                    }
+                                } else {
+                                    meta.setLore(Collections.singletonList(mending));
+                                    item.setItemMeta(meta);
+                                }
+                            }
                         }
 
                     }
@@ -363,6 +508,68 @@ public class Enchant extends BukkitRunnable implements Listener, CommandExecutor
                 Main.getInstance().getpotion().save(Main.getInstance().potion);
             } catch (IOException ioException) {
                 ioException.printStackTrace();
+            }
+        }
+    }
+
+    @EventHandler
+    public void onEntreringCombats(EntityDamageByEntityEvent e){
+        boolean isCitizensNPC = e.getEntity().hasMetadata("NPC");
+        if (e.getEntity() instanceof Player){
+            if(e.getDamager() instanceof  Player) {
+                if(!isCitizensNPC){
+                    Player Attaquant = ((Player) e.getDamager()).getPlayer();
+                    ItemStack item = Attaquant.getItemInHand();
+                    if(item.getType() != Material.AIR){
+                        ItemMeta meta = item.getItemMeta();
+                        if(meta.hasLore()){
+                            List<String> lore = meta.getLore();
+                            if(lore.contains("§2Venin")){
+                                Player Defenseur = ((Player) e.getEntity()).getPlayer();
+                                ItemStack Casque = Defenseur.getInventory().getHelmet();
+                                if(Casque != null){
+                                    ItemMeta metacasque = Casque.getItemMeta();
+                                    if(metacasque.hasLore()){
+                                        if(metacasque.getLore().contains("§2Anti-Venin")){
+                                            this.hasantivenin = true;
+                                        }
+                                    }
+                                }
+                                ItemStack Plastron = Defenseur.getInventory().getChestplate();
+                                if(Plastron != null){
+                                    ItemMeta metaplastron = Plastron.getItemMeta();
+                                    if(metaplastron.hasLore()){
+                                        if(metaplastron.getLore().contains("§2Anti-Venin")){
+                                            this.hasantivenin = true;
+                                        }
+                                    }
+                                }
+                                ItemStack Pantalon = Defenseur.getInventory().getLeggings();
+                                if(Pantalon != null){
+                                    ItemMeta metapantalon = Pantalon.getItemMeta();
+                                    if(metapantalon.hasLore()){
+                                        if(metapantalon.getLore().contains("§2Anti-Venin")){
+                                            this.hasantivenin = true;
+                                        }
+                                    }
+                                }
+                                ItemStack Botte = Defenseur.getInventory().getBoots();
+                                if(Botte != null){
+                                    ItemMeta metabotte = Botte.getItemMeta();
+                                    if(metabotte.hasLore()){
+                                        if(metabotte.getLore().contains("§2Anti-Venin")){
+                                            this.hasantivenin = true;
+                                        }
+                                    }
+                                }
+                                if(!hasantivenin){
+                                    Defenseur.addPotionEffect(new PotionEffect(PotionEffectType.POISON,200, 0,false,false));
+                                }
+                                this.hasantivenin = false;
+                            }
+                        }
+                    }
+                }
             }
         }
     }

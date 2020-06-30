@@ -9,6 +9,7 @@ import fr.mrsuricate.zekaria.CoinFlip.events.PlayerEvent;
 import fr.mrsuricate.zekaria.CoinFlip.utilz.*;
 import fr.mrsuricate.zekaria.Cooldownenderpearl.CooldownEnderPearl;
 import fr.mrsuricate.zekaria.CustomEnchant.Enchant;
+import fr.mrsuricate.zekaria.DailyRewards.Daily;
 import fr.mrsuricate.zekaria.Décocombats.DécoCombats;
 import fr.mrsuricate.zekaria.Décocombats.runnable2;
 import fr.mrsuricate.zekaria.HeadDrop.Headdrop;
@@ -136,6 +137,11 @@ public class Main extends JavaPlugin implements Listener {
     public static File NewPlayer;
     public static FileConfiguration config9;
     //Bienvenue
+
+    //Dailyrewards
+    public static File DailyRewards;
+    public static FileConfiguration config10;
+    //Dailyrewards
 
     public static boolean chatlock = false;
 
@@ -305,6 +311,7 @@ public class Main extends JavaPlugin implements Listener {
         new KillReward().runTaskTimer(Main.getInstance(),0L, 200L);
         //Reward kill
 
+        //shop potion
         this.potion = new File(getDataFolder() + File.separator + "Potion.yml");
         if(!potion.exists()){
             try{
@@ -317,7 +324,22 @@ public class Main extends JavaPlugin implements Listener {
         this.config8 = YamlConfiguration.loadConfiguration(potion);
         getCommand("zekaria").setExecutor(new Zekaria());
         new Zekaria().runTaskTimer(Main.getInstance(),0L, 20L);
+        //shop potion
 
+        //Dailyrewards
+        this.DailyRewards = new File(getDataFolder() + File.separator + "DailyRewards.yml");
+        if(!DailyRewards.exists()){
+            try{
+                DailyRewards.createNewFile();
+                new KillReward().createFile();
+            }catch(IOException e){
+                e.printStackTrace();
+            }
+        }
+        this.config10 = YamlConfiguration.loadConfiguration(DailyRewards); /*
+        Bukkit.getPluginManager().registerEvents(new Daily(), this);
+        getCommand("Daily").setExecutor(new Daily());  */
+        //Dailyrewards
 
 
 
@@ -409,6 +431,12 @@ public class Main extends JavaPlugin implements Listener {
         return config9;
     }
     //Bienvenue
+
+    //Dailyrewards
+    public FileConfiguration getDailyRewards(){
+        return config10;
+    }
+    //Dailyrewards
 
 
     @Override

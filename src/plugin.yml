@@ -71,3 +71,5 @@ commands:
     description: Souhaite la bienvenue au joueur
     aliases:
       - b
+  Daily:
+    description: Ouvre le menu du rewards
