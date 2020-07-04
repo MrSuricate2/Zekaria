@@ -240,11 +240,11 @@ public class TopFaction extends BukkitRunnable implements CommandExecutor, Liste
         TextLine textLine0 = hologram.insertTextLine(0 ,"§a§m---------§a Top 5 faction §a§m---------" );
         TextLine textLine1 = hologram.insertTextLine(1 ,"" );
         //df.format(this.top1).replace(" "," ")
-        TextLine textLine2 = hologram.insertTextLine(2 ,"§6Top 1 : §b"+ this.top1name + "§6 avec §d"+ df.format(this.top1).replace(","," ") + " ZekaCoins" );
-        TextLine textLine3 = hologram.insertTextLine(3 ,"§6Top 2 : §b"+ this.top2name + "§6 avec §d"+ df.format(this.top2).replace(","," ") + " ZekaCoins" );
-        TextLine textLine4 = hologram.insertTextLine(4 ,"§6Top 3 : §b"+ this.top3name + "§6 avec §d"+ df.format(this.top3).replace(","," ") + " ZekaCoins" );
-        TextLine textLine5 = hologram.insertTextLine(5 ,"§6Top 4 : §b"+ this.top4name + "§6 avec §d"+ df.format(this.top4).replace(","," ") + " ZekaCoins" );
-        TextLine textLine6 = hologram.insertTextLine(6 ,"§6Top 5 : §b"+ this.top5name + "§6 avec §d"+ df.format(this.top5).replace(","," ") + " ZekaCoins" );
+        TextLine textLine2 = hologram.insertTextLine(2 ,"§6Top 1 : §b"+ this.top1name + "§6 avec §d"+ df.format(this.top1) + " ZekaCoins" );
+        TextLine textLine3 = hologram.insertTextLine(3 ,"§6Top 2 : §b"+ this.top2name + "§6 avec §d"+ df.format(this.top2) + " ZekaCoins" );
+        TextLine textLine4 = hologram.insertTextLine(4 ,"§6Top 3 : §b"+ this.top3name + "§6 avec §d"+ df.format(this.top3) + " ZekaCoins" );
+        TextLine textLine5 = hologram.insertTextLine(5 ,"§6Top 4 : §b"+ this.top4name + "§6 avec §d"+ df.format(this.top4) + " ZekaCoins" );
+        TextLine textLine6 = hologram.insertTextLine(6 ,"§6Top 5 : §b"+ this.top5name + "§6 avec §d"+ df.format(this.top5) + " ZekaCoins" );
         TextLine textLine7 = hologram.insertTextLine(7 ,"" );
         TextLine textLine8 = hologram.insertTextLine(8 ,"§a§m-------------------------------" );
         for (Hologram holograms : HologramsAPI.getHolograms(plugin)) {
