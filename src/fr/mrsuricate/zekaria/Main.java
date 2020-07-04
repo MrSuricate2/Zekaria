@@ -151,7 +151,6 @@ public class Main extends JavaPlugin implements Listener {
         getCommand("site").setExecutor(new discord());
         getCommand("grades").setExecutor(new grades());
         getServer().getPluginManager().registerEvents(new grades(), this);
-        getCommand("buykits").setExecutor(new buykit());
         this.NewPlayer = new File(getDataFolder() + File.separator + "NewPlayer.yml");
         if(!NewPlayer.exists()){
             try{
@@ -164,7 +163,6 @@ public class Main extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new bienvenue(), this);
         getCommand("bienvenue").setExecutor(new bienvenue());
         new bienvenue().runTaskTimer(Main.getInstance(),0L, 20L);
-        getServer().getPluginManager().registerEvents(new buykit(), this);
         getServer().getPluginManager().registerEvents(new DeathMoney(), this);
         //TODO getServer().getPluginManager().registerEvents(new EffectBlood(), this);
 
