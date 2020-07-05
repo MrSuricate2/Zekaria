@@ -140,7 +140,7 @@ public class Enchant extends BukkitRunnable implements Listener, CommandExecutor
                     }
 
                     if(inv.getItem(0) != null){
-                        if(inv.getItem(0).getType().equals(Material.LEATHER_HELMET) || inv.getItem(0).getType().equals(Material.IRON_HELMET) || inv.getItem(0).getType().equals(Material.GOLD_HELMET) || inv.getItem(0).getType().equals(Material.CHAINMAIL_HELMET) || inv.getItem(0).getType().equals(Material.DIAMOND_HELMET)){
+                        if(inv.getItem(0).getType().equals(Material.ENCHANTED_BOOK) || inv.getItem(0).getType().equals(Material.LEATHER_HELMET) || inv.getItem(0).getType().equals(Material.IRON_HELMET) || inv.getItem(0).getType().equals(Material.GOLD_HELMET) || inv.getItem(0).getType().equals(Material.CHAINMAIL_HELMET) || inv.getItem(0).getType().equals(Material.DIAMOND_HELMET)){
                             if (meta.getLore() != null){
                                 if(meta.getLore().contains("§7Vision nocturne I")){
                                     if(inv.getItem(2) != null){
@@ -169,7 +169,7 @@ public class Enchant extends BukkitRunnable implements Listener, CommandExecutor
                         }
                     }
                     if(inv.getItem(0) != null){
-                        if(inv.getItem(0).getType().equals(Material.LEATHER_HELMET) || inv.getItem(0).getType().equals(Material.IRON_HELMET) || inv.getItem(0).getType().equals(Material.GOLD_HELMET) || inv.getItem(0).getType().equals(Material.CHAINMAIL_HELMET) || inv.getItem(0).getType().equals(Material.DIAMOND_HELMET) || inv.getItem(0).getType().equals(Material.LEATHER_CHESTPLATE) || inv.getItem(0).getType().equals(Material.IRON_CHESTPLATE) || inv.getItem(0).getType().equals(Material.GOLD_CHESTPLATE) || inv.getItem(0).getType().equals(Material.CHAINMAIL_CHESTPLATE) || inv.getItem(0).getType().equals(Material.DIAMOND_CHESTPLATE) || inv.getItem(0).getType().equals(Material.LEATHER_LEGGINGS) || inv.getItem(0).getType().equals(Material.IRON_LEGGINGS) || inv.getItem(0).getType().equals(Material.GOLD_LEGGINGS) || inv.getItem(0).getType().equals(Material.CHAINMAIL_LEGGINGS) || inv.getItem(0).getType().equals(Material.DIAMOND_LEGGINGS) || inv.getItem(0).getType().equals(Material.LEATHER_BOOTS) || inv.getItem(0).getType().equals(Material.IRON_BOOTS) || inv.getItem(0).getType().equals(Material.GOLD_BOOTS) || inv.getItem(0).getType().equals(Material.CHAINMAIL_BOOTS) || inv.getItem(0).getType().equals(Material.DIAMOND_BOOTS)){
+                        if(inv.getItem(0).getType().equals(Material.ENCHANTED_BOOK) || inv.getItem(0).getType().equals(Material.LEATHER_HELMET) || inv.getItem(0).getType().equals(Material.IRON_HELMET) || inv.getItem(0).getType().equals(Material.GOLD_HELMET) || inv.getItem(0).getType().equals(Material.CHAINMAIL_HELMET) || inv.getItem(0).getType().equals(Material.DIAMOND_HELMET) || inv.getItem(0).getType().equals(Material.LEATHER_CHESTPLATE) || inv.getItem(0).getType().equals(Material.IRON_CHESTPLATE) || inv.getItem(0).getType().equals(Material.GOLD_CHESTPLATE) || inv.getItem(0).getType().equals(Material.CHAINMAIL_CHESTPLATE) || inv.getItem(0).getType().equals(Material.DIAMOND_CHESTPLATE) || inv.getItem(0).getType().equals(Material.LEATHER_LEGGINGS) || inv.getItem(0).getType().equals(Material.IRON_LEGGINGS) || inv.getItem(0).getType().equals(Material.GOLD_LEGGINGS) || inv.getItem(0).getType().equals(Material.CHAINMAIL_LEGGINGS) || inv.getItem(0).getType().equals(Material.DIAMOND_LEGGINGS) || inv.getItem(0).getType().equals(Material.LEATHER_BOOTS) || inv.getItem(0).getType().equals(Material.IRON_BOOTS) || inv.getItem(0).getType().equals(Material.GOLD_BOOTS) || inv.getItem(0).getType().equals(Material.CHAINMAIL_BOOTS) || inv.getItem(0).getType().equals(Material.DIAMOND_BOOTS)){
                             if (meta.getLore() != null){
                                 if(meta.getLore().contains("§2Anti-Venin")){
                                     if(inv.getItem(2) != null){
@@ -198,7 +198,7 @@ public class Enchant extends BukkitRunnable implements Listener, CommandExecutor
                         }
                     }
                     if(inv.getItem(0) != null){
-                        if(inv.getItem(0).getType().equals(Material.DIAMOND_SWORD) || inv.getItem(0).getType().equals(Material.IRON_SWORD) || inv.getItem(0).getType().equals(Material.GOLD_SWORD) || inv.getItem(0).getType().equals(Material.STONE_SWORD) || inv.getItem(0).getType().equals(Material.WOOD_SWORD)){
+                        if(inv.getItem(0).getType().equals(Material.ENCHANTED_BOOK) || inv.getItem(0).getType().equals(Material.DIAMOND_SWORD) || inv.getItem(0).getType().equals(Material.IRON_SWORD) || inv.getItem(0).getType().equals(Material.GOLD_SWORD) || inv.getItem(0).getType().equals(Material.STONE_SWORD) || inv.getItem(0).getType().equals(Material.WOOD_SWORD)){
                             if (meta.getLore() != null){
                                 if(meta.getLore().contains("§2Venin")){
                                     if(inv.getItem(2) != null){

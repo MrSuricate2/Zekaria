@@ -19,7 +19,6 @@ import fr.mrsuricate.zekaria.TopFaction.TopFaction;
 import fr.mrsuricate.zekaria.Trade.ItemStackUtils;
 import fr.mrsuricate.zekaria.Trade.TradeHandler;
 import fr.mrsuricate.zekaria.Trade.commands.trade;
-import fr.mrsuricate.zekaria.blockCommand.blockCommand;
 import fr.mrsuricate.zekaria.commands.*;
 import fr.mrsuricate.zekaria.enchere.enchere;
 import fr.mrsuricate.zekaria.events.DeathMoney;
@@ -257,11 +256,6 @@ public class Main extends JavaPlugin implements Listener {
         new Enchant().runTaskTimer(Main.getInstance(),0L, 20L);
         getCommand("CustomEnchant").setExecutor(new Enchant());
         //CustomEnchant
-
-
-        //BlockCommand
-        Bukkit.getPluginManager().registerEvents(new blockCommand(), this);
-        //BlockCommand
 
 
         //cooldown_enderpearl
