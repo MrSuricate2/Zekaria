@@ -149,8 +149,6 @@ public class Main extends JavaPlugin implements Listener {
         getCommand("discord").setExecutor(new discord());
         getCommand("ts").setExecutor(new discord());
         getCommand("site").setExecutor(new discord());
-        getCommand("grades").setExecutor(new grades());
-        getServer().getPluginManager().registerEvents(new grades(), this);
         this.NewPlayer = new File(getDataFolder() + File.separator + "NewPlayer.yml");
         if(!NewPlayer.exists()){
             try{
