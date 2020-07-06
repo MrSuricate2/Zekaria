@@ -67,3 +67,5 @@ commands:
     description: Souhaite la bienvenue au joueur
     aliases:
       - b
+  jarvis:
+    description:

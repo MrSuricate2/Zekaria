@@ -1,6 +1,7 @@
 package fr.mrsuricate.zekaria;
 
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
+import fr.mrsuricate.zekaria.commands.Authme;
 import fr.mrsuricate.zekaria.ChatSide.ChatLock;
 import fr.mrsuricate.zekaria.ChatSide.ClearChat;
 import fr.mrsuricate.zekaria.CoinFlip.commands.CoinFlipCommand;
@@ -135,6 +136,11 @@ public class Main extends JavaPlugin implements Listener {
     public static File NewPlayer;
     public static FileConfiguration config9;
     //Bienvenue
+
+    //authme
+    public static File authme;
+    public static FileConfiguration config10;
+    //authme
 
     public static boolean chatlock = false;
 
@@ -310,6 +316,21 @@ public class Main extends JavaPlugin implements Listener {
         new Zekaria().runTaskTimer(Main.getInstance(),0L, 20L);
         //shop potion
 
+        //authme
+        this.authme = new File(getDataFolder() + File.separator + "authme.yml");
+        if(!authme.exists()){
+            try{
+                authme.createNewFile();
+                new KillReward().createFile();
+            }catch(IOException e){
+                e.printStackTrace();
+            }
+        }
+        this.config10 = YamlConfiguration.loadConfiguration(authme);
+        getServer().getPluginManager().registerEvents(new Authme(), this);
+        getCommand("JARVIS").setExecutor(new Authme());
+        //authme
+
 
 
     }
@@ -400,6 +421,12 @@ public class Main extends JavaPlugin implements Listener {
         return config9;
     }
     //Bienvenue
+
+    //authme
+    public FileConfiguration getauthme(){
+        return config10;
+    }
+    //authme
 
     @Override
     public void onDisable() {
