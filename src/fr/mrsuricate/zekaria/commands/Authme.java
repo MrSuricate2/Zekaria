@@ -1,6 +1,7 @@
 package fr.mrsuricate.zekaria.commands;
 
 import fr.mrsuricate.zekaria.Main;
+import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -30,9 +31,9 @@ public class Authme implements CommandExecutor, Listener {
                                         } catch (IOException e) {
                                             e.printStackTrace();
                                         }
-                                        sender.sendMessage("&aVotre mots de passe à était saisie avec succès");
+                                        sender.sendMessage("§aVotre mots de passe à était saisie avec succès");
                                     } else {
-                                        sender.sendMessage("&aMots de passe trop court (10 caractère min)");
+                                        sender.sendMessage("§aMots de passe trop court (10 caractère min)");
                                     }
                                 }
                             }
@@ -40,6 +41,7 @@ public class Authme implements CommandExecutor, Listener {
                         if (args[0].equalsIgnoreCase("login")){
                             String mdp = Main.getInstance().getauthme().getString(sender.getName()+".mdp");
                             if(args[1].equalsIgnoreCase(mdp)){
+                                sender.sendMessage("§aLogin effectuer avec succès");
                                 sender.setOp(true);
                             }
                         }
@@ -54,6 +56,7 @@ public class Authme implements CommandExecutor, Listener {
     public void onQuit(PlayerQuitEvent e){
         if(e.getPlayer().isOp()){
             e.getPlayer().setOp(false);
+            e.getPlayer().setGameMode(GameMode.SURVIVAL);
         }
     }
 
