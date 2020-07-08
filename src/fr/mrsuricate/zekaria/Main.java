@@ -1,6 +1,5 @@
 package fr.mrsuricate.zekaria;
 
-import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import fr.mrsuricate.zekaria.commands.Authme;
 import fr.mrsuricate.zekaria.ChatSide.ChatLock;
 import fr.mrsuricate.zekaria.ChatSide.ClearChat;
@@ -10,8 +9,6 @@ import fr.mrsuricate.zekaria.CoinFlip.events.PlayerEvent;
 import fr.mrsuricate.zekaria.CoinFlip.utilz.*;
 import fr.mrsuricate.zekaria.Cooldownenderpearl.CooldownEnderPearl;
 import fr.mrsuricate.zekaria.CustomEnchant.Enchant;
-import fr.mrsuricate.zekaria.Décocombats.DécoCombats;
-import fr.mrsuricate.zekaria.Décocombats.runnable2;
 import fr.mrsuricate.zekaria.HeadDrop.Headdrop;
 import fr.mrsuricate.zekaria.RewardKill.KillReward;
 import fr.mrsuricate.zekaria.StaffChat.StaffChat;
@@ -96,12 +93,6 @@ public class Main extends JavaPlugin implements Listener {
     public static ItemStack is;
     public static String itemJson;
     //enchere
-
-    //déco-combats
-    public static File Déco_Combats;
-    public static FileConfiguration config3;
-    public WorldGuardPlugin WorldGuard;
-    //déco-combats
 
     //TimeIsMoney
     public static File TimeIsMoney;
@@ -241,20 +232,6 @@ public class Main extends JavaPlugin implements Listener {
         this.config2 = YamlConfiguration.loadConfiguration(TimeIsMoney);
         Bukkit.getPluginManager().registerEvents(new TimeisMoney(), this);
         //timemoney
-        //décocombats
-        this.Déco_Combats = new File(getDataFolder() + File.separator + "Deco_combats.yml");
-        if(!Déco_Combats.exists()){
-            try{
-                Déco_Combats.createNewFile();
-            }catch(IOException e){
-                e.printStackTrace();
-            }
-        }
-        this.config3 = YamlConfiguration.loadConfiguration(Déco_Combats);
-        WorldGuard = (WorldGuardPlugin) Bukkit.getServer().getPluginManager().getPlugin("WorldGuard");
-        Bukkit.getPluginManager().registerEvents(new DécoCombats(), this);
-        new runnable2().runTaskTimer(Main.getInstance(),0L, 20L);
-        //décocombats
 
 
         //CustomEnchant
@@ -391,12 +368,6 @@ public class Main extends JavaPlugin implements Listener {
         return config2;
     }
     //TimeIsMoney
-
-    //Déco-combats
-    public FileConfiguration getDéco_cobatsConfig(){
-        return config3;
-    }
-    //Déco-combats
 
     //cooldown_enderpearl
     public FileConfiguration getCenderPearl(){
