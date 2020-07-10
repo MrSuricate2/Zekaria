@@ -1,5 +1,7 @@
 package fr.mrsuricate.zekaria.CustomEnchant;
 
+import com.massivecraft.factions.Rel;
+import com.massivecraft.factions.entity.Faction;
 import com.massivecraft.factions.entity.MPlayer;
 import com.sk89q.worldguard.protection.flags.DefaultFlag;
 import com.sk89q.worldguard.protection.flags.StateFlag;
@@ -556,8 +558,18 @@ public class Enchant extends BukkitRunnable implements Listener, CommandExecutor
                                         }
                                     }
                                 }
+                                MPlayer Causedamage = MPlayer.get(Attaquant);
+                                MPlayer takedamage = MPlayer.get(((Player) e.getEntity()).getPlayer());
+                                Faction CauseDamageFaction = Causedamage.getFaction();
+                                Faction takedamageFaction = takedamage.getFaction();
+                                Rel relation1 = CauseDamageFaction.getRelationWish(takedamageFaction);
+                                Rel relation2 = takedamageFaction.getRelationWish(CauseDamageFaction);
                                 if(!hasantivenin){
-                                    Defenseur.addPotionEffect(new PotionEffect(PotionEffectType.POISON,200, 0,false,false));
+                                    if(CauseDamageFaction != takedamageFaction){
+                                        if(!relation1.equals(Rel.ALLY) || !relation2.equals(Rel.ALLY)){
+                                            Defenseur.addPotionEffect(new PotionEffect(PotionEffectType.POISON,200, 0,false,false));
+                                        }
+                                    }
                                 }
                                 this.hasantivenin = false;
                             }
