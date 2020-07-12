@@ -283,7 +283,6 @@ public class Main extends JavaPlugin implements Listener {
         if(!potion.exists()){
             try{
                 potion.createNewFile();
-                new KillReward().createFile();
             }catch(IOException e){
                 e.printStackTrace();
             }
@@ -298,7 +297,6 @@ public class Main extends JavaPlugin implements Listener {
         if(!authme.exists()){
             try{
                 authme.createNewFile();
-                new KillReward().createFile();
             }catch(IOException e){
                 e.printStackTrace();
             }
