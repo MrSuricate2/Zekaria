@@ -2,7 +2,7 @@ name: Zekaria
 version: 1.0.0
 authors: [Neiyko,MrSuricate]
 main: fr.mrsuricate.zekaria.Main
-depends: [Vault, WordGuard, WorldEdit, MassiveCore, Factions,SkinRestorer,HolographicDisplays, Citizens, WildStacker]
+depends: [Vault, WordGuard, WorldEdit, MassiveCore, Factions,SkinsRestorer,HolographicDisplays, Citizens, WildStacker]
 api-version: 1.13
 commands:
   alert:
