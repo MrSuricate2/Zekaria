@@ -23,7 +23,7 @@ public class Headdrop implements Listener {
             SkullMeta meta = (SkullMeta) skull.getItemMeta();
             if (this.config.getString("SkinRestorer-enable").equalsIgnoreCase("true")) {
                 String name = e.getEntity().getPlayer().getName();
-                String skin = String.valueOf(SkinsRestorer.getInstance().getSkinsRestorerBukkitAPI().getSkinName(name));
+                String skin = String.valueOf(Main.getInstance().skinsRestorerBungeeAPI.getSkinName(name));
                 if (skin.equalsIgnoreCase("null")) {
                     meta.setOwner(e.getEntity().getPlayer().getName());
                     skull.setItemMeta(meta);

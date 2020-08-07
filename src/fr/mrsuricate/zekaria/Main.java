@@ -1,6 +1,5 @@
 package fr.mrsuricate.zekaria;
 
-import fr.mrsuricate.zekaria.commands.Authme;
 import fr.mrsuricate.zekaria.ChatSide.ChatLock;
 import fr.mrsuricate.zekaria.ChatSide.ClearChat;
 import fr.mrsuricate.zekaria.CoinFlip.commands.CoinFlipCommand;
@@ -21,7 +20,10 @@ import fr.mrsuricate.zekaria.commands.*;
 import fr.mrsuricate.zekaria.enchere.enchere;
 import fr.mrsuricate.zekaria.events.DeathMoney;
 import fr.mrsuricate.zekaria.giveall.Giveall;
-import fr.mrsuricate.zekaria.moderation.*;
+import fr.mrsuricate.zekaria.moderation.ModCancels;
+import fr.mrsuricate.zekaria.moderation.ModsItemsInteract;
+import fr.mrsuricate.zekaria.moderation.PlayerLeave;
+import fr.mrsuricate.zekaria.moderation.moderation;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -35,6 +37,9 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.material.MaterialData;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
+import skinsrestorer.bukkit.SkinsRestorer;
+import skinsrestorer.bukkit.SkinsRestorerBukkitAPI;
+import skinsrestorer.bungee.SkinsRestorerBungeeAPI;
 
 import java.io.File;
 import java.io.IOException;
@@ -135,6 +140,10 @@ public class Main extends JavaPlugin implements Listener {
 
     public static boolean chatlock = false;
 
+    //Skinsrestorer
+    public SkinsRestorer skinsRestorer;
+    public SkinsRestorerBukkitAPI skinsRestorerBungeeAPI;
+
     @Override
     public void onEnable() {
         saveDefaultConfig();
@@ -158,6 +167,17 @@ public class Main extends JavaPlugin implements Listener {
         getCommand("bienvenue").setExecutor(new bienvenue());
         new bienvenue().runTaskTimer(Main.getInstance(),0L, 20L);
         getServer().getPluginManager().registerEvents(new DeathMoney(), this);
+        
+        //Connection api skinsrestorer
+        skinsRestorer = JavaPlugin.getPlugin(SkinsRestorer.class);
+        System.out.println(skinsRestorer.toString());
+
+        //Bukkit API pour récuperer le skin
+        skinsRestorerBungeeAPI = skinsRestorer.getSkinsRestorerBukkitAPI();
+        System.out.println(skinsRestorerBungeeAPI.toString());
+
+
+
         //TODO getServer().getPluginManager().registerEvents(new EffectBlood(), this);
 
 
