@@ -13,7 +13,7 @@ import skinsrestorer.bukkit.SkinsRestorer;
 
 public class Headdrop implements Listener {
 
-    private FileConfiguration config = Main.getInstance().getConfig();
+    private final FileConfiguration config = Main.getInstance().getConfig();
 
     @EventHandler
     public void death(PlayerDeathEvent e) {

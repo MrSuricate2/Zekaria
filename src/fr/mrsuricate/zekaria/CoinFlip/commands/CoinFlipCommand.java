@@ -5,13 +5,12 @@ import fr.mrsuricate.zekaria.CoinFlip.utilz.CoinManager;
 import fr.mrsuricate.zekaria.CoinFlip.utilz.InventoryManager;
 import fr.mrsuricate.zekaria.CoinFlip.utilz.StatsManager;
 import fr.mrsuricate.zekaria.Main;
-import java.text.DecimalFormat;
-
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import java.text.DecimalFormat;
 
 public class CoinFlipCommand implements CommandExecutor {
     private CoinManager coins = Main.getInstance().getCoins();
